@@ -10,16 +10,19 @@ router.get('/', function (req, res) {
 })
 
 router.get('/groups.json', function(req, res) {
+    console.log('/groups.json')
     res.set('Content-Type', 'application/json')
     res.send(fs.readFileSync('files/groups.json', {'encoding': 'utf-8'}))
 })
 
 router.get('/groups.xml', function(req, res) {
+    console.log('/groups.xml')
     res.set('Content-Type', 'application/xml')
     res.send(fs.readFileSync('files/groups.xml', {'encoding': 'utf-8'}))
 })
 
 router.post('/schedule.json', function(req, res) {
+    console.log('/schedule.json')
     html_schedule = req.body.html_schedule
     options = {
         'url': 'http://rzaevali.pythonanywhere.com/vyatsu/schedule.json',
