@@ -4,7 +4,9 @@
   "description": "Server application for viewing VyatSU schedules",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.15.3"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "request": "^2.81.0"
   },
   "engine": {
     "node": "*",
