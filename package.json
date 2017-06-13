@@ -1,34 +1,23 @@
 {
-  "name": "nodejs-ex",
-  "version": "0.0.1",
-  "description": "Node.js sample app for OpenShift 3",
-  "main": "server.js",
+  "name": "vyatsu_schedule_nodejs_app",
+  "version": "1.0.0",
+  "description": "Server application for viewing VyatSU schedules",
+  "main": "app.js",
   "dependencies": {
-    "chai": "^3.5.0",
-    "chai-http": "^2.0.1",
-    "ejs": "^2.4.1",
-    "express": "^4.13.4",
-    "mocha": "^2.4.5",
-    "mongodb": "^2.1.16",
-    "morgan": "^1.7.0",
-    "object-assign":"4.1.0"
+    "express": "^4.15.3"
   },
   "engine": {
     "node": "*",
     "npm": "*"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node app.js",
     "test": "IP=0.0.0.0 PORT=3030 mocha --timeout 5000 tests/*_test.js"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/openshift/nodejs-ex.git"
+    "url": "https://AliRzaev@bitbucket.org/AliRzaev/vyatsu_schedule_nodejs_app.git"
   },
-  "author": "Steve Speicher <sspeiche@gmail.com>",
-  "license": "CC-BY-1.0",
-  "bugs": {
-    "url": "http://github.com/openshift/nodejs-ex/issues"
-  },
-  "homepage": "http://github.com/openshift/nodejs-ex"
+  "author": "Ali Rzaev <alirzaev1996@gmail.com>",
+  "license": "CC-BY-1.0"
 }
