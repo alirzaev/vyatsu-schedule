@@ -5,23 +5,23 @@ const router = express.Router()
 
 const groups_schedule_links = JSON.parse(fs.readFileSync('files/groups.json', {'encoding': 'utf-8'}))
 
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   res.send('VyatSU schedule app')
 })
 
-router.get('/groups.json', function(req, res) {
+router.get('/groups.json', (req, res) => {
     console.log('/groups.json')
     res.set('Content-Type', 'application/json')
     res.send(fs.readFileSync('files/groups.json', {'encoding': 'utf-8'}))
 })
 
-router.get('/groups.xml', function(req, res) {
+router.get('/groups.xml', (req, res) => {
     console.log('/groups.xml')
     res.set('Content-Type', 'application/xml')
     res.send(fs.readFileSync('files/groups.xml', {'encoding': 'utf-8'}))
 })
 
-router.post('/schedule.json', function(req, res) {
+router.post('/schedule.json', (req, res) => {
     console.log('/schedule.json')
     html_schedule = req.body.html_schedule
     options = {
@@ -34,7 +34,7 @@ router.post('/schedule.json', function(req, res) {
     })
 })
 
-router.get('/test', function(req, res) {
+router.get('/test', (req, res) => {
     request.get('https://www.vyatsu.ru/reports/schedule/Group/5741_2.html', (error, response, body) => {
         res.send(body)
     })

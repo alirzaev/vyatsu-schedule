@@ -14,7 +14,7 @@ app.use('/', index_router)
 app.use('/vyatsu', vyatsu_router)
 
 // error handling
-app.use(function(err, req, res, next){
+app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something bad happened!');
 });
