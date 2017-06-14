@@ -5,7 +5,7 @@ const jsdom = require('jsdom')
 const { JSDOM } = jsdom
 const router = express.Router()
 
-const groups_schedule_links = JSON.parse(fs.readFileSync('files/groups.json', { 'encoding': 'utf-8' }))
+const groups_ids = JSON.parse(fs.readFileSync('files/groups.json', { 'encoding': 'utf-8' }))
 
 function parse_html(html) {
 	const dom = new JSDOM(html)
@@ -53,8 +53,14 @@ router.get('/groups.xml', (req, res) => {
 router.get('/schedule.json', (req, res) => {
 	console.log('/schedule.json')
 
-	const group = req.query.group_name
-	const url = groups_schedule_links[group]
+	var season
+	if (req.query.season == 'autumn') {
+		season = 1
+	} else {
+		season = 2
+	}
+	const id = groups_ids[req.query.group_name]
+	const url = `https://www.vyatsu.ru/reports/schedule/Group/${id}_${season}.html`
 
 	request.get(url, (error, response, body) => {
 		const schedule = parse_html(body)
