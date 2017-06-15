@@ -53,19 +53,26 @@ router.get('/groups.xml', (req, res) => {
 router.get('/schedule', (req, res) => {
 	console.log('/vyatsu/schedule')
 
-	var season
-	if (req.query.season == 'autumn') {
-		season = 1
-	} else {
-		season = 2
+	if (['autumn', 'spring'].indexOf(req.query.season) == -1) {
+		res.status(422).send("{ 'error': 'Invalid param 'season'' }")
+		return
 	}
+	if (!(req.query.group_name in groups_ids)) {
+		res.status(422).send("{ 'error': 'No such group' }")
+		return
+	}
+	const season = (req.query.season == 'autumn' ? 1 : 2)
 	const id = groups_ids[req.query.group_name]
 	const url = `https://www.vyatsu.ru/reports/schedule/Group/${id}_${season}.html`
 
 	request.get(url, (error, response, body) => {
-		const schedule = parse_html(body)
-		res.set('Content-Type', 'application/json')
-		res.send(JSON.stringify(schedule))
+		if (error) {
+			res.status(424).send("{ 'error': 'vyatsu.ru unavailable' }")
+		} else {
+			const schedule = parse_html(body)
+			res.set('Content-Type', 'application/json')
+			res.send(JSON.stringify(schedule))
+		}
 	})
 })
 
