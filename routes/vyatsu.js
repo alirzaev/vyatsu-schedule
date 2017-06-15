@@ -77,10 +77,4 @@ router.post('/schedule.json', (req, res) => {
 	res.send(JSON.stringify(schedule))
 })
 
-router.get('/test', (req, res) => {
-    request.get('https://www.vyatsu.ru/reports/schedule/Group/5741_2.html', (error, response, body) => {
-        res.send(body)
-    })
-})
-
 module.exports = router
