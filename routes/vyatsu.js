@@ -30,28 +30,28 @@ router.get('/', (req, res) => {
 })
 
 router.get('/bells', (req, res) => {
-	console.log('/bells')
+	console.log('/vyatsu/bells')
 
 	res.set('Content-Type', 'application/json')
 	res.send(fs.readFileSync('files/bells.json', { 'encoding': 'utf-8' }))
 })
 
 router.get('/groups.json', (req, res) => {
-	console.log('/groups.json')
+	console.log('/vyatsu/groups.json')
 
     res.set('Content-Type', 'application/json')
     res.send(fs.readFileSync('files/groups.json', {'encoding': 'utf-8'}))
 })
 
 router.get('/groups.xml', (req, res) => {
-	console.log('/groups.xml')
+	console.log('/vyatsu/groups.xml')
 
     res.set('Content-Type', 'application/xml')
     res.send(fs.readFileSync('files/groups.xml', {'encoding': 'utf-8'}))
 })
 
-router.get('/schedule.json', (req, res) => {
-	console.log('/schedule.json')
+router.get('/schedule', (req, res) => {
+	console.log('/vyatsu/schedule')
 
 	var season
 	if (req.query.season == 'autumn') {
@@ -69,8 +69,8 @@ router.get('/schedule.json', (req, res) => {
 	})
 })
 
-router.post('/schedule.json', (req, res) => {
-	console.log('/schedule.json')
+router.post('/parse_schedule', (req, res) => {
+	console.log('/vyatsu/parse_schedule')
 
 	const schedule = parse_html(req.body.html_schedule)
 	res.set('Content-Type', 'application/json')
