@@ -10,11 +10,11 @@ const groups_ids = JSON.parse(fs.readFileSync('files/groups.json', { 'encoding':
 function parse_html(html) {
 	const dom = new JSDOM(html)
 	const days = []
-	for (var i = 0; i < 12; ++i) {
+	for (let i = 0; i < 12; ++i) {
 		days.push([])
 	}
 	const rows = Array.from(dom.window.document.body.getElementsByTagName('tr')).slice(2)
-	for (var i = 0; i < rows.length; ++i) {
+	for (let i = 0; i < rows.length; ++i) {
 		const cols = Array.from(rows[i].getElementsByTagName('td'))
 		if (i % 7 == 0) {
 			days[(i / 7) >> 0].push(cols[2].textContent)
