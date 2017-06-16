@@ -15,14 +15,16 @@ This web server provides REST API for viewing groups schedules in machine-readab
   - URL: `/vyatsu/groups.json`
   - Method: `GET`
   - Success response:
-    - Code: 200 <br />
+    - Code: 200
+      
       Content: `{ "ПОДб-1101-53-00": "5948", ... "ТиТб-1801-01-00": "6026" }`
 
 #### Show list of groups (XML)
   - URL: `/vyatsu/groups.xml`
   - Method: `GET`
   - Success response:
-    - Code: 200 <br />
+    - Code: 200
+      
       Content: 
       ```
       <?xml version="1.0" ?>
@@ -39,7 +41,8 @@ This web server provides REST API for viewing groups schedules in machine-readab
     - `name=[string]`
     - `season='autumn' | 'spring'`
   - Success response:
-    - Code: 200 <br />
+    - Code: 200
+      
       Content:
       ```
       { "weeks":
@@ -56,12 +59,12 @@ This web server provides REST API for viewing groups schedules in machine-readab
       }
       ```
   - Error response:
-    - Code: 422 <br />
+    - Code: 422
+      
       Content: `{ 'error': 'Invalid param 'season'' }` OR `{ 'error': 'No such group' }`
 
-    OR
-
-    - Code: 424 <br />
+    - Code: 424
+      
       Content: `{ 'error': 'vyatsu.ru unavailable' }`
 
 #### Parse html document with group schedule
@@ -69,7 +72,8 @@ This web server provides REST API for viewing groups schedules in machine-readab
   - Method: `POST`
   - Data params:
     ```    {       "html_schedule": "<HTML><HEAD>..."     }    ```  - Success response:
-    - Code: 200 <br />
+    - Code: 200
+      
       Content:
       ```
       { "weeks":
