@@ -26,7 +26,7 @@ function parse_html(html) {
 }
 
 router.get('/', (req, res) => {
-  res.send('VyatSU schedule app')
+	res.send(fs.readFileSync('files/index.html', { 'encoding': 'utf-8' }))
 })
 
 router.get('/bells', (req, res) => {
