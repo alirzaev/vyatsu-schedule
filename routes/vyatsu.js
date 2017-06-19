@@ -5,9 +5,11 @@ const jsdom = require('jsdom')
 const { JSDOM } = jsdom
 const router = express.Router()
 
-const groups_ids = JSON.parse(fs.readFileSync('files/groups.json', { 'encoding': 'utf-8' }))
+const INFO = {
+	bells: JSON.parse(fs.readFileSync('files/bells.json', { 'encoding': 'utf-8' }))
+}
 
-function parse_html(html) {
+function parse_schedule_html(html) {
 	const dom = new JSDOM(html)
 	const days = []
 	for (let i = 0; i < 12; ++i) {
@@ -25,6 +27,26 @@ function parse_html(html) {
 	return { 'weeks': [days.slice(0, 6), days.slice(6)] }
 }
 
+function parse_groups_html(html) {
+	const URL_PATTERN = new RegExp('https://www.vyatsu.ru/reports/schedule/Group/([0-9]+)_[12].html')
+	const dom = new JSDOM(html)
+
+	let groups_ids = {}
+
+	const tags = dom.window.document.body.getElementsByTagName('a')
+
+	for (let i = 0; i < tags.length; ++i) {
+		if (tags[i].getAttribute('href').search(URL_PATTERN) != -1) {
+			const content = tags[i].textContent
+			const group_name = content.slice(0, content.indexOf('(')).trim()
+			const group_id = URL_PATTERN.exec(tags[i].getAttribute('href'))[1]
+			groups_ids[group_name] = group_id
+		}
+	}
+
+	return groups_ids
+}
+
 router.get('/', (req, res) => {
 	res.send(fs.readFileSync('files/index.html', { 'encoding': 'utf-8' }))
 })
@@ -32,56 +54,55 @@ router.get('/', (req, res) => {
 router.get('/bells', (req, res) => {
 	console.log('/vyatsu/bells')
 
-	res.set('Content-Type', 'application/json')
-	res.send(fs.readFileSync('files/bells.json', { 'encoding': 'utf-8' }))
+	res.json(INFO.bells)
 })
 
 router.get('/groups.json', (req, res) => {
 	console.log('/vyatsu/groups.json')
 
-    res.set('Content-Type', 'application/json')
-    res.send(fs.readFileSync('files/groups.json', {'encoding': 'utf-8'}))
+	request.get('https://www.vyatsu.ru/studentu-1/spravochnaya-informatsiya/raspisanie-zanyatiy-dlya-studentov.html', (error, response, body) => {
+		if (error) {
+			res.status(424).json({ error: 'vyatsu.ru unavailable' })
+		} else {
+			res.json(parse_groups_html(body))
+		}
+	})
 })
 
 router.get('/groups.xml', (req, res) => {
 	console.log('/vyatsu/groups.xml')
 
-    res.set('Content-Type', 'application/xml')
-    res.send(fs.readFileSync('files/groups.xml', {'encoding': 'utf-8'}))
+	fs.readFile('files/groups.xml', { 'encoding': 'utf-8' }, (error, data) => res.type('xml').send(data))
 })
 
 router.get('/schedule', (req, res) => {
 	console.log('/vyatsu/schedule')
 
 	if (['autumn', 'spring'].indexOf(req.query.season) == -1) {
-		res.status(422).send("{ 'error': 'Invalid param 'season'' }")
+		res.status(422).json({ error: "Invalid param 'season'" })
+		return
+	} else if (!req.query.group_id) {
+		res.status(422).json({ error: 'Invalid group id' })
 		return
 	}
-	if (!(req.query.group_name in groups_ids)) {
-		res.status(422).send("{ 'error': 'No such group' }")
-		return
-	}
+
 	const season = (req.query.season == 'autumn' ? 1 : 2)
-	const id = groups_ids[req.query.group_name]
+	const id = req.query.group_id
 	const url = `https://www.vyatsu.ru/reports/schedule/Group/${id}_${season}.html`
 
 	request.get(url, (error, response, body) => {
 		if (error) {
-			res.status(424).send("{ 'error': 'vyatsu.ru unavailable' }")
+			res.status(424).json({ error: 'vyatsu.ru unavailable' })
 		} else {
-			const schedule = parse_html(body)
-			res.set('Content-Type', 'application/json')
-			res.send(JSON.stringify(schedule))
+			res.json(parse_schedule_html(body))
 		}
 	})
 })
 
 router.post('/parse_schedule', (req, res) => {
 	console.log('/vyatsu/parse_schedule')
-
-	const schedule = parse_html(req.body.html_schedule)
-	res.set('Content-Type', 'application/json')
-	res.send(JSON.stringify(schedule))
+	
+	res.json(parse_schedule_html(req.body.html_schedule))
 })
 
 module.exports = router

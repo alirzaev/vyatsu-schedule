@@ -35,10 +35,10 @@ This web server provides REST API for viewing groups schedules in machine-readab
       ```
 
 #### Show schedule of group
-  - URL: `/vyatsu/schedule?group_name=:name&season=:season`
+  - URL: `/vyatsu/schedule?group_id=:id&season=:season`
   - Method: `GET`
   - URL params:
-    - `name=[string]`
+    - `id=[string]`
     - `season='autumn' | 'spring'`
   - Success response:
     - Code: 200
@@ -61,7 +61,7 @@ This web server provides REST API for viewing groups schedules in machine-readab
   - Error response:
     - Code: 422
       
-      Content: `{ 'error': 'Invalid param 'season'' }` OR `{ 'error': 'No such group' }`
+      Content: `{ 'error': "Invalid param 'season'" }` OR `{ 'error': 'Invalid group id' }`
 
     - Code: 424
       
