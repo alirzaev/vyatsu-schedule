@@ -62,7 +62,11 @@ router.get('/groups.json', (req, res) => {
 
 	request.get('https://www.vyatsu.ru/studentu-1/spravochnaya-informatsiya/raspisanie-zanyatiy-dlya-studentov.html', (error, response, body) => {
 		if (error) {
-			res.status(424).json({ error: 'vyatsu.ru unavailable' })
+			res.status(503).json({ error: `Service unavailable: ${error.message}` })
+			return
+		}
+		if (res.statusCode != 200) {
+			res.status(424).json({ error: `vyatsu.ru error: ${res.statusCode}` })
 		} else {
 			res.json(parse_groups_html(body))
 		}
@@ -92,7 +96,11 @@ router.get('/schedule', (req, res) => {
 
 	request.get(url, (error, response, body) => {
 		if (error) {
-			res.status(424).json({ error: 'vyatsu.ru unavailable' })
+			res.status(503).json({ error: `Service unavailable ${error.message}` })
+			return
+		}
+		if (res.statusCode != 200) {
+			res.status(424).json({ error: `vyatsu.ru error: ${res.statusCode}` })
 		} else {
 			res.json(parse_schedule_html(body))
 		}
