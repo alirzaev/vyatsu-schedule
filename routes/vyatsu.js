@@ -65,7 +65,7 @@ router.get('/groups.json', (req, res) => {
 			res.status(503).json({ error: `Service unavailable: ${error.message}` })
 			return
 		}
-		if (res.statusCode != 200) {
+		if (response.statusCode != 200) {
 			res.status(424).json({ error: `vyatsu.ru error: ${res.statusCode}` })
 		} else {
 			res.json(parse_groups_html(body))
@@ -79,19 +79,19 @@ router.get('/groups.xml', (req, res) => {
 	fs.readFile('files/groups.xml', { 'encoding': 'utf-8' }, (error, data) => res.type('xml').send(data))
 })
 
-router.get('/schedule', (req, res) => {
+router.get('/schedule/:group_id/:season', (req, res) => {
 	console.log('/vyatsu/schedule')
 
-	if (['autumn', 'spring'].indexOf(req.query.season) == -1) {
+	if (['autumn', 'spring'].indexOf(req.params.season) == -1) {
 		res.status(422).json({ error: "Invalid param 'season'" })
 		return
-	} else if (!req.query.group_id) {
+	} else if (!req.params.group_id) {
 		res.status(422).json({ error: 'Invalid group id' })
 		return
 	}
 
-	const season = (req.query.season == 'autumn' ? 1 : 2)
-	const id = req.query.group_id
+	const season = (req.params.season == 'autumn' ? 1 : 2)
+	const id = req.params.group_id
 	const url = `https://www.vyatsu.ru/reports/schedule/Group/${id}_${season}.html`
 
 	request.get(url, (error, response, body) => {
@@ -99,7 +99,7 @@ router.get('/schedule', (req, res) => {
 			res.status(503).json({ error: `Service unavailable: ${error.message}` })
 			return
 		}
-		if (res.statusCode != 200) {
+		if (response.statusCode != 200) {
 			res.status(424).json({ error: `vyatsu.ru error: ${res.statusCode}` })
 		} else {
 			res.json(parse_schedule_html(body))
