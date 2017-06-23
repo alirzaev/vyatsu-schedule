@@ -96,7 +96,7 @@ router.get('/schedule', (req, res) => {
 
 	request.get(url, (error, response, body) => {
 		if (error) {
-			res.status(503).json({ error: `Service unavailable ${error.message}` })
+			res.status(503).json({ error: `Service unavailable: ${error.message}` })
 			return
 		}
 		if (res.statusCode != 200) {
