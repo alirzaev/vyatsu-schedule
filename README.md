@@ -19,6 +19,7 @@ This web server provides REST API for viewing groups schedules in machine-readab
     - Code: 200
     
       Content: `{ "Group name": "Group id", ... "Group name": "Group id" }`
+  
   - Error response:
     - Code: 424
     
@@ -67,6 +68,7 @@ This web server provides REST API for viewing groups schedules in machine-readab
         ]
       }
       ```
+  
   - Error response:
     - Code: 422
     
@@ -84,7 +86,12 @@ This web server provides REST API for viewing groups schedules in machine-readab
   - URL: `/vyatsu/parse_schedule`
   - Method: `POST`
   - Data params:
-    ```    {       html_schedule: "<HTML><HEAD>..."     }    ```  - Success response:
+    ```
+    { 
+      html_schedule: "<HTML><HEAD>..." 
+    }
+    ```
+  - Success response:
     - Code: 200
     
       Content:
