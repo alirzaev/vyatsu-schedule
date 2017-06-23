@@ -9,50 +9,59 @@ This web server provides REST API for viewing groups schedules in machine-readab
   - Method: `GET`
   - Success response:
     - Code: 200
-    - Content: `[["8:20", "9:50"], ... ["18:55", "20:25"]]`
+    
+      Content: `[["8:20", "9:50"], ... ["18:55", "20:25"]]`
 
 #### Show list of groups (JSON)
   - URL: `/vyatsu/groups.json`
   - Method: `GET`
   - Success response:
     - Code: 200
-      
-      Content: `{ "ПОДб-1101-53-00": "5948", ... "ТиТб-1801-01-00": "6026" }`
+    
+      Content: `{ "Group name": "Group id", ... "Group name": "Group id" }`
+  - Error response:
+    - Code: 424
+    
+      Content: `{ error: 'vyatsu.ru error: <status code>' }`
+
+    - Code: 503
+    
+      Content: `{ error: 'Service unavailable: <error message>' }`
 
 #### Show list of groups (XML)
   - URL: `/vyatsu/groups.xml`
   - Method: `GET`
   - Success response:
     - Code: 200
-      
+    
       Content: 
       ```
       <?xml version="1.0" ?>
       <groups>
-      <group name="ХМа-1501-02-00">5972</group>
+      <group name="Group name">Group id</group>
       ...
       </groups>
       ```
 
 #### Show schedule of group
-  - URL: `/vyatsu/schedule?group_id=:id&season=:season`
+  - URL: `/vyatsu/schedule/:group_id/:season`
   - Method: `GET`
   - URL params:
-    - `id=[string]`
+    - `id=[number]`
     - `season='autumn' | 'spring'`
   - Success response:
     - Code: 200
-      
+    
       Content:
       ```
-      { "weeks":
+      { weeks:
         [
           [
-            ["","Математика...", ... ],
+            ["Subject","Yet another subject", ... ],
             ...
           ],
           [
-            ["Технологии программирования...", ... ],
+            ["Some boring suject", ... ],
             ...
           ]
         ]
@@ -60,30 +69,34 @@ This web server provides REST API for viewing groups schedules in machine-readab
       ```
   - Error response:
     - Code: 422
-      
-      Content: `{ 'error': "Invalid param 'season'" }` OR `{ 'error': 'Invalid group id' }`
+    
+      Content: `{ error: "Invalid param 'season'" }` OR `{ error: 'Invalid group id' }`
 
     - Code: 424
-      
-      Content: `{ 'error': 'vyatsu.ru unavailable' }`
+    
+      Content: `{ error: 'vyatsu.ru error: <status code>' }`
+
+    - Code: 503
+    
+      Content: `{ error: 'Service unavailable: <error message>' }`
 
 #### Parse html document with group schedule
   - URL: `/vyatsu/parse_schedule`
   - Method: `POST`
   - Data params:
-    ```    {       "html_schedule": "<HTML><HEAD>..."     }    ```  - Success response:
+    ```    {       html_schedule: "<HTML><HEAD>..."     }    ```  - Success response:
     - Code: 200
-      
+    
       Content:
       ```
-      { "weeks":
+      { weeks:
         [
           [
-            ["","Математика...", ... ],
+            ["Subject","Yet another subject", ... ],
             ...
           ],
           [
-            ["Технологии программирования...", ... ],
+            ["Some boring subject", ... ],
             ...
           ]
         ]
