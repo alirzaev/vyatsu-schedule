@@ -66,7 +66,7 @@ router.get('/groups.json', (req, res) => {
 			return
 		}
 		if (response.statusCode != 200) {
-			res.status(424).json({ error: `vyatsu.ru error: ${res.statusCode}` })
+			res.status(424).json({ error: `vyatsu.ru error: ${response.statusCode}` })
 		} else {
 			res.json(parse_groups_html(body))
 		}
@@ -100,7 +100,7 @@ router.get('/schedule/:group_id/:season', (req, res) => {
 			return
 		}
 		if (response.statusCode != 200) {
-			res.status(424).json({ error: `vyatsu.ru error: ${res.statusCode}` })
+			res.status(424).json({ error: `vyatsu.ru error: ${response.statusCode}` })
 		} else {
 			res.json(parse_schedule_html(body))
 		}
