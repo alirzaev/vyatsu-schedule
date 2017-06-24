@@ -10,6 +10,12 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 app.use(express.static('files'))
 app.use(body_parser.urlencoded({ extended: true }))
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.use('/', index_router)
 app.use('/vyatsu', vyatsu_router)
 
