@@ -5,10 +5,6 @@ const jsdom = require('jsdom')
 const { JSDOM } = jsdom
 const router = express.Router()
 
-const INFO = {
-	bells: JSON.parse(fs.readFileSync('resources/bells.json', { 'encoding': 'utf-8' }))
-}
-
 function parse_schedule_html(html) {
 	const dom = new JSDOM(html)
 	const days = []
@@ -54,7 +50,7 @@ router.get('/', (req, res) => {
 router.get('/bells', (req, res) => {
 	console.log('/vyatsu/bells')
 
-	res.json(INFO.bells)
+	fs.readFile('resources/bells.json', { 'encoding': 'utf-8' }, (error, data) => res.type('json').send(data))
 })
 
 router.get('/groups.json', (req, res) => {
