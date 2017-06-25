@@ -6,7 +6,7 @@ const { JSDOM } = jsdom
 const router = express.Router()
 
 const INFO = {
-	bells: JSON.parse(fs.readFileSync('files/bells.json', { 'encoding': 'utf-8' }))
+	bells: JSON.parse(fs.readFileSync('resources/bells.json', { 'encoding': 'utf-8' }))
 }
 
 function parse_schedule_html(html) {
@@ -60,23 +60,13 @@ router.get('/bells', (req, res) => {
 router.get('/groups.json', (req, res) => {
 	console.log('/vyatsu/groups.json')
 
-	request.get('https://www.vyatsu.ru/studentu-1/spravochnaya-informatsiya/raspisanie-zanyatiy-dlya-studentov.html', (error, response, body) => {
-		if (error) {
-			res.status(503).json({ error: `Service unavailable: ${error.message}` })
-			return
-		}
-		if (response.statusCode != 200) {
-			res.status(424).json({ error: `vyatsu.ru error: ${response.statusCode}` })
-		} else {
-			res.json(parse_groups_html(body))
-		}
-	})
+	fs.readFile('resources/groups.json', { 'encoding': 'utf-8' }, (error, data) => res.type('json').send(data))
 })
 
 router.get('/groups.xml', (req, res) => {
 	console.log('/vyatsu/groups.xml')
 
-	fs.readFile('files/groups.xml', { 'encoding': 'utf-8' }, (error, data) => res.type('xml').send(data))
+	fs.readFile('resources/groups.xml', { 'encoding': 'utf-8' }, (error, data) => res.type('xml').send(data))
 })
 
 router.get('/schedule/:group_id/:season', (req, res) => {
