@@ -17,7 +17,7 @@ new Vue({
   		if (self.bellsShown == false && self.bells.length == 0) {
 	  		$.ajax({
 	  			type: "GET",
-	  			url: "http://localhost:8080/vyatsu/bells",
+	  			url: "vyatsu/bells",
 	  			dataType: "json",
 	  			success: (data) => {
 	  				self.bells = data
@@ -35,7 +35,7 @@ new Vue({
   		if (self.groupsShown == false && self.groupsList == null) {
   			$.ajax({
   				type: "GET",
-  				url: "http://localhost:8080/vyatsu/groups.json",
+  				url: "vyatsu/groups.json",
   				dataType: "json",
   				success: (data) => {
   					self.groupsList = data
