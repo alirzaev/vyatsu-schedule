@@ -44,7 +44,7 @@ function parse_groups_html(html) {
 }
 
 router.get('/', (req, res) => {
-	res.send(fs.readFileSync('files/index.html', { 'encoding': 'utf-8' }))
+	res.redirect('https://bitbucket.org/AliRzaev/vyatsu_schedule_server_rest_api')
 })
 
 router.get('/bells', (req, res) => {
