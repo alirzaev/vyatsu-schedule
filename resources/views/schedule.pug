@@ -21,12 +21,12 @@
       - var days = ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА']
       each week, week_index in weeks
         each day, day_index in week
-          h4(class=week_index == 1 ? "even-week" : "")
+          h4
             center
               b #{days[day_index]}
-          div(class="list-group", class=week_index == 1 ? "even-week" : "")
+          div(class="list-group")
             each lesson, index in day
-              div(class="list-group-item")
+              div(class="list-group-item", class=week_index == 0 ? "vsu-schedule-item-odd" : "vsu-schedule-item-even")
                 center
                   h4(class="list-group-item-heading")  #{bells[index][0]} - #{bells[index][1]}
                   if lesson != ""
