@@ -25,6 +25,9 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something bad happened!');
 });
 
+app.set('views', './resources/views')
+app.set('view engine', 'pug')
+
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
 

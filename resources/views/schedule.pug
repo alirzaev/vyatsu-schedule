@@ -1,0 +1,34 @@
+﻿html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+
+    title= "Расписание занятий для студентов"
+
+    if debug
+      script(src="https://ru.vuejs.org/js/vue.js")
+      script(src="https://code.jquery.com/jquery-3.2.1.js")
+      script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js")
+    else
+      script(src="https://ru.vuejs.org/js/vue.min.js")
+      script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+      script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/index.css")
+  body
+    div(class="container")
+      - var days = ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА']
+      each week, week_index in weeks
+        each day, day_index in week
+          h4(class=week_index == 1 ? "even-week" : "")
+            center #{days[day_index]}
+          div(class="list-group", class=week_index == 1 ? "even-week" : "")
+            each lesson, index in day
+              div(class="list-group-item")
+                center
+                  h4(class="list-group-item-heading")  #{bells[index][0]} - #{bells[index][1]}
+                  if lesson != ""
+                    p(class="list-group-item-text") #{lesson}
+                  else
+                    p(class="list-group-item-text")= "СВОБОДНАЯ ПАРА"

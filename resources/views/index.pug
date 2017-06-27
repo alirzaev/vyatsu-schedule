@@ -1,0 +1,45 @@
+﻿html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+
+    title= "Расписание занятий для студентов"
+
+    if debug
+      script(src="https://ru.vuejs.org/js/vue.js")
+      script(src="https://code.jquery.com/jquery-3.2.1.js")
+      script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js")
+    else
+      script(src="https://ru.vuejs.org/js/vue.min.js")
+      script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+      script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/index.css")
+  body
+    div(id="app", class="container")
+      button(type="button" v-on:click="showBells" class="btn btn-default btn-block")= "Звонки"
+      div(v-if="bellsShown" class="well")
+        div(class="list-group")
+          each item, index in bells
+            div(class="list-group-item")
+              h4(class="list-group-item-heading") #{index + 1} пара
+              p(class="list-group-item-text") #{item[0]} - #{item[1]}
+
+      button(type="button" v-on:click="showGroups" class="btn btn-default btn-block")= "Группы"
+      div(v-if="groupsShown" class="well")
+        div(class="form-group")
+          label(for="groupSelector")= "Выберите группу:"
+          select(v-model="curGroupID" class="form-control" id="groupSelector")
+            each groupId, group in groups
+              option(v-bind:value=groupId) #{group}
+
+        div(class="btn-group btn-group-justified" data-toggle="buttons")
+          label(class="btn btn-primary active" for="autumn")= "Осень"
+            input(type="radio" name="season" id="autumn" checked="true")
+          label(class="btn btn-primary" for="spring")= "Весна"
+            input(type="radio" name="season" id="spring")
+
+        br
+        a(href="#" v-on:click="openGroupSchedule" v-bind:class="{disabled: curGroupID == null}" class="btn btn-success btn-block" role="button")= "Открыть расписание"
+    script(src="/index.js")
