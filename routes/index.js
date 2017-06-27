@@ -25,10 +25,6 @@ router.get('/mobile/:group_id/:season', (req, res) => {
 	const opts = { 'encoding': 'utf-8' }
 	const url = `${BASE_URL}vyatsu/schedule/${req.params.group_id}/${req.params.season}`
 	request.get(url, (err, response, weeks_data) => {
-		if (response.statusCode != 200) {
-			res.send(500, response.body)
-			return
-		}
 		fs.readFile('resources/bells.json', opts, (_, bells_data) => {
 			const bells = JSON.parse(bells_data)
 			const weeks = JSON.parse(weeks_data)['weeks']
