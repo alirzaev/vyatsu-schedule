@@ -66,7 +66,7 @@ router.get('/groups.xml', (req, res) => {
 })
 
 router.get('/schedule/:group_id/:season', (req, res) => {
-	console.log('/vyatsu/schedule')
+	console.log(`/vyatsu/schedule/${req.params.group_id}/${req.params.season}`)
 
 	if (['autumn', 'spring'].indexOf(req.params.season) == -1) {
 		res.status(422).json({ error: "Invalid param 'season'" })
