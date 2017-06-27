@@ -87,16 +87,23 @@ router.get('/schedule/:group_id/:season', (req, res) => {
 		}
 		if (response.statusCode != 200) {
 			res.status(424).json({ error: `vyatsu.ru error: ${response.statusCode}` })
-		} else {
+			return
+		}
+		try {
 			res.json(parse_schedule_html(body))
+		} catch (e) {
+			res.status(500).json({ error: 'Error while parsing html file' })
 		}
 	})
 })
 
 router.post('/parse_schedule', (req, res) => {
 	console.log('/vyatsu/parse_schedule')
-	
-	res.json(parse_schedule_html(req.body.html_schedule))
+	try {
+		res.json(parse_schedule_html(req.body.html_schedule))
+	} catch (e) {
+		res.status(500).json({ error: 'Error while parsing html file' })
+	}
 })
 
 module.exports = router
