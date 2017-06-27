@@ -22,7 +22,8 @@
       each week, week_index in weeks
         each day, day_index in week
           h4(class=week_index == 1 ? "even-week" : "")
-            center #{days[day_index]}
+            center
+              b #{days[day_index]}
           div(class="list-group", class=week_index == 1 ? "even-week" : "")
             each lesson, index in day
               div(class="list-group-item")
