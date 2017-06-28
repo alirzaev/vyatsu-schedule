@@ -4,7 +4,7 @@ const request = require('request')
 const router = express.Router()
 
 const DEBUG = process.env.NODE_ENV !== 'production'
-const BASE_URL = DEBUG ? 'http://localhost:8080/' : 'http://vyatsushedule-vyatsuschedule.7e14.starter-us-west-2.openshiftapps.com/'
+const BASE_URL = DEBUG ? 'http://localhost:8080/' : 'https://floating-coast-81437.herokuapp.com/'
 
 router.get('/mobile', (req, res) => {
 	console.log('/mobile')
