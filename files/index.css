@@ -11,3 +11,11 @@
 .vsu-schedule-item-even {
     background-color: #fdfff1;
 }
+
+.vsu-enter-active, .vsu-leave-active {
+    transition: opacity 0.3s;
+}
+
+.vsu-enter, .vsu-leave-to {
+    opacity: 0;
+}
