@@ -11,8 +11,8 @@
     "request": "^2.81.0"
   },
   "engine": {
-    "node": "*",
-    "npm": "*"
+    "node": "6.11.0",
+    "npm": "3.10.10"
   },
   "scripts": {
     "start": "node app.js"
