@@ -4,15 +4,6 @@
 	font-family: 'Droid Sans', sans-serif;
 }
 
-.vsu {
-	width: 100%;
-	margin: auto;
-}
-
-.even-week {
-    color: #0e6ebf;
-}
-
 .vsu-schedule-item-odd {
     background-color: #fff1f1;
 }
