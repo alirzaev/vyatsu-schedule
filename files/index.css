@@ -1,6 +1,6 @@
 #app {
 	margin: auto;
-	width: 100%;
+    max-width: 768px;
 	font-family: 'Droid Sans', sans-serif;
 }
 
