@@ -6,6 +6,10 @@ const router = express.Router()
 const DEBUG = process.env.NODE_ENV !== 'production'
 const BASE_URL = DEBUG ? 'http://localhost:8080/' : 'https://vyatsuschedule.herokuapp.com/'
 
+router.get('/', (req, res) => {
+	res.redirect('/mobile')
+})
+
 router.get('/mobile', (req, res) => {
 	console.log('/mobile')
 
