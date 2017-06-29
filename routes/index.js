@@ -32,7 +32,8 @@ router.get('/mobile/:group_id/:season', (route_req, route_res) => {
 
 	request.get(url, (req_err, req_res, weeks_data) => {
 		if (req_res.statusCode != 200) {
-			route_res.status(500).send(req_res.body)
+			const error = JSON.parse(req_res.body)['error']
+			route_res.render('error', { error: error })
 			return
 		}
 		fs.readFile('resources/bells.json', opts, (_, bells_data) => {
