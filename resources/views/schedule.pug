@@ -15,7 +15,6 @@
       script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
 
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-    link(rel="stylesheet", href="/index.css")
   body
     div(class="container")
       - var days = ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА']
@@ -33,3 +32,4 @@
                     p(class="list-group-item-text") #{lesson}
                   else
                     p(class="list-group-item-text")= "СВОБОДНАЯ ПАРА"
+    script(src="/schedule.js")

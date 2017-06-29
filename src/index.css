@@ -5,14 +5,6 @@
 	font-family: 'Droid Sans', sans-serif;
 }
 
-.vsu-schedule-item-odd {
-    background-color: #fff1f1;
-}
-
-.vsu-schedule-item-even {
-    background-color: #fdfff1;
-}
-
 .vsu-enter-active, .vsu-leave-active {
     transition: opacity 0.3s;
 }
