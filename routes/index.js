@@ -6,37 +6,39 @@ const router = express.Router()
 const DEBUG = process.env.NODE_ENV !== 'production'
 const BASE_URL = DEBUG ? 'http://localhost:8080/' : 'https://vyatsuschedule.herokuapp.com/'
 
-router.get('/', (req, res) => {
-	res.redirect('/mobile')
+router.get('/', (route_req, route_res) => {
+	route_res.redirect('/mobile')
 })
 
-router.get('/mobile', (req, res) => {
+router.get('/mobile', (route_req, route_res) => {
 	console.log('/mobile')
 
 	const opts = { 'encoding': 'utf-8' }
+
 	fs.readFile('resources/bells.json', opts, (_, bells_data) => {
 		fs.readFile('resources/groups.json', opts, (_, groups_data) => {
 			const bells = JSON.parse(bells_data)
 			const groups = JSON.parse(groups_data)
-			res.render('index', { bells: bells, groups: groups, debug: DEBUG })
+			route_res.render('index', { bells: bells, groups: groups, debug: DEBUG })
 		})
 	})
 })
 
-router.get('/mobile/:group_id/:season', (req, res) => {
-	console.log(`/mobile/${req.params.group_id}/${req.params.season}`)
+router.get('/mobile/:group_id/:season', (route_req, route_res) => {
+	console.log(`/mobile/${route_req.params.group_id}/${route_req.params.season}`)
 	
 	const opts = { 'encoding': 'utf-8' }
-	const url = `${BASE_URL}vyatsu/schedule/${req.params.group_id}/${req.params.season}`
-	request.get(url, (err, response, weeks_data) => {
-		if (response.statusCode != 200) {
-			res.status(500).send(response.body)
+	const url = `${BASE_URL}vyatsu/schedule/${route_req.params.group_id}/${route_req.params.season}`
+
+	request.get(url, (req_err, req_res, weeks_data) => {
+		if (req_res.statusCode != 200) {
+			route_res.status(500).send(req_res.body)
 			return
 		}
 		fs.readFile('resources/bells.json', opts, (_, bells_data) => {
 			const bells = JSON.parse(bells_data)
 			const weeks = JSON.parse(weeks_data)['weeks']
-			res.render('schedule', { weeks: weeks, bells: bells })
+			route_res.render('schedule', { weeks: weeks, bells: bells })
 		})
 	})
 })
