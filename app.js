@@ -7,7 +7,7 @@ const app           = express()
 var port = process.env.PORT || 8080,
     ip   = process.env.IP   || '0.0.0.0';
 
-app.use(express.static('files'))
+app.use(express.static('dist'))
 app.use(body_parser.urlencoded({ extended: true }))
 
 app.use(function(req, res, next) {
