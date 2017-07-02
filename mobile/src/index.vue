@@ -1,8 +1,8 @@
 ﻿<template>
   <div id="app" class="container">
-    <button type="button" v-on:click="bellsVisible = !bellsVisible" class="btn btn-default btn-block">
+    <div type="button" v-on:click="bellsVisible = !bellsVisible" class="btn btn-default btn-block">
     Звонки
-    </button>
+    </div>
     <transition name="vsu">
       <div v-if="bellsVisible" class="well">
         <div class="list-group">
@@ -13,9 +13,9 @@
         </div>
       </div>
     </transition>
-    <button type="button" v-on:click="groupsVisible = !groupsVisible" class="btn btn-default btn-block">
+    <div v-on:click="groupsVisible = !groupsVisible" class="btn btn-default btn-block">
     Группы
-    </button>
+    </div>
     <transition name="vsu">
       <div v-if="groupsVisible" class="well">
         <div class="form-group">
