@@ -15,13 +15,7 @@ router.get('/mobile', (route_req, route_res) => {
 
 	const opts = { 'encoding': 'utf-8' }
 
-	fs.readFile('resources/bells.json', opts, (_, bells_data) => {
-		fs.readFile('resources/groups.json', opts, (_, groups_data) => {
-			const bells = JSON.parse(bells_data)
-			const groups = JSON.parse(groups_data)
-			route_res.render('index', { bells: bells, groups: groups, debug: DEBUG })
-		})
-	})
+	route_res.render('index')
 })
 
 router.get('/mobile/:group_id/:season', (route_req, route_res) => {
