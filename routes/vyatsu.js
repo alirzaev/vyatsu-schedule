@@ -41,7 +41,7 @@ function parse_groups_html(html) {
 }
 
 router.get('/', (route_req, route_res) => {
-	res.redirect('https://bitbucket.org/AliRzaev/vyatsu_schedule_server_rest_api')
+	route_res.redirect('https://bitbucket.org/AliRzaev/vyatsu_schedule_server_rest_api')
 })
 
 router.get('/bells', (route_req, route_res) => {
