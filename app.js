@@ -1,7 +1,7 @@
 const express       = require('express')
 const body_parser   = require('body-parser');
-const vyatsu_router = require('./routes/vyatsu')
-const index_router  = require('./routes/index')
+const api_router = require('./routes/vyatsu')
+const webapp_router  = require('./routes/index')
 const app           = express()
 
 var port = process.env.PORT || 8080,
@@ -16,8 +16,8 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/', index_router)
-app.use('/vyatsu', vyatsu_router)
+app.use('/', webapp_router)
+app.use('/vyatsu', api_router)
 
 // error handling
 app.use((err, req, res, next) => {
