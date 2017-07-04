@@ -1,14 +1,14 @@
-﻿const path = require('path')
+﻿const path    = require('path')
 const webpack = require('webpack')
 
 module.exports = {
 	entry: {
-		index: './mobile/src/index.js',
-		schedule: './mobile/src/schedule.js'
+		index: './webapp/src/index.js',
+		schedule: './webapp/src/schedule.css'
 	},
 	output: {
 		filename: '[name].js',
-		path: path.resolve(__dirname, 'mobile/dist')
+		path: path.resolve(__dirname, 'webapp/dist')
 	},
 	module: {
 		rules: [
@@ -18,7 +18,6 @@ module.exports = {
 				options: {
 					loaders: {
 					}
-					// other vue-loader options go here
 				}
 			},
 			{

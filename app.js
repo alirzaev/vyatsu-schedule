@@ -1,13 +1,13 @@
 const express       = require('express')
 const body_parser   = require('body-parser');
-const api_router = require('./routes/vyatsu')
-const webapp_router  = require('./routes/index')
+const api_router    = require('./routes/vyatsu')
+const webapp_router = require('./routes/webapp')
 const app           = express()
 
 var port = process.env.PORT || 8080,
     ip   = process.env.IP   || '0.0.0.0';
 
-app.use(express.static('mobile/dist'))
+app.use(express.static('webapp/dist'))
 app.use(body_parser.urlencoded({ extended: true }))
 
 app.use(function(req, res, next) {

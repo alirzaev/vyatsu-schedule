@@ -96,6 +96,7 @@ router.get('/schedule/:group_id/:season', (route_req, route_res) => {
 
 router.post('/parse_schedule', (route_req, route_res) => {
 	console.log('/vyatsu/parse_schedule')
+
 	try {
 		route_res.json(parse_schedule_html(route_req.body.html_schedule))
 	} catch (e) {

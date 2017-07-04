@@ -89,7 +89,7 @@ export default {
   methods: {
     openGroupSchedule: function() {
       const isAutumn = document.getElementById("autumn").checked
-      const url = '/mobile/' + this.curGroupID + '/' + (isAutumn ? 'autumn' : 'spring')
+      const url = `/mobile/${this.curGroupID}/${isAutumn ? 'autumn' : 'spring'}`
       window.open(url, '_blank')
     }
   }
