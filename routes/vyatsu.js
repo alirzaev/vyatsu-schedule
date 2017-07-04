@@ -44,10 +44,10 @@ router.get('/', (route_req, route_res) => {
 	route_res.redirect('https://bitbucket.org/AliRzaev/vyatsu_schedule_server_rest_api')
 })
 
-router.get('/bells', (route_req, route_res) => {
-	console.log('/vyatsu/bells')
+router.get('/calls', (route_req, route_res) => {
+	console.log('/vyatsu/calls')
 
-	fs.readFile('resources/bells.json', { 'encoding': 'utf-8' }, (error, data) => route_res.type('json').send(data))
+	fs.readFile('resources/calls.json', { 'encoding': 'utf-8' }, (error, data) => route_res.type('json').send(data))
 })
 
 router.get('/groups.json', (route_req, route_res) => {
