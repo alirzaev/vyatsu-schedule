@@ -1,7 +1,7 @@
 ﻿<template>
   <div id="app" class="container">
     <div v-if="ready">
-      <div type="button" v-on:click="bellsVisible = !bellsVisible" class="btn btn-default btn-block">
+      <div v-on:click="bellsVisible = !bellsVisible" class="btn btn-default btn-block">
       Звонки
       </div>
       <transition name="vsu">
