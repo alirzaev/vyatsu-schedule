@@ -20,9 +20,15 @@
       <transition name="vsu">
         <div v-if="groupsVisible" class="well">
           <div class="form-group">
+            <label for="facultySelector">Выберите факультет</label>
+            <select v-model="faculty" class="form-control" id="facultySelector">
+              <option v-for="_, faculty_name in groups" v-bind:value="faculty_name">{{ faculty_name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="groupSelector">Выберите группу</label>
             <select v-model="curGroupID" class="form-control" id="groupSelector">
-              <option v-for="group_id, group in groups" v-bind:value="group_id">{{ group }}</option>
+              <option v-for="group_id, group in groupsByFaculty" v-bind:value="group_id">{{ group }}</option>
             </select>
           </div>
           <div class="btn-group btn-group-justified" data-toggle="buttons">
@@ -59,6 +65,7 @@ export default {
       bellsVisible: false,
       groupsVisible: false,
       curGroupID: null,
+      faculty: null,
       season: '1',
       bells: [],
       groups: {}
@@ -69,7 +76,7 @@ export default {
     parallel([
       callback => {
         $.ajax({
-          url: "https://vyatsuschedule.herokuapp.com/vyatsu/calls",
+          url: "/vyatsu/calls",
           dataType: "json",
           success: (data) => {
             callback(null, data)
@@ -78,7 +85,7 @@ export default {
       },
       callback => {
         $.ajax({
-          url: "https://vyatsuschedule.herokuapp.com/vyatsu/groups.json",
+          url: "/vyatsu/groups/by_faculty.json",
           dataType: "json",
           success: (data) => {
             callback(null, data)
@@ -97,6 +104,11 @@ export default {
       const url = `/mobile/${this.curGroupID}/${isAutumn ? 'autumn' : 'spring'}`
       window.open(url, '_blank')
     }
+  },
+  computed: {
+      groupsByFaculty: function () {
+          return this.faculty ? this.groups[this.faculty] : []
+      }
   }
 }
 </script>
