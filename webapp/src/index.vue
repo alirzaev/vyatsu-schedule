@@ -69,7 +69,7 @@ export default {
     parallel([
       callback => {
         $.ajax({
-          url: "https://vyatsuschedule.herokuapp.com/vyatsu/bells",
+          url: "https://vyatsuschedule.herokuapp.com/vyatsu/calls",
           dataType: "json",
           success: (data) => {
             callback(null, data)
