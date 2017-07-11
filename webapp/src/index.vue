@@ -117,7 +117,7 @@
                 return this.selectedFaculty ? this.groups[this.selectedFaculty] : []
             },
             isGroupSelected: function () {
-                return this.selectedGroup != null && this.selectedGroup != undefined
+                return this.selectedGroup !== null && this.selectedGroup !== undefined
             }
         }
     }

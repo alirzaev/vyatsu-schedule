@@ -11,7 +11,7 @@ function parse_schedule_html(html) {
     const rows = Array.from(dom.window.document.body.getElementsByTagName('tr')).slice(2)
     for (let i = 0; i < rows.length; ++i) {
         const cols = Array.from(rows[i].getElementsByTagName('td'))
-        if (i % 7 == 0) {
+        if (i % 7 === 0) {
             days[(i / 7) >> 0].push(cols[2].textContent)
         } else {
             days[(i / 7) >> 0].push(cols[1].textContent)
@@ -29,7 +29,7 @@ function parse_groups_html(html) {
     const tags = dom.window.document.body.getElementsByTagName('a')
 
     for (let i = 0; i < tags.length; ++i) {
-        if (tags[i].getAttribute('href').search(URL_PATTERN) != -1) {
+        if (tags[i].getAttribute('href').search(URL_PATTERN) !== -1) {
             const content = tags[i].textContent
             const group_name = content.slice(0, content.indexOf('(')).trim()
             groups_ids[group_name] = URL_PATTERN.exec(tags[i].getAttribute('href'))[1]
@@ -72,7 +72,7 @@ router.get('/groups/by_faculty.json', (route_req, route_res) => {
 router.get('/schedule/:group_id/:season', (route_req, route_res) => {
     console.log(`/vyatsu/schedule/${route_req.params.group_id}/${route_req.params.season}`)
 
-    if (['autumn', 'spring'].indexOf(route_req.params.season) == -1) {
+    if (['autumn', 'spring'].indexOf(route_req.params.season) === -1) {
         route_res.status(422).json({error: "Invalid param 'season'"})
         return
     } else if (!route_req.params.group_id) {
@@ -80,7 +80,7 @@ router.get('/schedule/:group_id/:season', (route_req, route_res) => {
         return
     }
 
-    const season = (route_req.params.season == 'autumn' ? 1 : 2)
+    const season = (route_req.params.season === 'autumn' ? 1 : 2)
     const id = route_req.params.group_id
     const url = `https://www.vyatsu.ru/reports/schedule/Group/${id}_${season}.html`
 
@@ -89,7 +89,7 @@ router.get('/schedule/:group_id/:season', (route_req, route_res) => {
             route_res.status(503).json({error: `Service unavailable: ${req_err.message}`})
             return
         }
-        if (req_res.statusCode != 200) {
+        if (req_res.statusCode !== 200) {
             route_res.status(424).json({error: `vyatsu.ru error: ${req_res.statusCode}`})
             return
         }

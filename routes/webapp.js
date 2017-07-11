@@ -23,7 +23,7 @@ router.get('/mobile/:group_id/:season', (route_req, route_res) => {
     const url = `${BASE_URL}vyatsu/schedule/${route_req.params.group_id}/${route_req.params.season}`
 
     request.get(url, (req_err, req_res, weeks_data) => {
-        if (req_res.statusCode != 200) {
+        if (req_res.statusCode !== 200) {
             const error = JSON.parse(req_res.body)['error']
             route_res.render('error', {error: error})
             return
