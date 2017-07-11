@@ -21,14 +21,14 @@
         <div v-if="groupsVisible" class="well">
           <div class="form-group">
             <label for="facultySelector">Выберите факультет</label>
-            <select v-model="faculty" class="form-control" id="facultySelector">
+            <select v-model="selectedFaculty" class="form-control" id="facultySelector">
               <option v-for="_, faculty_name in groups" v-bind:value="faculty_name">{{ faculty_name }}</option>
             </select>
           </div>
           <div class="form-group">
             <label for="groupSelector">Выберите группу</label>
-            <select v-model="curGroupID" class="form-control" id="groupSelector">
-              <option v-for="group_id, group in groupsByFaculty" v-bind:value="group_id">{{ group }}</option>
+            <select v-model="selectedGroup" class="form-control" id="groupSelector">
+              <option v-for="_, group_name in groupsByFaculty" v-bind:value="group_name">{{ group_name }}</option>
             </select>
           </div>
           <div class="btn-group btn-group-justified" data-toggle="buttons">
@@ -41,7 +41,7 @@
               <input type="radio" name="season" id="spring">
             </label>
           </div><br />
-          <a href="#" v-on:click="openGroupSchedule" v-bind:class="{disabled: curGroupID == null}" class="btn btn-success btn-block" role="button">Открыть расписание</a>
+          <a href="#" v-on:click="openGroupSchedule" v-bind:class="{disabled: !isGroupSelected}" class="btn btn-success btn-block" role="button">Открыть расписание</a>
         </div>
       </transition>
     </div>
@@ -64,8 +64,8 @@ export default {
       ready: false,
       bellsVisible: false,
       groupsVisible: false,
-      curGroupID: null,
-      faculty: null,
+      selectedGroup: null,
+      selectedFaculty: null,
       season: '1',
       bells: [],
       groups: {}
@@ -101,13 +101,18 @@ export default {
   methods: {
     openGroupSchedule: function() {
       const isAutumn = document.getElementById("autumn").checked
-      const url = `/mobile/${this.curGroupID}/${isAutumn ? 'autumn' : 'spring'}`
+      const groupID = this.groupsByFaculty[this.selectedGroup]
+      const url = `/mobile/${groupID}/${isAutumn ? 'autumn' : 'spring'}`
       window.open(url, '_blank')
     }
   },
   computed: {
       groupsByFaculty: function () {
-          return this.faculty ? this.groups[this.faculty] : []
+          this.selectedGroup = null
+          return this.selectedFaculty ? this.groups[this.selectedFaculty] : []
+      },
+      isGroupSelected: function () {
+          return this.selectedGroup != null && this.selectedGroup != undefined
       }
   }
 }
