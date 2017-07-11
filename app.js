@@ -4,13 +4,13 @@ const api_router    = require('./routes/vyatsu')
 const webapp_router = require('./routes/webapp')
 const app           = express()
 
-var port = process.env.PORT || 8080,
-    ip   = process.env.IP   || '0.0.0.0';
+const port = process.env.PORT || 8080,
+      ip = process.env.IP || '0.0.0.0';
 
 app.use(express.static('webapp/dist'))
-app.use(body_parser.urlencoded({ extended: true }))
+app.use(body_parser.urlencoded({extended: true}))
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -21,8 +21,8 @@ app.use('/vyatsu', api_router)
 
 // error handling
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something bad happened!');
+    console.error(err.stack);
+    res.status(500).send('Something bad happened!');
 });
 
 app.set('views', './resources/views')
