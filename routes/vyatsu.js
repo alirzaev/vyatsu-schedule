@@ -67,6 +67,12 @@ router.get('/groups/by_faculty.json', (route_req, route_res) => {
     fs.readFile('resources/faculties.json', {'encoding': 'utf-8'}, (error, data) => route_res.type('json').send(data))
 })
 
+router.get('/groups/by_faculty.xml', (route_req, route_res) => {
+    console.log('/groups/by_faculty.xml')
+
+    fs.readFile('resources/faculties.xml', {'encoding': 'utf-8'}, (error, data) => route_res.type('xml').send(data))
+})
+
 router.get('/schedule/:group_id/:season', (route_req, route_res) => {
     console.log(`/vyatsu/schedule/${route_req.params.group_id}/${route_req.params.season}`)
 
