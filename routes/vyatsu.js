@@ -62,11 +62,9 @@ router.get('/groups.xml', (route_req, route_res) => {
 })
 
 router.get('/groups/by_faculty.json', (route_req, route_res) => {
-    {
-        console.log('/groups/by_faculty.json')
+    console.log('/groups/by_faculty.json')
 
-        fs.readFile('resources/faculties.json', {'encoding': 'utf-8'}, (error, data) => route_res.type('json').send(data))
-    }
+    fs.readFile('resources/faculties.json', {'encoding': 'utf-8'}, (error, data) => route_res.type('json').send(data))
 })
 
 router.get('/schedule/:group_id/:season', (route_req, route_res) => {
