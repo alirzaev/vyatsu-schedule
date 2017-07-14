@@ -8,7 +8,8 @@ const router  = express.Router()
 function parse_schedule_html(html) {
     const dom = new JSDOM(html)
     const days = [[], [], [], [], [], [], [], [], [], [], [], []]
-    const rows = Array.from(dom.window.document.body.getElementsByTagName('tr')).slice(2)
+    const [_, name_row, ...rows] = Array.from(dom.window.document.body.getElementsByTagName('tr'))
+    const group_name = name_row.getElementsByTagName('td')[2].textContent
     for (let i = 0; i < rows.length; ++i) {
         const cols = Array.from(rows[i].getElementsByTagName('td'))
         if (i % 7 === 0) {
@@ -17,7 +18,10 @@ function parse_schedule_html(html) {
             days[(i / 7) >> 0].push(cols[1].textContent)
         }
     }
-    return {'weeks': [days.slice(0, 6), days.slice(6)]}
+    return {
+        'weeks': [days.slice(0, 6), days.slice(6)],
+        'group': group_name
+    }
 }
 
 function parse_groups_html(html) {

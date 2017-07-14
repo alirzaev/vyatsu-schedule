@@ -30,8 +30,8 @@ router.get('/mobile/:group_id/:season', (route_req, route_res) => {
         }
         fs.readFile('resources/calls.json', opts, (_, bells_data) => {
             const bells = JSON.parse(bells_data)
-            const weeks = JSON.parse(weeks_data)['weeks']
-            route_res.render('schedule', {weeks: weeks, bells: bells})
+            const {weeks, group} = JSON.parse(weeks_data)
+            route_res.render('schedule', {weeks: weeks, bells: bells, group: group})
         })
     })
 })
