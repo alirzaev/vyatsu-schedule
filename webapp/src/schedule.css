@@ -1,7 +1,15 @@
-﻿.vsu-schedule-item-odd {
+﻿body {
+    padding-top: 70px;
+}
+
+.vsu-schedule-item-odd {
     background-color: #fff1f1;
 }
 
 .vsu-schedule-item-even {
     background-color: #fdfff1;
+}
+
+.vsu-navbar-shadow {
+    box-shadow: 0 2px 2px 0 #cccccc;
 }

@@ -16,8 +16,11 @@
 
     link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
   body
+    nav(class="navbar navbar-default navbar-fixed-top")
+      div(class="container-fluid vsu-navbar-shadow")
+        div(class="navbar-header")
+          h3(class="text-center") #{group}
     div(class="container")
-      h3(class="well well-sm text-center") #{group}
       - var days = ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА']
       each week, week_index in weeks
         each day, day_index in week
