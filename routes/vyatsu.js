@@ -80,33 +80,35 @@ router.get('/groups/by_faculty.xml', (route_req, route_res) => {
 router.get('/schedule/:group_id/:season', (route_req, route_res) => {
     console.log(`/vyatsu/schedule/${route_req.params.group_id}/${route_req.params.season}`)
 
-    if (['autumn', 'spring'].indexOf(route_req.params.season) === -1) {
-        route_res.status(422).json({error: "Invalid param 'season'"})
-        return
-    } else if (!route_req.params.group_id) {
-        route_res.status(422).json({error: 'Invalid group id'})
-        return
-    }
+    fs.readFile('resources/demo_schedule.json', {'encoding': 'utf-8'}, (error, data) => route_res.type('json').send(data))
 
-    const season = (route_req.params.season === 'autumn' ? 1 : 2)
-    const id = route_req.params.group_id
-    const url = `https://www.vyatsu.ru/reports/schedule/Group/${id}_${season}.html`
-
-    request.get(url, (req_err, req_res, req_body) => {
-        if (req_err) {
-            route_res.status(503).json({error: `Service unavailable: ${req_err.message}`})
-            return
-        }
-        if (req_res.statusCode !== 200) {
-            route_res.status(424).json({error: `vyatsu.ru error: ${req_res.statusCode}`})
-            return
-        }
-        try {
-            route_res.json(parse_schedule_html(req_body))
-        } catch (e) {
-            route_res.status(500).json({error: 'Error while parsing html file'})
-        }
-    })
+    // if (['autumn', 'spring'].indexOf(route_req.params.season) === -1) {
+    //     route_res.status(422).json({error: "Invalid param 'season'"})
+    //     return
+    // } else if (!route_req.params.group_id) {
+    //     route_res.status(422).json({error: 'Invalid group id'})
+    //     return
+    // }
+    //
+    // const season = (route_req.params.season === 'autumn' ? 1 : 2)
+    // const id = route_req.params.group_id
+    // const url = `https://www.vyatsu.ru/reports/schedule/Group/${id}_${season}.html`
+    //
+    // request.get(url, (req_err, req_res, req_body) => {
+    //     if (req_err) {
+    //         route_res.status(503).json({error: `Service unavailable: ${req_err.message}`})
+    //         return
+    //     }
+    //     if (req_res.statusCode !== 200) {
+    //         route_res.status(424).json({error: `vyatsu.ru error: ${req_res.statusCode}`})
+    //         return
+    //     }
+    //     try {
+    //         route_res.json(parse_schedule_html(req_body))
+    //     } catch (e) {
+    //         route_res.status(500).json({error: 'Error while parsing html file'})
+    //     }
+    // })
 })
 
 router.post('/parse_schedule', (route_req, route_res) => {
