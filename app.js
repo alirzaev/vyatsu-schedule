@@ -4,7 +4,7 @@ const api_router    = require('./routes/vyatsu')
 const webapp_router = require('./routes/webapp')
 const app           = express()
 
-const port = process.env.PORT || 8080,
+const port = process.env.PORT || 8081,
       ip = process.env.IP || '0.0.0.0';
 
 app.use(express.static('webapp/dist'))
@@ -22,7 +22,7 @@ app.use('/vyatsu', api_router)
 // error handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something bad happened!');
+    res.status(500).render('error', {error: 'Something bad happened!'})
 });
 
 app.set('views', './resources/views')

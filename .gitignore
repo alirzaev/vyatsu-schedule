@@ -1,6 +1,7 @@
 /node_modules/
 npm-debug.log
-/.vs
+/.vscode
+/.idea
 /obj/Debug
 /bin
 /vyatsu_schedule_nodejs_app.njsproj
