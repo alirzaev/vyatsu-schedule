@@ -19,20 +19,23 @@
     nav(class="navbar navbar-default navbar-fixed-top")
       div(class="container-fluid vsu-navbar-shadow")
         div(class="navbar-header")
-          h3(class="text-center") #{group}
+          h3(class="text-center")
+            a(href="#current") #{group}
     div(class="container")
       - var days = ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА']
       each week, week_index in weeks
         each day, day_index in week
           h4
+            if current[0] === week_index && current[1] === day_index
+              a(id="current" class="anchor")
             center
               b #{days[day_index]}
           div(class="list-group")
             each lesson, index in day
-              div(class="list-group-item", class=week_index == 0 ? "vsu-schedule-item-odd" : "vsu-schedule-item-even")
+              div(class="list-group-item", class=week_index === 0 ? "vsu-schedule-item-odd" : "vsu-schedule-item-even")
                 center
                   h4(class="list-group-item-heading")  #{bells[index][0]} - #{bells[index][1]}
-                  if lesson != ""
+                  if lesson !== ""
                     p(class="list-group-item-text") #{lesson}
                   else
                     p(class="list-group-item-text")= "———"

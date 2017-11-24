@@ -13,3 +13,15 @@
 .vsu-navbar-shadow {
     box-shadow: 0 2px 2px 0 #cccccc;
 }
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -70px;
+    visibility: hidden;
+}
+
+a {
+    color: #333 !important;
+    text-decoration: none !important;
+}
