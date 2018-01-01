@@ -29,19 +29,18 @@
                     <div class="form-group">
                         <label for="groupSelector">Выберите группу</label>
                         <select v-model="selectedGroup" class="form-control" id="groupSelector">
-                            <option v-for="_, group_name in groupsByFaculty" v-bind:value="group_name">{{ group_name
-                                }}
+                            <option v-for="_, group_name in groupsByFaculty" v-bind:value="group_name">{{ group_name }}
                             </option>
                         </select>
                     </div>
                     <div class="btn-group btn-group-justified" data-toggle="buttons">
-                        <label class="btn btn-primary active" for="autumn">
+                        <label class="btn btn-primary" for="autumn">
                             Осень
-                            <input type="radio" name="season" id="autumn" checked="true">
+                            <input type="radio" name="season" id="autumn">
                         </label>
-                        <label class="btn btn-primary" for="spring">
+                        <label class="btn btn-primary active" for="spring">
                             Весна
-                            <input type="radio" name="season" id="spring">
+                            <input type="radio" name="season" id="spring" checked="checked">
                         </label>
                     </div>
                     <br/>
@@ -71,7 +70,6 @@
                 groupsVisible: false,
                 selectedGroup: null,
                 selectedFaculty: null,
-                season: '1',
                 bells: [],
                 groups: {}
             }
