@@ -70,9 +70,9 @@ router.get('/mobile/:group_id/:season', (route_req, route_res) => {
                 'schedule',
                 {
                     weeks: weeks,
-                    bells: calls,
+                    calls: calls,
                     group: group,
-                    current: getCurrentDay(date_range[0], date_range[1])
+                    today: getCurrentDay(date_range[0], date_range[1])
                 }
             )
         })

@@ -1,13 +1,13 @@
 ﻿<template>
     <div id="app" class="container">
         <div v-if="ready">
-            <div v-on:click="bellsVisible = !bellsVisible" class="btn btn-default btn-block">
+            <div v-on:click="callsVisible = !callsVisible" class="btn btn-default btn-block">
                 Расписание звонков
             </div>
             <transition name="vsu">
-                <div v-if="bellsVisible" class="well">
+                <div v-if="callsVisible" class="well">
                     <div class="list-group">
-                        <div class="list-group-item" v-for="item, index in bells">
+                        <div class="list-group-item" v-for="item, index in calls">
                             <h4 class="list-group-item-heading">{{ index + 1 + " пара" }}</h4>
                             <p class="list-group-item-text">{{ item[0] + " - " + item[1] }}</p>
                         </div>
@@ -66,11 +66,11 @@
         data: function () {
             return {
                 ready: false,
-                bellsVisible: false,
+                callsVisible: false,
                 groupsVisible: false,
                 selectedGroup: null,
                 selectedFaculty: null,
-                bells: [],
+                calls: [],
                 groups: {}
             }
         },
@@ -97,7 +97,7 @@
                     }
                 ],
                 (err, res) => {
-                    [self.bells, self.groups] = res
+                    [self.calls, self.groups] = res
                     self.ready = true
                 })
         },
