@@ -62,7 +62,6 @@ router.get('/mobile/:group_id/:season', (route_req, route_res) => {
         request.get(`${BASE_URL}/vyatsu/calls`, (req_err, req_res, calls_data) => {
             const calls = JSON.parse(calls_data)
             const {weeks, group, date_range} = JSON.parse(weeks_data)
-            // const {weeks, group} = JSON.parse(weeks_data)
             route_res.render(
                 'schedule',
                 {

@@ -2,7 +2,7 @@
     <div id="app" class="container">
         <div v-if="ready">
             <div v-on:click="bellsVisible = !bellsVisible" class="btn btn-default btn-block">
-                Звонки
+                Расписание звонков
             </div>
             <transition name="vsu">
                 <div v-if="bellsVisible" class="well">
@@ -15,7 +15,7 @@
                 </div>
             </transition>
             <div v-on:click="groupsVisible = !groupsVisible" class="btn btn-default btn-block">
-                Группы
+                Расписание групп
             </div>
             <transition name="vsu">
                 <div v-if="groupsVisible" class="well">
