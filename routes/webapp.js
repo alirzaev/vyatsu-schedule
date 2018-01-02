@@ -56,7 +56,11 @@ router.get('/mobile/:group_id/:season', (route_req, route_res) => {
     request.get(url, (req_err, req_res, weeks_data) => {
         if (req_res.statusCode !== 200) {
             const error = JSON.parse(req_res.body)['error']
-            route_res.render('error', {error: req_res.statusCode})
+            if (error === undefined) {
+                route_res.render('error', {error: req_res.statusCode})
+            } else {
+                route_res.render('error', {error: error})
+            }
             return
         }
         request.get(`${BASE_URL}/vyatsu/calls`, (req_err, req_res, calls_data) => {
