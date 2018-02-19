@@ -1,9 +1,12 @@
 const express = require('express')
 const request = require('request')
+const log4js  = require('log4js')
 const router  = express.Router()
 
 const DEBUG = process.env.NODE_ENV !== 'production'
 const BASE_URL = DEBUG ? 'http://localhost:8080' : 'https://vyatsuscheduleapi.herokuapp.com'
+
+const logger = log4js.getLogger('mobile')
 
 function parseDate(date) {
     let day = Number.parseInt(date.slice(0, 2))
@@ -43,13 +46,14 @@ router.get('/', (route_req, route_res) => {
 })
 
 router.get('/mobile', (route_req, route_res) => {
-    console.log('/mobile')
+    logger.info('/mobile')
 
     route_res.render('index')
 })
 
 router.get('/mobile/:group_id/:season', (route_req, route_res) => {
-    console.log(`/mobile/${route_req.params.group_id}/${route_req.params.season}`)
+    const req_url = `/mobile/${route_req.params.group_id}/${route_req.params.season}`
+    logger.info(req_url)
 
     const url = `${BASE_URL}/vyatsu/schedule/${route_req.params.group_id}/${route_req.params.season}`
 
@@ -57,12 +61,17 @@ router.get('/mobile/:group_id/:season', (route_req, route_res) => {
         if (req_res.statusCode !== 200) {
             const error = JSON.parse(req_res.body)['error']
             if (error === undefined) {
+                logger.error(`${req_url} - Error status code: ${req_res.statusCode}`)
+
                 route_res.render('error', {error: req_res.statusCode})
             } else {
+                logger.error(`${req_url} - ${error}`)
+
                 route_res.render('error', {error: error})
             }
             return
         }
+
         request.get(`${BASE_URL}/vyatsu/calls`, (req_err, req_res, calls_data) => {
             const calls = JSON.parse(calls_data)
             const {weeks, group, date_range} = JSON.parse(weeks_data)
