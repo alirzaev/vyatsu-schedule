@@ -22,14 +22,14 @@
                     <div class="form-group">
                         <label for="facultySelector">Выберите факультет</label>
                         <select v-model="selectedFaculty" class="form-control" id="facultySelector">
-                            <option v-for="_, faculty_name in groups" v-bind:value="faculty_name">{{ faculty_name }}
+                            <option v-for="faculty_item in groups" v-bind:value="faculty_item">{{ faculty_item['faculty'] }}
                             </option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="groupSelector">Выберите группу</label>
                         <select v-model="selectedGroup" class="form-control" id="groupSelector">
-                            <option v-for="_, group_name in groupsByFaculty" v-bind:value="group_name">{{ group_name }}
+                            <option v-for="group_item in groupsByFaculty" v-bind:value="group_item">{{ group_item['name'] }}
                             </option>
                         </select>
                     </div>
@@ -88,7 +88,7 @@
                     },
                     callback => {
                         $.ajax({
-                            url: "/vyatsu/groups/by_faculty.json",
+                            url: "/vyatsu/v2/groups/by_faculty.json",
                             dataType: "json",
                             success: (data) => {
                                 callback(null, data)
@@ -104,7 +104,7 @@
         methods: {
             openGroupSchedule: function () {
                 const isAutumn = document.getElementById("autumn").checked
-                const groupID = this.groupsByFaculty[this.selectedGroup]
+                const groupID = this.selectedGroup['id']
                 const url = `/mobile/${groupID}/${isAutumn ? 'autumn' : 'spring'}`
                 window.open(url, '_blank')
             }
@@ -112,7 +112,7 @@
         computed: {
             groupsByFaculty: function () {
                 this.selectedGroup = null
-                return this.selectedFaculty ? this.groups[this.selectedFaculty] : []
+                return this.selectedFaculty ? this.selectedFaculty['groups'] : []
             },
             isGroupSelected: function () {
                 return this.selectedGroup !== null && this.selectedGroup !== undefined

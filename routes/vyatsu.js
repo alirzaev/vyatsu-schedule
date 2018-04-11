@@ -21,11 +21,11 @@ router.get('/calls', (route_req, route_res) => {
     )
 })
 
-router.get('/groups/by_faculty.json', (route_req, route_res) => {
-    logger.info('/vyatsu/groups/by_faculty.json')
+router.get('/v2/groups/by_faculty.json', (route_req, route_res) => {
+    logger.info('/vyatsu/v2/groups/by_faculty.json')
 
     request.get(
-        `${BASE_URL}/vyatsu/groups/by_faculty.json`, 
+        `${BASE_URL}/vyatsu/v2/groups/by_faculty.json`, 
         (req_err, req_res, req_data) => route_res.type('json').send(req_data)
     )
 })
