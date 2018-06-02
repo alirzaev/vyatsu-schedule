@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="home container">
         <div v-if="ready">
             <div v-on:click="callsVisible = !callsVisible" class="btn btn-default btn-block">
                 Расписание звонков
@@ -98,7 +98,13 @@
     }
 </script>
 
-<style>
+<style scoped>
+    .home {
+        margin: auto;
+        max-width: 768px;
+        padding: 19px;
+        font-family: 'Droid Sans', sans-serif;
+    }
     .vsu-splashscreen {
         text-align: center;
         margin-top: 50%;
