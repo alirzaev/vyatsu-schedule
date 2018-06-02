@@ -6,7 +6,7 @@
             </div>
             <div v-if="callsVisible" class="well">
                 <div class="list-group">
-                    <div class="list-group-item" v-for="item, index in calls">
+                    <div class="list-group-item" v-for="(item, index) in calls">
                         <h4 class="list-group-item-heading">{{ index + 1 + " пара" }}</h4>
                         <p class="list-group-item-text">{{ item[0] + " - " + item[1] }}</p>
                     </div>
