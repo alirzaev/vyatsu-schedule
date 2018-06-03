@@ -37,8 +37,6 @@
 </template>
 
 <script>
-    import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
-
     const API_URL = 'https://vsuscheduleapi-dev.herokuapp.com';
 
     function parseDate(date) {
