@@ -54,6 +54,8 @@
 <script>
     import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
 
+    const API_URL = 'https://vsuscheduleapi-dev.herokuapp.com';
+
     export default {
         name: 'home',
         data: function () {
@@ -69,8 +71,8 @@
         },
         created: async function () {
             const self = this;
-            const calls_res = await this.$http.get('/vyatsu/calls.json');
-            const groups_res = await this.$http.get('/vyatsu/v2/groups/by_faculty.json');
+            const calls_res = await this.$http.get(`${API_URL}/static/v1/calls.json`);
+            const groups_res = await this.$http.get(`${API_URL}/static/v2/groups/by_faculty.json`);
 
             if (calls_res.status === 200 && groups_res.status === 200) {
                 self.calls = calls_res.data;

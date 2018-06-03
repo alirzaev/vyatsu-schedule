@@ -39,6 +39,8 @@
 <script>
     import bootstrap from 'bootstrap/dist/css/bootstrap.min.css'
 
+    const API_URL = 'https://vsuscheduleapi-dev.herokuapp.com';
+
     function parseDate(date) {
         let day = Number.parseInt(date.slice(0, 2));
         let month = Number.parseInt(date.slice(2, 4));
@@ -88,8 +90,8 @@
             const group_id = this.$route.params.groupId;
             const season = this.$route.params.season;
 
-            const weeks_res = await this.$http.get(`https://vyatsuscheduleapi.herokuapp.com/vyatsu/schedule/${group_id}/${season}`);
-            const calls_res = await this.$http.get('/vyatsu/calls.json');
+            const weeks_res = await this.$http.get(`${API_URL}/vyatsu/schedule/${group_id}/${season}`);
+            const calls_res = await this.$http.get(`${API_URL}/vyatsu/calls`);
 
             const date_range = weeks_res.data.date_range;
 
