@@ -91,7 +91,7 @@
             const season = this.$route.params.season;
 
             const weeks_res = await this.$http.get(`${API_URL}/vyatsu/schedule/${group_id}/${season}`);
-            const calls_res = await this.$http.get(`${API_URL}/vyatsu/calls`);
+            const calls_res = await this.$http.get(`${API_URL}/static/v1/calls.json`);
 
             const date_range = weeks_res.data.date_range;
 
