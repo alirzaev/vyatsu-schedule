@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home pt-3">
         <div v-if="!ready" class="vsu-splashscreen">
             <spinner></spinner>
             <h3 class="text-center">Расписание студентов ВятГУ</h3>
@@ -7,38 +7,48 @@
         <div v-if="ready">
             <div class="container">
                 <h3 class="text-center">Расписание групп</h3>
-                <div class="well">
-                    <div class="form-group">
-                        <label for="facultySelector">Выберите факультет</label>
-                        <select v-model="selectedFaculty" class="form-control" id="facultySelector">
-                            <option v-for="faculty_item in groups" v-bind:value="faculty_item">{{
-                                faculty_item['faculty'] }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="groupSelector">Выберите группу</label>
-                        <select v-model="selectedGroup" class="form-control" id="groupSelector">
-                            <option v-for="group_item in groupsByFaculty" v-bind:value="group_item">{{
-                                group_item['name'] }}
-                            </option>
-                        </select>
-                    </div>
                     <b-form-group>
+                        <label>Выберите факультет</label>
+                        <b-form-select v-model="selectedFaculty" class="mb-2">
+                            <option
+                                    v-for="faculty_item in groups"
+                                    v-bind:key="faculty_item['faculty']"
+                                    v-bind:value="faculty_item"
+                            >{{ faculty_item['faculty'] }}
+                            </option>
+                        </b-form-select>
+
+                        <label>Выберите группу</label>
+                        <b-form-select v-model="selectedGroup" class="mb-3">
+                            <option
+                                    v-for="group_item in facultyGroups"
+                                    v-bind:key="group_item['name']"
+                                    v-bind:value="group_item"
+                            >{{ group_item['name'] }}
+                            </option>
+                        </b-form-select>
+
                         <b-form-radio-group
-                                v-model="season"
+                                v-model="selectedSeason"
+                                class="w-100"
                                 buttons
-                                button-variant="primary"
-                                id="autumn"
-                                name="season"
-                                :options="['autumn', 'spring']"
-                                variant="primary"></b-form-radio-group>
+                                button-variant="primary">
+                            <b-form-radio
+                                    v-for="season in seasons"
+                                    v-bind:key="season['text']"
+                                    v-bind:value="season['value']"
+                                    class="w-100"
+                            >{{ season.text }}
+                            </b-form-radio>
+                        </b-form-radio-group>
                     </b-form-group>
-                    <b-button variant="success" v-on:click="openGroupSchedule"
-                              v-bind:class="{disabled: !isGroupSelected}"
-                              class="w-100 mt-0">Открыть расписание
+                    <b-button
+                            variant="success"
+                            v-on:click="openGroupSchedule"
+                            :disabled="!isGroupSelected"
+                            class="w-100 mt-0"
+                    >Открыть расписание
                     </b-button>
-                </div>
             </div>
         </div>
     </div>
@@ -56,14 +66,15 @@
         },
         data: function () {
             return {
-                ready: false,
-                callsVisible: false,
-                groupsVisible: false,
                 selectedGroup: null,
                 selectedFaculty: null,
-                season: null,
+                selectedSeason: null,
+                seasons: [
+                    {text: 'Осень', value: 'autumn'},
+                    {text: 'Весна', value: 'spring'}
+                ],
                 calls: [],
-                groups: {}
+                groups: []
             }
         },
         created: async function () {
@@ -74,18 +85,22 @@
             if (calls_res.status === 200 && groups_res.status === 200) {
                 self.calls = calls_res.data;
                 self.groups = groups_res.data;
-                self.ready = true;
             }
+
+            this.selectedSeason = this.seasons[1].value;
         },
         methods: {
             openGroupSchedule: function () {
                 const groupID = this.selectedGroup['id'];
-                const url = `/schedule/${groupID}/${this.season}`;
+                const url = `/schedule/${groupID}/${this.selectedSeason}`;
                 this.$router.push(url);
             }
         },
         computed: {
-            groupsByFaculty: function () {
+            ready: function () {
+                return this.calls && this.groups;
+            },
+            facultyGroups: function () {
                 this.selectedGroup = null;
                 return this.selectedFaculty ? this.selectedFaculty['groups'] : []
             },
@@ -100,7 +115,6 @@
     .home {
         margin: auto;
         max-width: 768px;
-        padding: 19px;
         font-family: 'Droid Sans', sans-serif;
     }
 
