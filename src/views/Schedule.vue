@@ -1,35 +1,34 @@
 <template>
     <div v-if="ready">
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid vsu-navbar-shadow">
-                <div class="navbar-header">
-                    <h3 class="text-center">
-                        <a href="#today">{{group}}</a>
-                    </h3>
-                </div>
-            </div>
-        </nav>
+        <b-navbar fixed="top" variant="light" class="vsu-navbar-shadow">
+            <b-navbar-brand>
+                {{group}}
+            </b-navbar-brand>
+            <b-navbar-nav class="ml-auto">
+                <b-button size="sm" href="#today" variant="outline-secondary">Сегодня</b-button>
+            </b-navbar-nav>
+        </b-navbar>
         <div class="schedule container">
             <div v-for="(week, week_index) in weeks">
                 <div v-for="(day, day_index) in week">
-                    <h4 class="text-center">
+                    <h5 class="text-center mt-2">
                         <span v-if="today[0] === week_index && today[1] === day_index">
                             <a id="today" class="anchor"></a>
                         </span>
                         <b>{{days[day_index]}}</b>
-                    </h4>
-                    <div class="list-group">
-                        <div class="list-group-item" v-for="(lesson, index) in day"
-                             v-bind:class="{
-                                'vsu-schedule-item-odd': week_index % 2 === 0,
-                                'vsu-schedule-item-even': week_index % 2 !== 0
-                             }">
-                            <div>
-                                <h4 class="text-center list-group-item-heading">{{calls[index][0] + ' - ' + calls[index][1]}}</h4>
-                                <p class="text-center list-group-item-text">{{lesson !== '' ? lesson : '———'}}</p>
-                            </div>
-                        </div>
-                    </div>
+                    </h5>
+                    <b-list-group>
+                        <b-list-group-item
+                                v-for="(lesson, index) in day"
+                                class="pl-2, pr-2"
+                                v-bind:class="{
+                            'vsu-schedule-item-odd': week_index % 2 === 0,
+                            'vsu-schedule-item-even': week_index % 2 !== 0
+                        }">
+                            <h5 class="text-center calls">{{calls[index][0] + ' - ' + calls[index][1]}}</h5>
+                            <p class="text-center mb-0 lesson-description">{{lesson !== '' ? lesson : '———'}}</p>
+                        </b-list-group-item>
+                    </b-list-group>
                 </div>
             </div>
         </div>
@@ -105,7 +104,7 @@
 
 <style scoped>
     .schedule {
-        padding-top: 70px;
+        padding-top: 60px;
     }
 
     .vsu-schedule-item-odd {
@@ -120,15 +119,19 @@
         box-shadow: 0 2px 2px 0 #cccccc;
     }
 
+    .lesson-description {
+        font-size: 14px;
+        line-height: 18.2px;
+    }
+
+    .calls {
+        font-size: 18px;
+    }
+
     a.anchor {
         display: block;
         position: relative;
         top: -70px;
         visibility: hidden;
-    }
-
-    a {
-        color: #333 !important;
-        text-decoration: none !important;
     }
 </style>
