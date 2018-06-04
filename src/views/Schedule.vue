@@ -1,34 +1,39 @@
 <template>
-    <div v-if="ready">
-        <b-navbar fixed="top" variant="light" class="vsu-navbar-shadow">
-            <b-navbar-brand>
-                {{group}}
-            </b-navbar-brand>
-            <b-navbar-nav class="ml-auto">
-                <b-button size="sm" href="#today" variant="outline-secondary">Сегодня</b-button>
-            </b-navbar-nav>
-        </b-navbar>
-        <div class="schedule container">
-            <div v-for="(week, week_index) in weeks">
-                <div v-for="(day, day_index) in week">
-                    <h5 class="text-center mt-2">
+    <div>
+        <div v-if="!ready" class="vsu-splashscreen">
+            <spinner></spinner>
+        </div>
+        <div v-if="ready">
+            <b-navbar fixed="top" variant="light" class="vsu-navbar-shadow">
+                <b-navbar-brand>
+                    {{group}}
+                </b-navbar-brand>
+                <b-navbar-nav class="ml-auto">
+                    <b-button size="sm" href="#today" variant="outline-secondary">Сегодня</b-button>
+                </b-navbar-nav>
+            </b-navbar>
+            <div class="schedule container">
+                <div v-for="(week, week_index) in weeks">
+                    <div v-for="(day, day_index) in week">
+                        <h5 class="text-center mt-2">
                         <span v-if="today[0] === week_index && today[1] === day_index">
                             <a id="today" class="anchor"></a>
                         </span>
-                        <b>{{days[day_index]}}</b>
-                    </h5>
-                    <b-list-group>
-                        <b-list-group-item
-                                v-for="(lesson, index) in day"
-                                class="pl-2, pr-2"
-                                v-bind:class="{
+                            <b>{{days[day_index]}}</b>
+                        </h5>
+                        <b-list-group>
+                            <b-list-group-item
+                                    v-for="(lesson, index) in day"
+                                    class="pl-2, pr-2"
+                                    v-bind:class="{
                             'vsu-schedule-item-odd': week_index % 2 === 0,
                             'vsu-schedule-item-even': week_index % 2 !== 0
                         }">
-                            <h5 class="text-center calls">{{calls[index][0] + ' - ' + calls[index][1]}}</h5>
-                            <p class="text-center mb-0 lesson-description">{{lesson !== '' ? lesson : '———'}}</p>
-                        </b-list-group-item>
-                    </b-list-group>
+                                <h5 class="text-center calls">{{calls[index][0] + ' - ' + calls[index][1]}}</h5>
+                                <p class="text-center mb-0 lesson-description">{{lesson !== '' ? lesson : '———'}}</p>
+                            </b-list-group-item>
+                        </b-list-group>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,6 +41,8 @@
 </template>
 
 <script>
+    import Spinner from 'vue-simple-spinner'
+
     const API_URL = 'https://vsuscheduleapi-dev.herokuapp.com';
 
     function parseDate(date) {
@@ -73,6 +80,9 @@
 
     export default {
         name: 'schedule',
+        components: {
+            spinner: Spinner
+        },
         data: function () {
             return {
                 weeks: [],
@@ -103,6 +113,12 @@
 </script>
 
 <style scoped>
+    .vsu-splashscreen {
+        text-align: center;
+        margin-top: 50%;
+        display: block;
+    }
+
     .schedule {
         padding-top: 60px;
     }
