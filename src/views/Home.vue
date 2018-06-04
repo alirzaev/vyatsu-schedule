@@ -98,7 +98,7 @@
         },
         computed: {
             ready: function () {
-                return this.calls && this.groups;
+                return this.calls != false && this.groups != false;
             },
             facultyGroups: function () {
                 this.selectedGroup = null;
