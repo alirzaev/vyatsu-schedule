@@ -9,7 +9,7 @@
                     {{group}}
                 </b-navbar-brand>
                 <b-navbar-nav class="ml-auto">
-                    <b-button size="sm" href="#today" variant="outline-secondary">Сегодня</b-button>
+                    <b-button size="sm" v-scroll-to="'#today'" variant="outline-secondary">Сегодня</b-button>
                 </b-navbar-nav>
             </b-navbar>
             <div class="schedule container">
@@ -115,7 +115,7 @@
 <style scoped>
     .vsu-splashscreen {
         text-align: center;
-        margin-top: 50%;
+        margin-top: 50px;
         display: block;
     }
 
