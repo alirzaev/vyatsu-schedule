@@ -50,6 +50,11 @@
                     >Открыть расписание
                     </b-button>
             </div>
+            <footer class="page-footer font-small pt-4 mt-4">
+                <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                    <a href="https://vk.me/rzaevali">Али Рзаев</a>
+                </div>
+            </footer>
         </div>
     </div>
 </template>
