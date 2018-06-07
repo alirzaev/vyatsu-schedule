@@ -41,9 +41,8 @@
 </template>
 
 <script>
+    import { getSchedule, getCalls } from "../utils/api";
     import Spinner from 'vue-simple-spinner'
-
-    const API_URL = 'https://vsuscheduleapi-dev.herokuapp.com';
 
     function parseDate(date) {
         let day = Number.parseInt(date.slice(0, 2));
@@ -97,14 +96,14 @@
             const group_id = this.$route.params.groupId;
             const season = this.$route.params.season;
 
-            const weeks_res = await this.$http.get(`${API_URL}/vyatsu/schedule/${group_id}/${season}`);
-            const calls_res = await this.$http.get(`${API_URL}/static/v1/calls.json`);
+            const [schedule, error1] = await getSchedule(group_id, season);
+            const [calls, error2] = await getCalls();
 
-            const date_range = weeks_res.data.date_range;
+            const date_range = schedule.date_range;
 
-            this.weeks = weeks_res.data.weeks;
-            this.calls = calls_res.data;
-            this.group = weeks_res.data.group;
+            this.weeks = schedule.weeks;
+            this.calls = calls;
+            this.group = schedule.group;
             this.today = getCurrentDay(date_range[0], date_range[1]);
 
             this.ready = true;

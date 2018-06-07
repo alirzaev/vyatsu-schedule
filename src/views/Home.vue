@@ -56,8 +56,7 @@
 
 <script>
     import Spinner from 'vue-simple-spinner'
-
-    const API_URL = 'https://vsuscheduleapi-dev.herokuapp.com';
+    import { getCalls, getGroups } from "../utils/api";
 
     export default {
         name: 'home',
@@ -79,12 +78,12 @@
         },
         created: async function () {
             const self = this;
-            const calls_res = await this.$http.get(`${API_URL}/static/v1/calls.json`);
-            const groups_res = await this.$http.get(`${API_URL}/static/v2/groups/by_faculty.json`);
+            const [calls, error1] = await getCalls();
+            const [groups, error2] = await getGroups();
 
-            if (calls_res.status === 200 && groups_res.status === 200) {
-                self.calls = calls_res.data;
-                self.groups = groups_res.data;
+            if (error1 == null && error2 == null) {
+                self.calls = calls;
+                self.groups = groups;
             }
 
             this.selectedSeason = this.seasons[1].value;
