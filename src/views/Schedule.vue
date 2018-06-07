@@ -1,7 +1,9 @@
 <template>
     <div>
-        <div class="container" style="padding: 19px;">
-            <error v-show="ready && !scheduleOk" v-bind:title="error.title" v-bind:message="error.message"></error>
+        <div class="container"
+             style="padding: 19px;"
+             v-if="ready && !scheduleOk">
+            <error v-bind:title="error.title" v-bind:message="error.message"></error>
         </div>
         <div v-if="!ready" class="vsu-splashscreen">
             <spinner></spinner>
