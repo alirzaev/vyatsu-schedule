@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const API_URL = 'https://vsuscheduleapi-dev.herokuapp.com';
+const API_URL = 'https://api.vyatsuschedule.ru';
 
 export async function getCalls() {
     try {
