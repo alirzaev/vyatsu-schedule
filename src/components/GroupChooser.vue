@@ -2,7 +2,6 @@
     <div class="home">
         <div v-if="!ready" class="vsu-splashscreen">
             <spinner></spinner>
-            <h3 class="text-center">Расписание студентов ВятГУ</h3>
         </div>
         <div v-if="ready">
             <div class="container">
@@ -113,14 +112,14 @@
 
 <style scoped>
     .home {
-        margin: auto;
+        /*margin: auto;*/
         max-width: 768px;
         font-family: 'Droid Sans', sans-serif;
     }
 
     .vsu-splashscreen {
         text-align: center;
-        margin-top: 50%;
+        margin-top: 50px;
         display: block;
     }
 </style>
