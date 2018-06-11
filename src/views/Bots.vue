@@ -7,7 +7,7 @@
             <p class="card-text">
                 Telegram-бот
             </p>
-            <b-button href="t.me/vyatsu_schedule_bot" variant="primary">Открыть</b-button>
+            <b-button href="https://t.me/vyatsu_schedule_bot" variant="primary">Открыть</b-button>
         </b-card>
         <b-card title="Viber"
                 tag="article"
