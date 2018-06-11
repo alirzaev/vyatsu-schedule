@@ -9,15 +9,15 @@
             <spinner></spinner>
         </div>
         <div v-if="ready && scheduleOk">
-            <b-navbar fixed="top" variant="light" class="vsu-navbar-shadow">
-                <b-navbar-brand>
-                    {{group}}
-                </b-navbar-brand>
-                <b-navbar-nav class="ml-auto">
-                    <b-button size="sm" v-scroll-to="'#today'" variant="outline-secondary">Сегодня</b-button>
-                </b-navbar-nav>
-            </b-navbar>
-            <div class="schedule container">
+            <!--<b-navbar fixed="top" variant="light" class="vsu-navbar-shadow">-->
+                <!--<b-navbar-brand>-->
+                    <!--{{group}}-->
+                <!--</b-navbar-brand>-->
+                <!--<b-navbar-nav class="ml-auto">-->
+                    <!--<b-button size="sm" v-scroll-to="'#today'" variant="outline-secondary">Сегодня</b-button>-->
+                <!--</b-navbar-nav>-->
+            <!--</b-navbar>-->
+            <div class="container">
                 <div v-for="(week, week_index) in weeks">
                     <div v-for="(day, day_index) in week">
                         <h5 class="text-center mt-2">
@@ -49,7 +49,7 @@
     import {getSchedule, getCalls} from "../utils/api";
     import {getCurrentDay} from "../utils/date";
     import Spinner from 'vue-simple-spinner'
-    import Error from '../components/Error'
+    import Error from './Error'
 
     export default {
         name: 'schedule',
@@ -82,6 +82,8 @@
                 this.calls = calls;
                 this.group = schedule.group;
                 this.today = getCurrentDay(date_range[0], date_range[1]);
+
+                this.$store.commit('changeTitle', this.group);
             } else if (error1 == null) {
                 this.error.title = 'Что-то пошло не так :(';
                 this.error.message = 'Нам не удалось загрузить расписание, попробуйте обновить страницу';
@@ -110,10 +112,6 @@
         text-align: center;
         margin-top: 50px;
         display: block;
-    }
-
-    .schedule {
-        padding-top: 60px;
     }
 
     .vsu-schedule-item-odd {

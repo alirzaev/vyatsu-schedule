@@ -4,7 +4,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {},
-    mutations: {},
+    state: {
+        navbarTitle: ''
+    },
+    mutations: {
+        changeTitle (state, title) {
+            state.navbarTitle = title;
+        }
+    },
     actions: {}
 })
