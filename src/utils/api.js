@@ -4,7 +4,7 @@ const API_URL = 'https://api.vyatsuschedule.ru';
 
 export async function getCalls() {
     try {
-        const resp = await Vue.http.get(`${API_URL}/static/v1/calls.json`);
+        const resp = await Vue.http.get(`${API_URL}/api/v1/calls`);
 
         return [resp.data, null];
     } catch (error) {
@@ -14,7 +14,7 @@ export async function getCalls() {
 
 export async function getGroups() {
     try {
-        const resp = await Vue.http.get(`${API_URL}/static/v2/groups/by_faculty.json`);
+        const resp = await Vue.http.get(`${API_URL}/api/v2/groups/by_faculty`);
 
         return [resp.data, null];
     } catch (error) {
@@ -24,7 +24,7 @@ export async function getGroups() {
 
 export async function getSchedule(groupId, season) {
     try {
-        const resp = await Vue.http.get(`${API_URL}/vyatsu/schedule/${groupId}/${season}`);
+        const resp = await Vue.http.get(`${API_URL}/api/v1/schedule/${groupId}/${season}`);
 
         return [resp.data, null];
     } catch (error) {
