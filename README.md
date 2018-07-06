@@ -1,5 +1,7 @@
-# Node.js VyatSU schedule web server
+# VyatSU schedule web application
 
-This web server provides REST API for viewing groups schedules in machine-readable representation
+## Description
 
-Link to [documentation](https://bitbucket.org/AliRzaev/vyatsu_schedule_server_rest_api)
+This app provides students a convenient way to view group schedules.
+
+Try it: [vyatsuschedule.ru](https://vyatsuschedule.ru)
