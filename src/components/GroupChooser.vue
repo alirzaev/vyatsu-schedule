@@ -6,7 +6,7 @@
         <div v-if="ready" class="home container">
             <b-form-group>
                 <label>Выберите факультет</label>
-                <b-form-select v-model="selectedFaculty" class="mb-2">
+                <b-form-select v-model="selectedFaculty" class="mb-2" v-on:change="resetGroup()">
                     <option
                             v-for="faculty_item in groups"
                             v-bind:key="faculty_item['faculty']"
@@ -91,6 +91,9 @@ export default {
             const groupID = this.selectedGroup['id'];
             const url = `/schedule/${groupID}/${this.selectedSeason}`;
             this.$router.push(url);
+        },
+        resetGroup: function () {
+            this.selectedGroup = null;
         }
     },
     computed: {
@@ -98,7 +101,6 @@ export default {
             return this.calls != false && this.groups != false;
         },
         facultyGroups: function () {
-            this.selectedGroup = null;
             return this.selectedFaculty ? this.selectedFaculty['groups'] : [];
         },
         isGroupSelected: function () {
