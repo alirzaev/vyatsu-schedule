@@ -13,14 +13,14 @@
 </template>
 
 <script>
-    export default {
-        name: "vyatsunavbar",
-        computed: {
-            title: function () {
-                return this.$store.state.navbarTitle;
-            }
+export default {
+    name: 'vyatsunavbar',
+    computed: {
+        title: function () {
+            return this.$store.state.navbarTitle;
         }
     }
+};
 </script>
 
 <style scoped>

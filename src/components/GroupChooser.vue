@@ -51,61 +51,61 @@
 </template>
 
 <script>
-    import Spinner from 'vue-simple-spinner'
-    import {getCalls, getGroups} from "../utils/api";
+import Spinner from 'vue-simple-spinner';
+import {getCalls, getGroups} from '../utils/api';
 
-    export default {
-        name: 'home',
-        components: {
-            spinner: Spinner
-        },
-        data: function () {
-            return {
-                selectedGroup: null,
-                selectedFaculty: null,
-                selectedSeason: null,
-                seasons: [
-                    {text: 'Осень', value: 'autumn'},
-                    {text: 'Весна', value: 'spring'}
-                ],
-                calls: [],
-                groups: []
-            }
-        },
-        created: async function () {
-            this.$store.commit('changeTitle', 'Расписание')
+export default {
+    name: 'home',
+    components: {
+        spinner: Spinner
+    },
+    data: function () {
+        return {
+            selectedGroup: null,
+            selectedFaculty: null,
+            selectedSeason: null,
+            seasons: [
+                {text: 'Осень', value: 'autumn'},
+                {text: 'Весна', value: 'spring'}
+            ],
+            calls: [],
+            groups: []
+        };
+    },
+    created: async function () {
+        this.$store.commit('changeTitle', 'Расписание');
 
-            const self = this;
-            const [calls, error1] = await getCalls();
-            const [groups, error2] = await getGroups();
+        const self = this;
+        const [calls, error1] = await getCalls();
+        const [groups, error2] = await getGroups();
 
-            if (error1 == null && error2 == null) {
-                self.calls = calls;
-                self.groups = groups;
-            }
+        if (error1 == null && error2 == null) {
+            self.calls = calls;
+            self.groups = groups;
+        }
 
-            this.selectedSeason = this.seasons[1].value;
+        this.selectedSeason = this.seasons[1].value;
+    },
+    methods: {
+        openGroupSchedule: function () {
+            const groupID = this.selectedGroup['id'];
+            const url = `/schedule/${groupID}/${this.selectedSeason}`;
+            this.$router.push(url);
+        }
+    },
+    computed: {
+        ready: function () {
+            return this.calls != false && this.groups != false;
         },
-        methods: {
-            openGroupSchedule: function () {
-                const groupID = this.selectedGroup['id'];
-                const url = `/schedule/${groupID}/${this.selectedSeason}`;
-                this.$router.push(url);
-            }
+        facultyGroups: function () {
+            this.selectedGroup = null;
+            return this.selectedFaculty ? this.selectedFaculty['groups'] : [];
         },
-        computed: {
-            ready: function () {
-                return this.calls != false && this.groups != false;
-            },
-            facultyGroups: function () {
-                this.selectedGroup = null;
-                return this.selectedFaculty ? this.selectedFaculty['groups'] : []
-            },
-            isGroupSelected: function () {
-                return this.selectedGroup !== null && this.selectedGroup !== undefined
-            }
+        isGroupSelected: function () {
+            return this.selectedGroup !== null && this.selectedGroup !== undefined;
         }
     }
+};
 </script>
 
 <style scoped>

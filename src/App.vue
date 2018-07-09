@@ -11,11 +11,11 @@
 </template>
 
 <script>
-    import Vyatsunavbar from "./components/VyatSUNavBar";
+import Vyatsunavbar from './components/VyatSUNavBar';
 
-    export default {
-        components: {Vyatsunavbar}
-    }
+export default {
+    components: {Vyatsunavbar}
+};
 </script>
 
 <style scoped>

@@ -3,11 +3,11 @@ function parseDate(date) {
     let month = Number.parseInt(date.slice(2, 4));
     let year = Number.parseInt(date.slice(4));
 
-    return [day, month, year]
+    return [day, month, year];
 }
 
 export function getCurrentDay(firstDate, secondDate) {
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const OFFSET_MSK = 10800000;
     const MODULO = 1209600000;
     const DAY_IN_MILLISEC = 24 * 3600 * 1000;
@@ -25,8 +25,8 @@ export function getCurrentDay(firstDate, secondDate) {
     const cDay = difference % 7;
 
     if (cWeek < 0 || cWeek > 1 || cDay > 5 || cDay < 0) {
-        return [-1, -1]
+        return [-1, -1];
     } else {
-        return [cWeek, cDay]
+        return [cWeek, cDay];
     }
 }

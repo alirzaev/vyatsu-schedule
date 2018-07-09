@@ -46,65 +46,65 @@
 </template>
 
 <script>
-    import {getSchedule, getCalls} from "../utils/api";
-    import {getCurrentDay} from "../utils/date";
-    import Spinner from 'vue-simple-spinner'
-    import Error from './Error'
+import {getSchedule, getCalls} from '../utils/api';
+import {getCurrentDay} from '../utils/date';
+import Spinner from 'vue-simple-spinner';
+import Error from './Error';
 
-    export default {
-        name: 'schedule',
-        components: {
-            spinner: Spinner,
-            error: Error
-        },
-        data: function () {
-            return {
-                weeks: [],
-                calls: [],
-                group: '',
-                today: [],
-                days: ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА'],
-                error: {},
-                ready: false
-            }
-        },
-        created: async function () {
-            const group_id = this.$route.params.groupId;
-            const season = this.$route.params.season;
+export default {
+    name: 'schedule',
+    components: {
+        spinner: Spinner,
+        error: Error
+    },
+    data: function () {
+        return {
+            weeks: [],
+            calls: [],
+            group: '',
+            today: [],
+            days: ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА'],
+            error: {},
+            ready: false
+        };
+    },
+    created: async function () {
+        const group_id = this.$route.params.groupId;
+        const season = this.$route.params.season;
 
-            const [schedule, error1] = await getSchedule(group_id, season);
-            const [calls, error2] = await getCalls();
+        const [schedule, error1] = await getSchedule(group_id, season);
+        const [calls, error2] = await getCalls();
 
-            if (error1 == null && error2 == null) {
-                const date_range = schedule.date_range;
+        if (error1 == null && error2 == null) {
+            const date_range = schedule.date_range;
 
-                this.weeks = schedule.weeks;
-                this.calls = calls;
-                this.group = schedule.group;
-                this.today = getCurrentDay(date_range[0], date_range[1]);
+            this.weeks = schedule.weeks;
+            this.calls = calls;
+            this.group = schedule.group;
+            this.today = getCurrentDay(date_range[0], date_range[1]);
 
-                this.$store.commit('changeTitle', this.group);
-            } else if (error1 == null) {
-                this.error.title = 'Что-то пошло не так :(';
-                this.error.message = 'Нам не удалось загрузить расписание, попробуйте обновить страницу';
-            } else {
-                this.error.title = 'Что-то пошло не так :(';
-                this.error.message = 'Возможно вы ошиблись группой или расписания на нужный семестр для вашей группы нет';
-            }
+            this.$store.commit('changeTitle', this.group);
+        } else if (error1 == null) {
+            this.error.title = 'Что-то пошло не так :(';
+            this.error.message = 'Нам не удалось загрузить расписание, попробуйте обновить страницу';
+        } else {
+            this.error.title = 'Что-то пошло не так :(';
+            this.error.message = 'Возможно вы ошиблись группой или расписания на нужный семестр для вашей группы нет';
+        }
 
-            this.ready = true;
-        },
-        computed: {
-            scheduleOk: function () {
-                return [
-                    this.weeks,
-                    this.calls,
-                    this.group,
-                    this.today
-                ].every(item => item); // item => item != false
-            }
+        this.ready = true;
+    },
+    computed: {
+        scheduleOk: function () {
+            return [
+                this.weeks,
+                this.calls,
+                this.group,
+                this.today
+            ].every(item => item); // item => item != false
         }
     }
+};
 </script>
 
 <style scoped>

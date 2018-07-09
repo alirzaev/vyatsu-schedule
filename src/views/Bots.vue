@@ -22,12 +22,12 @@
 </template>
 
 <script>
-    export default {
-        name: "Bots",
-        created: function () {
-            this.$store.commit('changeTitle', 'Чат-боты');
-        }
+export default {
+    name: 'Bots',
+    created: function () {
+        this.$store.commit('changeTitle', 'Чат-боты');
     }
+};
 </script>
 
 <style scoped>

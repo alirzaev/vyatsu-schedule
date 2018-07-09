@@ -15,29 +15,29 @@
 </template>
 
 <script>
-    import {getCalls} from "../utils/api";
-    import Spinner from 'vue-simple-spinner'
+import {getCalls} from '../utils/api';
+import Spinner from 'vue-simple-spinner';
 
-    export default {
-        name: "Calls",
-        components: {
-            spinner: Spinner
-        },
-        data: function () {
-            return {
-                calls: [],
-                ready: false
-            }
-        },
-        created: async function () {
-            this.$store.commit('changeTitle', 'Звонки');
+export default {
+    name: 'Calls',
+    components: {
+        spinner: Spinner
+    },
+    data: function () {
+        return {
+            calls: [],
+            ready: false
+        };
+    },
+    created: async function () {
+        this.$store.commit('changeTitle', 'Звонки');
 
-            const [calls, error2] = await getCalls();
+        const [calls, error2] = await getCalls();
 
-            this.calls = calls;
-            this.ready = true;
-        }
+        this.calls = calls;
+        this.ready = true;
     }
+};
 </script>
 
 <style scoped>
