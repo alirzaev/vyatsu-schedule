@@ -1,6 +1,6 @@
 <template>
     <div v-if="ready" class="row justify-content-center">
-        <div class="col-12 col-sm-11 col-md-6 col-lg-6">
+        <div class="col-12 col-md-6">
             <b-form-group>
                 <label>Выберите факультет</label>
                 <b-form-select v-model="selectedFaculty" class="mb-2" v-on:change="resetGroup()">

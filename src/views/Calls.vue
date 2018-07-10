@@ -1,7 +1,7 @@
 <template>
     <div v-if="ready">
         <div class="row justify-content-center">
-        <b-list-group class="col-12 col-sm-11 col-md-6 col-lg-6">
+        <b-list-group class="col-12 col-md-6">
             <b-list-group-item v-for="(item, index) in calls" class="pt-2 pb-2" v-bind:key="item">
                 <h5 class="calls">{{ index + 1 + " пара" }}</h5>
                 <p class="mb-0 calls-description">{{ item[0] + " - " + item[1] }}</p>
