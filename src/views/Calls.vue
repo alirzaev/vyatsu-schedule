@@ -5,7 +5,7 @@
         </div>
         <div v-if="ready" class="container">
             <b-list-group>
-                <b-list-group-item v-for="(item, index) in calls" class="pt-2 pb-2">
+                <b-list-group-item v-for="(item, index) in calls" class="pt-2 pb-2" v-bind:key="item">
                     <h5 class="calls">{{ index + 1 + " пара" }}</h5>
                     <p class="mb-0 calls-description">{{ item[0] + " - " + item[1] }}</p>
                 </b-list-group-item>

@@ -18,8 +18,8 @@
                 <!--</b-navbar-nav>-->
             <!--</b-navbar>-->
             <div class="container">
-                <div v-for="(week, week_index) in weeks">
-                    <div v-for="(day, day_index) in week">
+                <div v-for="(week, week_index) in weeks" v-bind:key="week">
+                    <div v-for="(day, day_index) in week" v-bind:key="day">
                         <h5 class="text-center mt-2">
                         <span v-if="today[0] === week_index && today[1] === day_index">
                             <a id="today" class="anchor"></a>
@@ -29,6 +29,7 @@
                         <b-list-group>
                             <b-list-group-item
                                     v-for="(lesson, index) in day"
+                                    v-bind:key="lesson"
                                     class="pl-2, pr-2"
                                     v-bind:class="{
                             'vsu-schedule-item-odd': week_index % 2 === 0,
