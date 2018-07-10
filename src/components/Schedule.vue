@@ -4,9 +4,6 @@
              v-if="ready && !scheduleOk">
             <error v-bind:title="error.title" v-bind:message="error.message"></error>
         </div>
-        <div v-if="!ready" class="vs-spinner">
-            <spinner></spinner>
-        </div>
         <div v-if="ready && scheduleOk">
             <!--<b-navbar fixed="top" variant="light" class="vsu-navbar-shadow">-->
                 <!--<b-navbar-brand>-->
@@ -48,13 +45,11 @@
 <script>
 import {getSchedule, getCalls} from '../utils/api';
 import {getCurrentDay} from '../utils/date';
-import Spinner from 'vue-simple-spinner';
 import Error from './Error';
 
 export default {
     name: 'schedule',
     components: {
-        spinner: Spinner,
         error: Error
     },
     data: function () {
@@ -69,6 +64,8 @@ export default {
         };
     },
     created: async function () {
+        this.$store.commit('showSpinner');
+
         const group_id = this.$route.params.groupId;
         const season = this.$route.params.season;
 
@@ -92,6 +89,7 @@ export default {
             this.error.message = 'Возможно вы ошиблись группой или расписания на нужный семестр для вашей группы нет';
         }
 
+        this.$store.commit('hideSpinner');
         this.ready = true;
     },
     computed: {
