@@ -53,6 +53,6 @@ export default {
 
     .calls-description {
         font-size: 14px;
-        line-height: 18.2px;
+        line-height: 1.3em;
     }
 </style>

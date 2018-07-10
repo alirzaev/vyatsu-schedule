@@ -3,7 +3,7 @@
         <div v-if="!ready" class="vsu-splashscreen">
             <spinner></spinner>
         </div>
-        <div v-if="ready" class="home container">
+        <div v-if="ready">
             <b-form-group>
                 <label>Выберите факультет</label>
                 <b-form-select v-model="selectedFaculty" class="mb-2" v-on:change="resetGroup()">
@@ -111,11 +111,6 @@ export default {
 </script>
 
 <style scoped>
-    .home {
-        max-width: 768px;
-        font-family: 'Droid Sans', sans-serif;
-    }
-
     .vsu-splashscreen {
         text-align: center;
         margin-top: 50px;

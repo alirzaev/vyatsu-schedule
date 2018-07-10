@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <vyatsunavbar></vyatsunavbar>
-        <router-view class="content"/>
+        <router-view class="content container align-content-center"/>
         <footer class="page-footer font-small pt-3">
             <div class="footer-copyright text-center py-3">© 2018 Copyright:
                 <a href="https://vk.me/rzaevali">Али Рзаев</a>
@@ -20,6 +20,7 @@ export default {
 
 <style scoped>
     .content {
+        max-width: 768px;
         padding-top: 65px;
     }
 </style>
