@@ -51,7 +51,7 @@
     import {getCalls, getGroups} from '../utils/api';
 
     export default {
-        name: 'home',
+        name: 'groupchooser',
         data: function () {
             return {
                 selectedGroup: null,
