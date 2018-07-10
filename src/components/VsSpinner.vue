@@ -5,15 +5,15 @@
 </template>
 
 <script>
-    import Spinner from 'vue-simple-spinner';
+import Spinner from 'vue-simple-spinner';
 
-    export default {
-        name: 'vsspinner',
-        components: {
-            Spinner
-        },
-        props: ['visible']
-    };
+export default {
+    name: 'vsspinner',
+    components: {
+        Spinner
+    },
+    props: ['visible']
+};
 </script>
 
 <style scoped lang="sass">

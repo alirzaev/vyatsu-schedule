@@ -11,10 +11,10 @@
 </template>
 
 <script>
-    export default {
-        name: 'error',
-        props: ['title', 'message', 'visible']
-    };
+export default {
+    name: 'error',
+    props: ['title', 'message', 'visible']
+};
 </script>
 
 <style scoped>

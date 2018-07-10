@@ -48,61 +48,61 @@
 </template>
 
 <script>
-    import {getCalls, getGroups} from '../utils/api';
+import {getCalls, getGroups} from '../utils/api';
 
-    export default {
-        name: 'groupchooser',
-        data: function () {
-            return {
-                selectedGroup: null,
-                selectedFaculty: null,
-                selectedSeason: null,
-                seasons: [
-                    {text: 'Осень', value: 'autumn'},
-                    {text: 'Весна', value: 'spring'}
-                ],
-                calls: [],
-                groups: []
-            };
-        },
-        created: async function () {
-            this.$store.commit('changeTitle', 'Расписание');
-            this.$store.commit('showSpinner');
+export default {
+    name: 'groupchooser',
+    data: function () {
+        return {
+            selectedGroup: null,
+            selectedFaculty: null,
+            selectedSeason: null,
+            seasons: [
+                {text: 'Осень', value: 'autumn'},
+                {text: 'Весна', value: 'spring'}
+            ],
+            calls: [],
+            groups: []
+        };
+    },
+    created: async function () {
+        this.$store.commit('changeTitle', 'Расписание');
+        this.$store.commit('showSpinner');
 
-            const self = this;
-            const [calls, error1] = await getCalls();
-            const [groups, error2] = await getGroups();
+        const self = this;
+        const [calls, error1] = await getCalls();
+        const [groups, error2] = await getGroups();
 
-            if (error1 == null && error2 == null) {
-                this.$store.commit('hideSpinner');
-                self.calls = calls;
-                self.groups = groups;
-            }
-
-            this.selectedSeason = this.seasons[1].value;
-        },
-        methods: {
-            openGroupSchedule: function () {
-                const groupID = this.selectedGroup['id'];
-                const url = `/schedule/${groupID}/${this.selectedSeason}`;
-                this.$router.push(url);
-            },
-            resetGroup: function () {
-                this.selectedGroup = null;
-            }
-        },
-        computed: {
-            ready: function () {
-                return this.calls != false && this.groups != false;
-            },
-            facultyGroups: function () {
-                return this.selectedFaculty ? this.selectedFaculty['groups'] : [];
-            },
-            isGroupSelected: function () {
-                return this.selectedGroup !== null && this.selectedGroup !== undefined;
-            }
+        if (error1 == null && error2 == null) {
+            this.$store.commit('hideSpinner');
+            self.calls = calls;
+            self.groups = groups;
         }
-    };
+
+        this.selectedSeason = this.seasons[1].value;
+    },
+    methods: {
+        openGroupSchedule: function () {
+            const groupID = this.selectedGroup['id'];
+            const url = `/schedule/${groupID}/${this.selectedSeason}`;
+            this.$router.push(url);
+        },
+        resetGroup: function () {
+            this.selectedGroup = null;
+        }
+    },
+    computed: {
+        ready: function () {
+            return this.calls != false && this.groups != false;
+        },
+        facultyGroups: function () {
+            return this.selectedFaculty ? this.selectedFaculty['groups'] : [];
+        },
+        isGroupSelected: function () {
+            return this.selectedGroup !== null && this.selectedGroup !== undefined;
+        }
+    }
+};
 </script>
 
 <style scoped lang="sass">

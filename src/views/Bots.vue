@@ -24,13 +24,13 @@
 </template>
 
 <script>
-    export default {
-        name: 'bots',
-        created: function () {
-            this.$store.commit('changeTitle', 'Чат-боты');
-            this.$store.commit('hideSpinner');
-        }
-    };
+export default {
+    name: 'bots',
+    created: function () {
+        this.$store.commit('changeTitle', 'Чат-боты');
+        this.$store.commit('hideSpinner');
+    }
+};
 </script>
 
 <style scoped lang="sass">

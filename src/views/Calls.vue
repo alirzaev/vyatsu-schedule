@@ -17,28 +17,28 @@
 </template>
 
 <script>
-    import {getCalls} from '../utils/api';
+import {getCalls} from '../utils/api';
 
-    export default {
-        name: 'calls',
-        data: function () {
-            return {
-                calls: [],
-                ready: false
-            };
-        },
-        created: async function () {
-            this.$store.commit('changeTitle', 'Звонки');
-            this.$store.commit('showSpinner');
+export default {
+    name: 'calls',
+    data: function () {
+        return {
+            calls: [],
+            ready: false
+        };
+    },
+    created: async function () {
+        this.$store.commit('changeTitle', 'Звонки');
+        this.$store.commit('showSpinner');
 
-            const [calls, error2] = await getCalls();
+        const [calls, error2] = await getCalls();
 
-            this.calls = calls;
+        this.calls = calls;
 
-            this.$store.commit('hideSpinner');
-            this.ready = true;
-        }
-    };
+        this.$store.commit('hideSpinner');
+        this.ready = true;
+    }
+};
 </script>
 
 <style scoped lang="sass">
