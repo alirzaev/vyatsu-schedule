@@ -9,23 +9,17 @@
             ></error>
         </div>
         <div v-if="ready && scheduleOk" class="row justify-content-center">
-            <!--<b-navbar fixed="top" variant="light" class="vsu-navbar-shadow">-->
-                <!--<b-navbar-brand>-->
-                    <!--{{group}}-->
-                <!--</b-navbar-brand>-->
-                <!--<b-navbar-nav class="ml-auto">-->
-                    <!--<b-button size="sm" v-scroll-to="'#today'" variant="outline-secondary">Сегодня</b-button>-->
-                <!--</b-navbar-nav>-->
-            <!--</b-navbar>-->
             <div class="col-12 col-md-6">
                 <div v-for="(week, week_index) in weeks" v-bind:key="week">
                     <div v-for="(day, day_index) in week" v-bind:key="day">
-                        <h5 class="text-center mt-2">
-                        <span v-if="today[0] === week_index && today[1] === day_index">
-                            <a id="today" class="anchor"></a>
-                        </span>
-                            <b>{{days[day_index]}}</b>
-                        </h5>
+                        <div>
+                            <span v-if="today[0] === week_index && today[1] === day_index">
+                                <a id="today" class="anchor"></a>
+                            </span>
+                            <h5 class="text-center mt-2">
+                                <b>{{days[day_index]}}</b>
+                            </h5>
+                        </div>
                         <b-list-group>
                             <b-list-group-item
                                     v-for="(lesson, index) in day"
@@ -42,6 +36,14 @@
                     </div>
                 </div>
             </div>
+            <b-button
+                    size="sm"
+                    v-scroll-to="'#today'"
+                    variant="secondary"
+                    class="position-fixed today-button"
+            >
+                Сегодня
+            </b-button>
         </div>
     </div>
 </template>
@@ -131,6 +133,19 @@ export default {
     a.anchor
         display: block
         position: relative
-        top: -70px
+        top: -($vs-navbar-height + 0.5em)
         visibility: hidden
+
+    .today-button
+        display: block
+        z-index: $zindex-sticky
+
+    @include media-breakpoint-down(md)
+        .today-button
+            bottom: 1em
+            right: 1em
+
+    @include media-breakpoint-up(md)
+        .today-button
+            display: none
 </style>
