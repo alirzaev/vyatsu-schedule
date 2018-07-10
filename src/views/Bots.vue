@@ -1,6 +1,5 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
+    <div class="row justify-content-center">
         <b-card title="Telegram"
                 tag="article"
                 class="col-11 col-sm-6 col-md-4 col-lg-4 bot-card"
@@ -18,7 +17,6 @@
             </p>
             <b-button href="viber://pa?chatURI=vyatsubot" variant="primary">Открыть</b-button>
         </b-card>
-        </div>
     </div>
 </template>
 
