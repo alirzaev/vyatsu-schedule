@@ -2,7 +2,7 @@
     <div id="app">
         <vsnavbar></vsnavbar>
         <vsspinner v-bind:visible="spinner"></vsspinner>
-        <div class="content container">
+        <div class="container">
             <router-view/>
         </div>
         <footer class="page-footer font-small pt-3">
@@ -33,6 +33,6 @@ export default {
 <style scoped lang="sass">
     @import "sass/common"
 
-    .content
+    .container
         padding-top: $vs-navbar-height + 0.6em
 </style>
