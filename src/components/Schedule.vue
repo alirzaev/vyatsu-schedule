@@ -34,7 +34,7 @@
                             'vsu-schedule-item-odd': week_index % 2 === 0,
                             'vsu-schedule-item-even': week_index % 2 !== 0
                         }">
-                                <h5 class="text-center calls">{{calls[index][0] + ' - ' + calls[index][1]}}</h5>
+                                <h5 class="text-center call-title">{{calls[index][0] + ' - ' + calls[index][1]}}</h5>
                                 <p class="text-center mb-0 lesson-description">{{lesson !== '' ? lesson : '———'}}</p>
                             </b-list-group-item>
                         </b-list-group>
@@ -121,7 +121,7 @@ export default {
         font-size: 14px
         line-height: 1.3em
 
-    .calls
+    .call-title
         font-size: 18px
 
     .error-alert
