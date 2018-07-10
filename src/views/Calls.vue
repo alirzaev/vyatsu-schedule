@@ -1,6 +1,5 @@
 <template>
-    <div v-if="ready">
-        <div class="row justify-content-center">
+    <div v-if="ready" class="row justify-content-center">
         <b-list-group class="col-12 col-md-6">
             <b-list-group-item
                     v-for="(item, index) in calls"
@@ -14,33 +13,32 @@
                 </p>
             </b-list-group-item>
         </b-list-group>
-        </div>
     </div>
 </template>
 
 <script>
-import {getCalls} from '../utils/api';
+    import {getCalls} from '../utils/api';
 
-export default {
-    name: 'Calls',
-    data: function () {
-        return {
-            calls: [],
-            ready: false
-        };
-    },
-    created: async function () {
-        this.$store.commit('changeTitle', 'Звонки');
-        this.$store.commit('showSpinner');
+    export default {
+        name: 'Calls',
+        data: function () {
+            return {
+                calls: [],
+                ready: false
+            };
+        },
+        created: async function () {
+            this.$store.commit('changeTitle', 'Звонки');
+            this.$store.commit('showSpinner');
 
-        const [calls, error2] = await getCalls();
+            const [calls, error2] = await getCalls();
 
-        this.calls = calls;
+            this.calls = calls;
 
-        this.$store.commit('hideSpinner');
-        this.ready = true;
-    }
-};
+            this.$store.commit('hideSpinner');
+            this.ready = true;
+        }
+    };
 </script>
 
 <style scoped lang="sass">
