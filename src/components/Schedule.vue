@@ -1,13 +1,14 @@
 <template>
     <div>
-        <div class="error-alert">
+        <div class="row justify-content-center">
             <error
+                    class="col-11 col-md-6 error-alert"
                     v-bind:title="error.title"
                     v-bind:message="error.message"
                     v-bind:visible="ready && !scheduleOk"
             ></error>
         </div>
-        <div v-if="ready && scheduleOk">
+        <div v-if="ready && scheduleOk" class="row justify-content-center">
             <!--<b-navbar fixed="top" variant="light" class="vsu-navbar-shadow">-->
                 <!--<b-navbar-brand>-->
                     <!--{{group}}-->
@@ -16,7 +17,7 @@
                     <!--<b-button size="sm" v-scroll-to="'#today'" variant="outline-secondary">Сегодня</b-button>-->
                 <!--</b-navbar-nav>-->
             <!--</b-navbar>-->
-            <div>
+            <div class="col-12 col-md-6">
                 <div v-for="(week, week_index) in weeks" v-bind:key="week">
                     <div v-for="(day, day_index) in week" v-bind:key="day">
                         <h5 class="text-center mt-2">
