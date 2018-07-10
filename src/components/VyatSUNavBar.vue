@@ -13,14 +13,14 @@
 </template>
 
 <script>
-export default {
-    name: 'vyatsunavbar',
-    computed: {
-        title: function () {
-            return this.$store.state.navbarTitle;
+    export default {
+        name: 'vyatsunavbar',
+        computed: {
+            title: function () {
+                return this.$store.state.navbarTitle;
+            }
         }
-    }
-};
+    };
 </script>
 
 <style scoped lang="sass">
@@ -29,5 +29,4 @@ export default {
     .vs-navbar
         min-height: $vs-navbar-height
         box-shadow: 0 2px 2px 0 #cccccc
-
 </style>
