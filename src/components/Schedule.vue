@@ -1,8 +1,11 @@
 <template>
     <div>
-        <div style="padding: 19px;"
-             v-if="ready && !scheduleOk">
-            <error v-bind:title="error.title" v-bind:message="error.message"></error>
+        <div class="error-alert">
+            <error
+                    v-bind:title="error.title"
+                    v-bind:message="error.message"
+                    v-bind:visible="ready && !scheduleOk"
+            ></error>
         </div>
         <div v-if="ready && scheduleOk">
             <!--<b-navbar fixed="top" variant="light" class="vsu-navbar-shadow">-->
@@ -120,6 +123,9 @@ export default {
 
     .calls
         font-size: 18px
+
+    .error-alert
+        padding: 1.2em
 
     a.anchor
         display: block
