@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <vyatsunavbar></vyatsunavbar>
+        <vsnavbar></vsnavbar>
         <vsspinner v-bind:visible="spinner"></vsspinner>
         <div class="content container">
             <router-view/>
@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import Vyatsunavbar from './components/VyatSUNavBar';
+import Vsnavbar from './components/VsNavBar';
 import Vsspinner from './components/VsSpinner';
 
 export default {
     components: {
-        Vyatsunavbar,
+        Vsnavbar,
         Vsspinner
     },
     computed: {
