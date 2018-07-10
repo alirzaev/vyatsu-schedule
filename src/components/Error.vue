@@ -12,7 +12,7 @@
 
 <script>
 export default {
-    name: 'Error',
+    name: 'error',
     props: ['title', 'message']
 };
 </script>
