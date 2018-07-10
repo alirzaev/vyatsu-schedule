@@ -1,9 +1,10 @@
 <template>
     <div class="container">
+        <div class="row justify-content-center">
         <b-card title="Telegram"
                 tag="article"
-                style="max-width: 20rem;"
-                class="mr-auto ml-auto mb-2">
+                class="col-11 col-sm-6 col-md-4 col-lg-4 bot-card"
+        >
             <p class="card-text">
                 Telegram-бот
             </p>
@@ -11,13 +12,13 @@
         </b-card>
         <b-card title="Viber"
                 tag="article"
-                style="max-width: 20rem;"
-                class="mr-auto ml-auto mb-2">
+                class="col-11 col-sm-6 col-md-4 col-lg-4 bot-card">
             <p class="card-text">
                 Viber-бот
             </p>
             <b-button href="viber://pa?chatURI=vyatsubot" variant="primary">Открыть</b-button>
         </b-card>
+        </div>
     </div>
 </template>
 
@@ -30,6 +31,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="sass">
+    @import "../sass/common"
 
+    $bot-card-margin: 10px
+
+    @include media-breakpoint-up(sm)
+        .bot-card
+            margin: 0 $bot-card-margin $bot-card-margin $bot-card-margin
+
+    @include media-breakpoint-down(xs)
+        .bot-card
+            margin: 0 0 $bot-card-margin 0
 </style>
