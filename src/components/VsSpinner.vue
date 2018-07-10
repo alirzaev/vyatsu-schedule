@@ -8,12 +8,12 @@
     import Spinner from 'vue-simple-spinner';
 
     export default {
-        name: "vsspinner",
+        name: 'vsspinner',
         components: {
             Spinner
         },
         props: ['visible']
-    }
+    };
 </script>
 
 <style scoped lang="sass">
