@@ -18,9 +18,10 @@ export default {
 };
 </script>
 
-<style scoped>
-    .content {
-        max-width: 768px;
-        padding-top: 65px;
-    }
+<style scoped lang="sass">
+    @import "sass/common"
+
+    .content
+        padding-top: $vs-navbar-height + 0.6em
+
 </style>

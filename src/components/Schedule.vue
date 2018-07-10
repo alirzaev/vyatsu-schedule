@@ -1,11 +1,10 @@
 <template>
     <div>
-        <div class="container"
-             style="padding: 19px;"
+        <div style="padding: 19px;"
              v-if="ready && !scheduleOk">
             <error v-bind:title="error.title" v-bind:message="error.message"></error>
         </div>
-        <div v-if="!ready" class="vsu-splashscreen">
+        <div v-if="!ready" class="vs-spinner">
             <spinner></spinner>
         </div>
         <div v-if="ready && scheduleOk">
@@ -17,7 +16,7 @@
                     <!--<b-button size="sm" v-scroll-to="'#today'" variant="outline-secondary">Сегодня</b-button>-->
                 <!--</b-navbar-nav>-->
             <!--</b-navbar>-->
-            <div class="container">
+            <div>
                 <div v-for="(week, week_index) in weeks" v-bind:key="week">
                     <div v-for="(day, day_index) in week" v-bind:key="day">
                         <h5 class="text-center mt-2">
@@ -108,38 +107,25 @@ export default {
 };
 </script>
 
-<style scoped>
-    .vsu-splashscreen {
-        text-align: center;
-        margin-top: 50px;
-        display: block;
-    }
+<style scoped lang="sass">
+    @import "../sass/common"
 
-    .vsu-schedule-item-odd {
-        background-color: #fff1f1;
-    }
+    .vsu-schedule-item-odd
+        background-color: #fff1f1
 
-    .vsu-schedule-item-even {
-        background-color: #fdfff1;
-    }
+    .vsu-schedule-item-even
+        background-color: #fdfff1
 
-    .vsu-navbar-shadow {
-        box-shadow: 0 2px 2px 0 #cccccc;
-    }
+    .lesson-description
+        font-size: 14px
+        line-height: 1.3em
 
-    .lesson-description {
-        font-size: 14px;
-        line-height: 1.3em;
-    }
+    .calls
+        font-size: 18px
 
-    .calls {
-        font-size: 18px;
-    }
-
-    a.anchor {
-        display: block;
-        position: relative;
-        top: -70px;
-        visibility: hidden;
-    }
+    a.anchor
+        display: block
+        position: relative
+        top: -70px
+        visibility: hidden
 </style>

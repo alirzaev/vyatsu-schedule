@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="md" variant="light" class="vsu-navbar-shadow" fixed="top">
+    <b-navbar toggleable="md" variant="light" class="vs-navbar" fixed="top">
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         <b-collapse is-nav id="nav_collapse">
             <b-navbar-nav>
@@ -23,8 +23,11 @@ export default {
 };
 </script>
 
-<style scoped>
-    .vsu-navbar-shadow {
-        box-shadow: 0 2px 2px 0 #cccccc;
-    }
+<style scoped lang="sass">
+    @import "../sass/common"
+
+    .vs-navbar
+        min-height: $vs-navbar-height
+        box-shadow: 0 2px 2px 0 #cccccc
+
 </style>

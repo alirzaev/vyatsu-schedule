@@ -1,15 +1,17 @@
 <template>
     <div>
-        <div v-if="!ready" class="vsu-splashscreen">
+        <div v-if="!ready" class="vs-spinner">
             <spinner></spinner>
         </div>
-        <div v-if="ready" class="container">
-            <b-list-group>
+        <div v-if="ready">
+            <div class="row justify-content-center">
+            <b-list-group class="col-12 col-sm-11 col-md-6 col-lg-6">
                 <b-list-group-item v-for="(item, index) in calls" class="pt-2 pb-2" v-bind:key="item">
                     <h5 class="calls">{{ index + 1 + " пара" }}</h5>
                     <p class="mb-0 calls-description">{{ item[0] + " - " + item[1] }}</p>
                 </b-list-group-item>
             </b-list-group>
+            </div>
         </div>
     </div>
 </template>
@@ -40,19 +42,13 @@ export default {
 };
 </script>
 
-<style scoped>
-    .vsu-splashscreen {
-        text-align: center;
-        margin-top: 50px;
-        display: block;
-    }
+<style scoped lang="sass">
+    @import "../sass/common"
 
-    .calls {
-        font-size: 18px;
-    }
+    .calls
+        font-size: 18px
 
-    .calls-description {
-        font-size: 14px;
-        line-height: 1.3em;
-    }
+    .calls-description
+        font-size: 14px
+        line-height: 1.3em
 </style>
