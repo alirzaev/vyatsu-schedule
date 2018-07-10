@@ -14,20 +14,20 @@
 </template>
 
 <script>
-import Vyatsunavbar from './components/VyatSUNavBar';
-import Vsspinner from './components/VsSpinner';
+    import Vyatsunavbar from './components/VyatSUNavBar';
+    import Vsspinner from './components/VsSpinner';
 
-export default {
-    components: {
-        Vyatsunavbar,
-        Vsspinner
-    },
-    computed: {
-        spinner: function () {
-            return this.$store.state.spinner;
+    export default {
+        components: {
+            Vyatsunavbar,
+            Vsspinner
+        },
+        computed: {
+            spinner: function () {
+                return this.$store.state.spinner;
+            }
         }
-    }
-};
+    };
 </script>
 
 <style scoped lang="sass">
@@ -35,5 +35,4 @@ export default {
 
     .content
         padding-top: $vs-navbar-height + 0.6em
-
 </style>
