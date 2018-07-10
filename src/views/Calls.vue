@@ -20,7 +20,7 @@
     import {getCalls} from '../utils/api';
 
     export default {
-        name: 'Calls',
+        name: 'calls',
         data: function () {
             return {
                 calls: [],
