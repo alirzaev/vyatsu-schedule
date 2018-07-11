@@ -50,7 +50,6 @@
 
 <script>
 import {getSchedule, getCalls} from '../utils/api';
-import {getCurrentDay} from '../utils/date';
 import Error from './Error';
 
 export default {
@@ -79,12 +78,12 @@ export default {
         const [calls, error2] = await getCalls();
 
         if (error1 == null && error2 == null) {
-            const date_range = schedule.date_range;
+            const {week, dayOfWeek: day} = schedule.today;
 
             this.weeks = schedule.weeks;
             this.calls = calls;
             this.group = schedule.group;
-            this.today = getCurrentDay(date_range[0], date_range[1]);
+            this.today = [week, day];
 
             this.$store.commit('changeTitle', this.group);
         } else if (error1 == null) {
