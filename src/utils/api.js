@@ -31,3 +31,13 @@ export async function getSchedule(groupId, season) {
         return [null, error];
     }
 }
+
+export async function getSeason() {
+    try {
+        const resp = await Vue.http.get(`${API_URL}/api/v2/season/current`);
+
+        return resp.data['season'];
+    } catch (error) {
+        return 'autumn';
+    }
+}

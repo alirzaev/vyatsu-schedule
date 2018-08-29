@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import {getCalls, getGroups} from '../utils/api';
+import {getCalls, getGroups, getSeason} from '../utils/api';
 
 export default {
     name: 'groupchooser',
@@ -72,6 +72,7 @@ export default {
         const self = this;
         const [calls, error1] = await getCalls();
         const [groups, error2] = await getGroups();
+        const season = await getSeason();
 
         if (error1 == null && error2 == null) {
             this.$store.commit('hideSpinner');
@@ -79,7 +80,7 @@ export default {
             self.groups = groups;
         }
 
-        this.selectedSeason = this.seasons[1].value;
+        this.selectedSeason = season === 'autumn' ? this.seasons[0].value : this.seasons[1].value;
     },
     methods: {
         openGroupSchedule: function () {
