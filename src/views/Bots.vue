@@ -6,9 +6,9 @@
                 class="col-11 col-sm-6 col-md-4 col-lg-4 bot-card"
         >
             <p class="card-text">
-                Telegram-бот
+                Расписание групп, звонков, адреса корпусов
             </p>
-            <b-button href="tg://resolve?domain=vyatsu_schedule_bot" variant="primary">Открыть</b-button>
+            <b-button href="tg://resolve?domain=vyatsu_schedule_bot" variant="primary">Установить бота</b-button>
         </b-card>
         <b-card
                 title="Viber"
@@ -16,9 +16,9 @@
                 class="col-11 col-sm-6 col-md-4 col-lg-4 bot-card"
         >
             <p class="card-text">
-                Viber-бот
+                Расписание звонков и групп <span style="white-space: nowrap">(β-версия)</span>
             </p>
-            <b-button href="viber://pa?chatURI=vyatsubot" variant="primary">Открыть</b-button>
+            <b-button href="viber://pa?chatURI=vyatsubot" variant="primary">Установить бота</b-button>
         </b-card>
     </div>
 </template>
