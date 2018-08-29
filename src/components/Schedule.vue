@@ -37,7 +37,7 @@
                 </div>
             </div>
             <b-button
-                    size="sm"
+                    size="md"
                     v-scroll-to="'#today'"
                     variant="secondary"
                     class="position-fixed today-button"
