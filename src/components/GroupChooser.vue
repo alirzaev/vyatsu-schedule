@@ -77,7 +77,7 @@ export default {
         if (error1 == null && error2 == null) {
             this.$store.commit('hideSpinner');
             self.calls = calls;
-            self.groups = groups;
+            self.groups = groups.sort((a, b) => a['faculty'].localeCompare(b['faculty']));
         }
 
         this.selectedSeason = season === 'autumn' ? this.seasons[0].value : this.seasons[1].value;
