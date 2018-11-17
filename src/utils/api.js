@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-const API_URL = 'https://api.vyatsuschedule.ru';
+const API_URL = 'https://vyatsu-schedule-api.herokuapp.com';
 
 export async function getCalls() {
     try {
