@@ -1,0 +1,31 @@
+language: node_js
+node_js:
+  - "8"
+install:
+  - npm install
+script:
+  - npm run configure
+  - npm run lint
+  - npm run build
+  - mkdir -p dist/docs
+  - wget -O dist/docs/OpenAPI.yaml https://github.com/AliRzaev/vyatsu_schedule_api_docs/raw/master/OpenAPI.yaml
+  - wget -O dist/docs/index.html https://github.com/AliRzaev/vyatsu_schedule_api_docs/raw/master/index.html
+deploy:
+  - provider: pages
+    skip-cleanup: true
+    target-branch: master
+    github-token: $GITHUB_TOKEN_DEV
+    keep-history: true
+    local-dir: dist
+    repo: AliRzaev/AliRzaev.github.io
+    on:
+      branch: dev
+  - provider: pages
+    skip-cleanup: true
+    target-branch: master
+    github-token: $GITHUB_TOKEN_RELEASE
+    keep-history: true
+    local-dir: dist
+    repo: vyatsuschedule/vyatsuschedule.github.io
+    on:
+      branch: master
