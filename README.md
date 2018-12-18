@@ -9,11 +9,18 @@ Try it: [vyatsuschedule.github.io](https://vyatsuschedule.github.io)
 VyatSU web app is built with `vue-cli-service`.
 
 1. Configure application
-   `$ API_URL=<apiUrl> npm run configure`
+   
+   ```
+   API_URL=<apiUrl> npm run configure
+   ```
+   
    where `apiUrl` - URL to the VyatSU schedule API server, defaults `http://localhost:8080`.
 
 2. Build application
-   `$ npm run build`
+   
+   ```
+   npm run build
+   ```
    
    Built application can be found in `dist` folder.
 
@@ -22,7 +29,10 @@ VyatSU web app is built with `vue-cli-service`.
 1. Configure application
 
 2. Run application with `webpack-dev-server`
-   `$ npm run serve`
+   
+   ```
+   npm run serve
+   ```
 
 ## Docker
 
@@ -33,8 +43,12 @@ VyatSU web app is built with `vue-cli-service`.
 3. Build docker image
    Docker image is based on `nginx:alpine`.
    
-   `$ docker build -t somename .`
+   ```
+   docker build -t somename .
+   ```
 
 4. Run docker container
    
-   `$ docker run --name somename -d -p 8080:80 imagename`
+   ```
+   docker run --name somename -d -p 8080:80 imagename
+   ```
