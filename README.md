@@ -1,5 +1,7 @@
 # VyatSU schedule web application
 
+[![Build Status](https://travis-ci.org/AliRzaev/vyatsu_web_app.svg?branch=master)](https://travis-ci.org/AliRzaev/vyatsu_web_app)
+
 This application provides students a convenient way to view group schedules.
 
 Try it: [vyatsuschedule.github.io](https://vyatsuschedule.github.io)
