@@ -13,6 +13,7 @@ script:
 deploy:
   - provider: pages
     skip-cleanup: true
+    keep-history: true
     target-branch: master
     github-token: $GITHUB_TOKEN_DEV
     keep-history: true
@@ -22,6 +23,7 @@ deploy:
       branch: dev
   - provider: pages
     skip-cleanup: true
+    keep-history: true
     target-branch: master
     github-token: $GITHUB_TOKEN_RELEASE
     keep-history: true
