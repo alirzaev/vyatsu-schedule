@@ -24,6 +24,7 @@ deploy:
   - provider: pages
     skip-cleanup: true
     keep-history: true
+    fqdn: vyatsuschedule.ru
     target-branch: master
     github-token: $GITHUB_TOKEN_RELEASE
     keep-history: true
