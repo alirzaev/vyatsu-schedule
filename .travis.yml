@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "8"
+before_install:
+    # download API documentation static site
+    - mkdir -p dist/docs
+    - wget -O dist/docs/OpenAPI.yaml https://github.com/AliRzaev/vyatsu_schedule_api_docs/raw/master/OpenAPI.yaml
+    - wget -O dist/docs/index.html https://github.com/AliRzaev/vyatsu_schedule_api_docs/raw/master/index.html
+install:
+    - npm install
+script:
+    - npm run configure
+    - npm run lint
+    - npm run build
