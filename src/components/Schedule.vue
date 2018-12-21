@@ -10,6 +10,7 @@
         </div>
         <div v-if="ready && scheduleOk" class="row justify-content-center">
             <div class="col-12 col-md-6">
+                <a id="top" class="anchor"></a>
                 <div v-for="(week, week_index) in weeks" v-bind:key="week">
                     <div v-for="(day, day_index) in week" v-bind:key="day">
                         <div>
@@ -36,14 +37,25 @@
                     </div>
                 </div>
             </div>
-            <b-button
-                    size="md"
-                    v-scroll-to="'#today'"
-                    variant="secondary"
-                    class="position-fixed today-button"
+            <b-button-group
+                    class="position-fixed toolbar"
             >
-                Сегодня
-            </b-button>
+                <b-button
+                        size="md"
+                        v-scroll-to="'#today'"
+                        variant="secondary"
+                >
+                    Сегодня
+                </b-button>
+                <div class="splitter"></div>
+                <b-button
+                        size="md"
+                        v-scroll-to="'#top'"
+                        variant="secondary"
+                >
+                    ▲
+                </b-button>
+            </b-button-group>
         </div>
     </div>
 </template>
@@ -136,17 +148,20 @@ export default {
         position: relative
         top: -($vs-navbar-height + 0.5em)
         visibility: hidden
-
-    .today-button
-        display: block
+    
+    .toolbar
         z-index: $zindex-sticky
-
+    
     @include media-breakpoint-down(md)
-        .today-button
+        .toolbar
             bottom: 1em
             right: 1em
-
+    
     @include media-breakpoint-up(md)
-        .today-button
+        .toolbar
             display: none
+    
+    .splitter
+        background-color: #5b5b5b
+        width: 0.1rem
 </style>
