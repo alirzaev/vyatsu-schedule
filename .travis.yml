@@ -1,6 +1,7 @@
 jobs:
   include:
     - stage: deploy to dev
+      if: branch = dev
       language: node_js
       node_js:
         - "8"
@@ -26,6 +27,7 @@ jobs:
           on:
             branch: dev
     - stage: deploy to production
+      if: branch = master
       language: node_js
       node_js:
         - "8"
