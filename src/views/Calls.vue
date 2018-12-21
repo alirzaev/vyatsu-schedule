@@ -34,10 +34,11 @@ export default {
 
         const [calls, error2] = await getCalls();
 
-        this.calls = calls;
-
-        this.$store.commit('hideSpinner');
-        this.ready = true;
+        if (error2 == null) {
+            this.calls = calls;
+            this.$store.commit('hideSpinner');
+            this.ready = true;
+        }
     }
 };
 </script>
