@@ -36,26 +36,26 @@
                         </b-list-group>
                     </div>
                 </div>
+                <div class="toolbar d-flex justify-content-end">
+                    <b-button-group>
+                        <b-button
+                                size="md"
+                                v-scroll-to="'#today'"
+                                variant="secondary"
+                        >
+                            Сегодня
+                        </b-button>
+                        <div class="splitter"></div>
+                        <b-button
+                                size="md"
+                                v-scroll-to="'#top'"
+                                variant="secondary"
+                        >
+                            ▲
+                        </b-button>
+                    </b-button-group>
+                </div>
             </div>
-            <b-button-group
-                    class="position-fixed toolbar"
-            >
-                <b-button
-                        size="md"
-                        v-scroll-to="'#today'"
-                        variant="secondary"
-                >
-                    Сегодня
-                </b-button>
-                <div class="splitter"></div>
-                <b-button
-                        size="md"
-                        v-scroll-to="'#top'"
-                        variant="secondary"
-                >
-                    ▲
-                </b-button>
-            </b-button-group>
         </div>
     </div>
 </template>
@@ -151,15 +151,10 @@ export default {
     
     .toolbar
         z-index: $zindex-sticky
-    
-    @include media-breakpoint-down(md)
-        .toolbar
-            bottom: 1em
-            right: 1em
-    
-    @include media-breakpoint-up(md)
-        .toolbar
-            display: none
+        position: sticky
+        bottom: 1em
+        margin-top: 1em
+        margin-bottom: -($vs-footer-height + 0.5em)
     
     .splitter
         background-color: #5b5b5b

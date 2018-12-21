@@ -5,7 +5,7 @@
         <div class="container">
             <router-view/>
         </div>
-        <footer class="page-footer font-small pt-3">
+        <footer class="page-footer font-small pt-3 vs-footer pb-1">
             <div class="footer-copyright text-center py-3">© 2018 Copyright:
                 <a href="https://vk.me/rzaevali">Али Рзаев</a>
             </div>
@@ -35,4 +35,7 @@ export default {
 
     .container
         padding-top: $vs-navbar-height + 0.6em
+    
+    .vs-footer
+        min-height: $vs-footer-height
 </style>
