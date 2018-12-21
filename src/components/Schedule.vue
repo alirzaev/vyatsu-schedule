@@ -53,6 +53,7 @@ import {getSchedule, getCalls} from '../utils/api';
 import Error from './Error';
 
 export default {
+    title: 'Расписание',
     name: 'schedule',
     components: {
         error: Error
@@ -86,6 +87,7 @@ export default {
             this.today = [week, day];
 
             this.$store.commit('changeTitle', this.group);
+            this.$title = this.group;
         } else if (error1 == null) {
             this.error.title = 'Что-то пошло не так :(';
             this.error.message = 'Нам не удалось загрузить расписание, попробуйте обновить страницу';

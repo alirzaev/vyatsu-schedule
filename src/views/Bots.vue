@@ -25,6 +25,7 @@
 
 <script>
 export default {
+    title: 'Чат-боты',
     name: 'bots',
     created: function () {
         this.$store.commit('changeTitle', 'Чат-боты');

@@ -20,6 +20,7 @@
 import {getCalls} from '../utils/api';
 
 export default {
+    title: 'Звонки',
     name: 'calls',
     data: function () {
         return {
