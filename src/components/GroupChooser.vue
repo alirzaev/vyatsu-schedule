@@ -51,6 +51,7 @@
 import {getCalls, getGroups, getSeason} from '../utils/api';
 
 export default {
+    title: 'Расписание',
     name: 'groupchooser',
     data: function () {
         return {

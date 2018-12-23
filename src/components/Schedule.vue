@@ -10,6 +10,7 @@
         </div>
         <div v-if="ready && scheduleOk" class="row justify-content-center">
             <div class="col-12 col-md-6">
+                <a id="top" class="anchor"></a>
                 <div v-for="(week, week_index) in weeks" v-bind:key="week">
                     <div v-for="(day, day_index) in week" v-bind:key="day">
                         <div>
@@ -35,15 +36,26 @@
                         </b-list-group>
                     </div>
                 </div>
+                <div class="toolbar d-flex justify-content-end">
+                    <b-button-group>
+                        <b-button
+                                size="md"
+                                v-scroll-to="'#today'"
+                                variant="secondary"
+                        >
+                            Сегодня
+                        </b-button>
+                        <div class="splitter"></div>
+                        <b-button
+                                size="md"
+                                v-scroll-to="'#top'"
+                                variant="secondary"
+                        >
+                            ▲
+                        </b-button>
+                    </b-button-group>
+                </div>
             </div>
-            <b-button
-                    size="md"
-                    v-scroll-to="'#today'"
-                    variant="secondary"
-                    class="position-fixed today-button"
-            >
-                Сегодня
-            </b-button>
         </div>
     </div>
 </template>
@@ -53,6 +65,7 @@ import {getSchedule, getCalls} from '../utils/api';
 import Error from './Error';
 
 export default {
+    title: 'Расписание',
     name: 'schedule',
     components: {
         error: Error
@@ -86,6 +99,7 @@ export default {
             this.today = [week, day];
 
             this.$store.commit('changeTitle', this.group);
+            this.$title = this.group;
         } else if (error1 == null) {
             this.error.title = 'Что-то пошло не так :(';
             this.error.message = 'Нам не удалось загрузить расписание, попробуйте обновить страницу';
@@ -134,17 +148,15 @@ export default {
         position: relative
         top: -($vs-navbar-height + 0.5em)
         visibility: hidden
-
-    .today-button
-        display: block
+    
+    .toolbar
         z-index: $zindex-sticky
-
-    @include media-breakpoint-down(md)
-        .today-button
-            bottom: 1em
-            right: 1em
-
-    @include media-breakpoint-up(md)
-        .today-button
-            display: none
+        position: sticky
+        bottom: 1em
+        margin-top: 1em
+        margin-bottom: -($vs-footer-height + 0.5em)
+    
+    .splitter
+        background-color: #5b5b5b
+        width: 0.1rem
 </style>
