@@ -15,7 +15,7 @@ Vue.use(VueResource);
 Vue.use(BootstrapVue);
 Vue.use(VueScrollTo);
 Vue.use(VuePageTitle, {
-    suffix: '| Расписание студентов ВятГУ'
+    suffix: '| Расписание занятий'
 });
 
 new Vue({
