@@ -1,55 +1,62 @@
-# VyatSU schedule web application
+# Веб-сайт проекта VyatSU schedule
 
 [![Build Status](https://travis-ci.org/AliRzaev/vyatsu_web_app.svg?branch=master)](https://travis-ci.org/AliRzaev/vyatsu_web_app)
 
-This application provides students a convenient way to view group schedules.
+Неофициальный сайт для просмотра расписания занятий студентов [Вятского государственного университета](https://www.vyatsu.ru).
 
-Try it: [vyatsuschedule.github.io](https://vyatsuschedule.github.io)
+Основной упор сделан на удобство работы с мобильных устройств. В отличие от официального сайта, здесь расписание групп можно смотреть прямо во вкладке браузера, не загружая PDF-файлы.
 
-## Building
+## Для пользователей
 
-VyatSU web app is built with `vue-cli-service`.
+Тык: [vyatsuschedule.github.io](https://vyatsuschedule.github.io)
 
-1. Configure application
+## Для разработчиков
+
+Этот сайт - не что иное, как одностраничное [Vue.js](https://vuejs.org)-приложение. Для сборки на production, запуска сервера и линтера используется [Vue CLI 3](https://cli.vuejs.org).
+
+### Сборка приложения
+
+1. Установка параметров
+
+   Для работы сайта нужен [backend-сервер](https://github.com/AliRzaev/vyatsu-schedule-backend). Указываем его URL через переменную окружения `API_URL` и запускаем скрпит `configure`:
    
    ```
    API_URL=<apiUrl> npm run configure
    ```
    
-   where `apiUrl` - URL to the VyatSU schedule API server, defaults `http://localhost:8080`.
+   По умолчанию для `API_URL` используется значение `http://localhost:8080`.
 
-2. Build application
+2. Собираем на production
    
    ```
    npm run build
    ```
    
-   Built application can be found in `dist` folder.
+   Скомпилированные файлы расположены в папке `dist`.
 
-## Running
+### Запуск сервера для разработки
 
-1. Configure application
+1. Устанавливаем параметры
 
-2. Run application with `webpack-dev-server`
+2. Запускаем сервер
    
    ```
    npm run serve
    ```
 
-## Docker
+### Сборка Docker-образа
 
-1. Configure application
+1. Устанавливаем параметры
 
-2. Build application
+2. Собираем на production
 
-3. Build docker image
-   Docker image is based on `nginx:alpine`.
-   
+3. Собираем образ
+
    ```
-   docker build -t somename .
+   docker build -t imagename .
    ```
 
-4. Run docker container
+4. Запускаем
    
    ```
    docker run --name somename -d -p 8080:80 imagename
