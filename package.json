@@ -1,6 +1,8 @@
 {
   "name": "vyatsu_web_app",
-  "version": "1.0.4",
+  "version": "1.0.9",
+  "author": "Ali Rzaev <alirzaev1996@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
