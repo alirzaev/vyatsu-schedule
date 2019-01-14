@@ -29,7 +29,6 @@ export default {
     name: 'bots',
     created: function () {
         this.$store.commit('changeTitle', 'Чат-боты');
-        this.$store.commit('hideSpinner');
     }
 };
 </script>
@@ -37,7 +36,7 @@ export default {
 <style scoped lang="sass">
     @import "../sass/common"
 
-    $bot-card-margin: 10px
+    $bot-card-margin: 0.6em
 
     @include media-breakpoint-up(sm)
         .bot-card

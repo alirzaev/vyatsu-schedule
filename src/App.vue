@@ -1,12 +1,11 @@
 <template>
     <div id="app">
         <vsnavbar></vsnavbar>
-        <vsspinner v-bind:visible="spinner"></vsspinner>
         <div class="container">
             <router-view/>
         </div>
         <footer class="page-footer font-small pt-3 vs-footer pb-1">
-            <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <div class="footer-copyright text-center py-3">© 2018-2019
                 <a href="https://vk.me/rzaevali">Али Рзаев</a>
             </div>
         </footer>
@@ -15,17 +14,10 @@
 
 <script>
 import Vsnavbar from './components/VsNavBar';
-import Vsspinner from './components/VsSpinner';
 
 export default {
     components: {
-        Vsnavbar,
-        Vsspinner
-    },
-    computed: {
-        spinner: function () {
-            return this.$store.state.spinner;
-        }
+        Vsnavbar
     }
 };
 </script>

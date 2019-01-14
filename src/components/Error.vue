@@ -1,5 +1,5 @@
 <template>
-    <b-alert :show="visible" variant="danger">
+    <b-alert :show="true" variant="danger">
         <h4 class="alert-heading">{{title}}</h4>
         <p>{{message}}</p>
         <hr>
@@ -13,7 +13,7 @@
 <script>
 export default {
     name: 'error',
-    props: ['title', 'message', 'visible']
+    props: ['title', 'message']
 };
 </script>
 

@@ -1,14 +1,15 @@
 <template>
     <div>
-        <div class="row justify-content-center">
+        <vsspinner v-bind:visible="state === STATES.LOADING"></vsspinner>
+        <div v-if="state === STATES.ERROR" class="row justify-content-center">
             <error
                     class="col-11 col-md-6 error-alert"
                     v-bind:title="error.title"
                     v-bind:message="error.message"
-                    v-bind:visible="ready && !scheduleOk"
             ></error>
         </div>
-        <div v-if="ready && scheduleOk" class="row justify-content-center">
+        <div v-if="state === STATES.READY" class="row justify-content-center">
+            <div class="col-12 col-md"></div>
             <div class="col-12 col-md-6">
                 <a id="top" class="anchor"></a>
                 <div v-for="(week, week_index) in weeks" v-bind:key="week">
@@ -36,7 +37,9 @@
                         </b-list-group>
                     </div>
                 </div>
-                <div class="toolbar d-flex justify-content-end">
+            </div>
+            <div class="col-12 col-md align-self-end justify-content-start col-md-sticky">
+                <div class="toolbar justify-content-end">
                     <b-button-group>
                         <b-button
                                 size="md"
@@ -62,27 +65,31 @@
 
 <script>
 import {getSchedule, getCalls} from '../utils/api';
+import {states} from '../utils/states';
 import Error from './Error';
+import Vsspinner from './VsSpinner';
 
 export default {
     title: 'Расписание',
     name: 'schedule',
     components: {
-        error: Error
+        error: Error,
+        Vsspinner
     },
     data: function () {
         return {
+            STATES: states,
+            state: states.LOADING,
             weeks: [],
             calls: [],
             group: '',
             today: [],
             days: ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА'],
-            error: {},
-            ready: false
+            error: {}
         };
     },
     created: async function () {
-        this.$store.commit('showSpinner');
+        this.state = states.LOADING;
 
         const group_id = this.$route.params.groupId;
         const season = this.$route.params.season;
@@ -100,25 +107,18 @@ export default {
 
             this.$store.commit('changeTitle', this.group);
             this.$title = this.group;
+
+            this.state = states.READY;
         } else if (error1 == null) {
             this.error.title = 'Что-то пошло не так :(';
             this.error.message = 'Нам не удалось загрузить расписание, попробуйте обновить страницу';
+
+            this.state = states.ERROR;
         } else {
             this.error.title = 'Что-то пошло не так :(';
             this.error.message = 'Возможно вы ошиблись группой или расписания на нужный семестр для вашей группы нет';
-        }
 
-        this.$store.commit('hideSpinner');
-        this.ready = true;
-    },
-    computed: {
-        scheduleOk: function () {
-            return [
-                this.weeks,
-                this.calls,
-                this.group,
-                this.today
-            ].every(item => item); // item => item != false
+            this.state = states.ERROR;
         }
     }
 };
@@ -134,11 +134,11 @@ export default {
         background-color: #fdfff1
 
     .lesson-description
-        font-size: 14px
+        font-size: 0.9em
         line-height: 1.3em
 
     .call-title
-        font-size: 18px
+        font-size: 1.1em
 
     .error-alert
         padding: 1.2em
@@ -148,14 +148,19 @@ export default {
         position: relative
         top: -($vs-navbar-height + 0.5em)
         visibility: hidden
-    
-    .toolbar
-        z-index: $zindex-sticky
-        position: sticky
-        bottom: 1em
-        margin-top: 1em
-        margin-bottom: -($vs-footer-height + 0.5em)
-    
+
+    @include media-breakpoint-down(sm)
+        .toolbar
+            position: fixed
+            z-index: $zindex-fixed
+            bottom: 1em
+            right: 1em
+
+    @include media-breakpoint-up(md)
+        .col-md-sticky
+            position: sticky
+            bottom: 1em
+
     .splitter
         background-color: #5b5b5b
         width: 0.1rem
