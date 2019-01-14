@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <vsnavbar></vsnavbar>
-        <vsspinner v-bind:visible="spinner"></vsspinner>
         <div class="container">
             <router-view/>
         </div>
@@ -15,17 +14,10 @@
 
 <script>
 import Vsnavbar from './components/VsNavBar';
-import Vsspinner from './components/VsSpinner';
 
 export default {
     components: {
-        Vsnavbar,
-        Vsspinner
-    },
-    computed: {
-        spinner: function () {
-            return this.$store.state.spinner;
-        }
+        Vsnavbar
     }
 };
 </script>

@@ -17,10 +17,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-    @import "../sass/common"
-
     .vs-spinner
         text-align: center
-        margin-top: $vs-navbar-height + 0.5em
         display: block
 </style>

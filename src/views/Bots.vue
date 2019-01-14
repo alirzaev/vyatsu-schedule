@@ -29,7 +29,6 @@ export default {
     name: 'bots',
     created: function () {
         this.$store.commit('changeTitle', 'Чат-боты');
-        this.$store.commit('hideSpinner');
     }
 };
 </script>
