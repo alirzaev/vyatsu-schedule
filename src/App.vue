@@ -5,7 +5,7 @@
             <router-view/>
         </div>
         <footer class="page-footer font-small pt-3 vs-footer pb-1">
-            <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <div class="footer-copyright text-center py-3">© 2018-2019
                 <a href="https://vk.me/rzaevali">Али Рзаев</a>
             </div>
         </footer>
