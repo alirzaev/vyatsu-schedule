@@ -88,6 +88,10 @@ export default {
             this.state = states.READY;
             this.calls = calls;
             this.groups = groups.sort((a, b) => a['faculty'].localeCompare(b['faculty']));
+
+            const [savedFaculty, savedGroup] = this.loadFromLocalStorage();
+            this.selectedFaculty = savedFaculty;
+            this.selectedGroup = savedGroup;
         }
 
         this.selectedSeason = season === 'autumn' ? this.seasons[0].value : this.seasons[1].value;
@@ -96,10 +100,33 @@ export default {
         openGroupSchedule: function () {
             const groupID = this.selectedGroup['id'];
             const url = `/schedule/${groupID}/${this.selectedSeason}`;
+            this.saveToLocalStorage(this.selectedFaculty['faculty'], this.selectedGroup['name']);
             this.$router.push(url);
         },
         resetGroup: function () {
             this.selectedGroup = null;
+        },
+        saveToLocalStorage: function (faculty, group) {
+            localStorage.setItem('faculty', faculty);
+            localStorage.setItem('group', group);
+        },
+        loadFromLocalStorage: function () {
+            const faculty = localStorage.getItem('faculty');
+            const group = localStorage.getItem('group');
+
+            if (faculty) {
+                const facultyItem = this.groups.find(item => item['faculty'] === faculty);
+
+                if (facultyItem && group) {
+                    const groupItem = facultyItem['groups'].find(item => item['name'] === group);
+
+                    return [facultyItem, groupItem];
+                } else {
+                    return [facultyItem, null];
+                }
+            } else {
+                return [null, null];
+            }
         }
     },
     computed: {
