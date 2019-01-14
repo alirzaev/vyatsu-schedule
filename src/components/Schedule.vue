@@ -9,6 +9,7 @@
             ></error>
         </div>
         <div v-if="state === STATES.READY" class="row justify-content-center">
+            <div class="col-12 col-md"></div>
             <div class="col-12 col-md-6">
                 <a id="top" class="anchor"></a>
                 <div v-for="(week, week_index) in weeks" v-bind:key="week">
@@ -36,7 +37,9 @@
                         </b-list-group>
                     </div>
                 </div>
-                <div class="toolbar d-flex justify-content-end">
+            </div>
+            <div class="col-12 col-md align-self-end justify-content-start col-md-sticky">
+                <div class="toolbar justify-content-end">
                     <b-button-group>
                         <b-button
                                 size="md"
@@ -145,14 +148,19 @@ export default {
         position: relative
         top: -($vs-navbar-height + 0.5em)
         visibility: hidden
-    
-    .toolbar
-        z-index: $zindex-sticky
-        position: sticky
-        bottom: 1em
-        margin-top: 1em
-        margin-bottom: -($vs-footer-height + 0.5em)
-    
+
+    @include media-breakpoint-down(sm)
+        .toolbar
+            position: fixed
+            z-index: $zindex-fixed
+            bottom: 1em
+            right: 1em
+
+    @include media-breakpoint-up(md)
+        .col-md-sticky
+            position: sticky
+            bottom: 1em
+
     .splitter
         background-color: #5b5b5b
         width: 0.1rem
