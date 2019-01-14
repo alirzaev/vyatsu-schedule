@@ -134,11 +134,11 @@ export default {
         background-color: #fdfff1
 
     .lesson-description
-        font-size: 14px
+        font-size: 0.9em
         line-height: 1.3em
 
     .call-title
-        font-size: 18px
+        font-size: 1.1em
 
     .error-alert
         padding: 1.2em
