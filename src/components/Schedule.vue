@@ -1,63 +1,51 @@
 <template>
     <div>
         <vsspinner v-bind:visible="state === STATES.LOADING"></vsspinner>
-        <div v-if="state === STATES.ERROR" class="row justify-content-center">
+        <div v-if="state === STATES.ERROR" class="error-container">
             <error
-                    class="col-11 col-md-6 error-alert"
+                    class="error-column"
                     v-bind:title="error.title"
                     v-bind:message="error.message"
             ></error>
         </div>
-        <div v-if="state === STATES.READY" class="row justify-content-center">
-            <div class="col-12 col-md"></div>
-            <div class="col-12 col-md-6">
+        <div v-if="state === STATES.READY" class="schedule-container">
+            <div class="schedule-column">
                 <a id="top" class="anchor"></a>
-                <div v-for="(week, week_index) in weeks" v-bind:key="week">
+                <div v-for="(week, week_index) in weeks" v-bind:key="week" class="vs-schedule-week">
                     <div v-for="(day, day_index) in week" v-bind:key="day">
                         <div>
                             <span v-if="today[0] === week_index && today[1] === day_index">
                                 <a id="today" class="anchor"></a>
                             </span>
-                            <h5 class="text-center mt-2">
-                                <b>{{days[day_index]}}</b>
-                            </h5>
+                            <h5 class="text-center mt-2 day-title">{{days[day_index]}}</h5>
                         </div>
                         <b-list-group>
                             <b-list-group-item
                                     v-for="(lesson, index) in day"
                                     v-bind:key="lesson"
-                                    class="pl-2, pr-2"
-                                    v-bind:class="{
-                            'vsu-schedule-item-odd': week_index % 2 === 0,
-                            'vsu-schedule-item-even': week_index % 2 !== 0
-                        }">
-                                <h5 class="text-center call-title">{{calls[index][0] + ' - ' + calls[index][1]}}</h5>
+                                    class="pl-2 pr-2"
+                            >
+                                <h5 class="text-center lesson-title">{{calls[index][0] + ' - ' + calls[index][1]}}</h5>
                                 <p class="text-center mb-0 lesson-description">{{lesson !== '' ? lesson : '———'}}</p>
                             </b-list-group-item>
                         </b-list-group>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md align-self-end justify-content-start col-md-sticky">
-                <div class="toolbar justify-content-end">
-                    <b-button-group>
-                        <b-button
-                                size="md"
-                                v-scroll-to="'#today'"
-                                variant="secondary"
-                        >
-                            Сегодня
-                        </b-button>
-                        <div class="splitter"></div>
-                        <b-button
-                                size="md"
-                                v-scroll-to="'#top'"
-                                variant="secondary"
-                        >
-                            ▲
-                        </b-button>
-                    </b-button-group>
-                </div>
+            <div class="toolbar-column">
+                <b-button-group>
+                    <b-button
+                            size="md"
+                            v-scroll-to="'#today'"
+                            variant="secondary"
+                    >Сегодня</b-button>
+                    <div class="splitter"></div>
+                    <b-button
+                            size="md"
+                            v-scroll-to="'#top'"
+                            variant="secondary"
+                    >▲</b-button>
+                </b-button-group>
             </div>
         </div>
     </div>
@@ -127,39 +115,78 @@ export default {
 <style scoped lang="sass">
     @import "../sass/common"
 
-    .vsu-schedule-item-odd
+    .schedule-container
+        display: grid
+        grid-template-columns: 1fr 2fr 1fr
+        grid-template-rows: auto
+        align-items: start
+
+    @include media-breakpoint-up(md)
+        .schedule-column
+            grid-column: 2 / 3
+
+        .toolbar-column
+            grid-column: 3 / 4
+            align-self: end
+            position: sticky
+            bottom: 1em
+            margin-left: 1em
+
+    @include media-breakpoint-down(sm)
+        .schedule-column
+            grid-column: 1 / 4
+
+        .toolbar-column
+            position: fixed
+            z-index: $zindex-fixed
+            bottom: 1em
+            right: 1em
+
+    .error-container
+        display: grid
+        grid-template-rows: auto
+        align-items: start
+
+    .error-column
+        padding: 1.2em
+
+    @include media-breakpoint-up(md)
+        .error-container
+            grid-template-columns: 1fr 2fr 1fr
+
+    @include media-breakpoint-between(xs, sm)
+        .error-container
+            grid-template-columns: 1fr 11fr 1fr
+
+    @include media-breakpoint-up(sm)
+        .error-column
+            grid-column: 2 / 3
+
+    @include media-breakpoint-down(xs)
+        .error-column
+            grid-column: 1 / 3
+
+    div.vs-schedule-week:nth-child(even) .list-group-item
         background-color: #fff1f1
 
-    .vsu-schedule-item-even
+    div.vs-schedule-week:nth-child(odd) .list-group-item
         background-color: #fdfff1
 
     .lesson-description
         font-size: 0.9em
         line-height: 1.3em
 
-    .call-title
+    .lesson-title
         font-size: 1.1em
 
-    .error-alert
-        padding: 1.2em
+    .day-title
+        font-weight: 700
 
     a.anchor
         display: block
         position: relative
         top: -($vs-navbar-height + 0.5em)
         visibility: hidden
-
-    @include media-breakpoint-down(sm)
-        .toolbar
-            position: fixed
-            z-index: $zindex-fixed
-            bottom: 1em
-            right: 1em
-
-    @include media-breakpoint-up(md)
-        .col-md-sticky
-            position: sticky
-            bottom: 1em
 
     .splitter
         background-color: #5b5b5b
