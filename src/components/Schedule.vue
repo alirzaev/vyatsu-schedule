@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import {getSchedule, getCalls} from '../utils/api';
 import {states} from '../utils/states';
 import Error from './Error';
 import Vsspinner from './VsSpinner';
@@ -67,46 +66,60 @@ export default {
     data: function () {
         return {
             STATES: states,
-            state: states.LOADING,
-            weeks: [],
-            calls: [],
-            group: '',
-            today: [],
-            days: ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА'],
-            error: {}
+            days: ['ПОНЕДЕЛЬНИК', 'ВТОРНИК', 'СРЕДА', 'ЧЕТВЕРГ', 'ПЯТНИЦА', 'СУББОТА']
         };
     },
     created: async function () {
-        this.state = states.LOADING;
+        const groupId = this.$route.params['groupId'];
+        const season = this.$route.params['season'];
 
-        const group_id = this.$route.params.groupId;
-        const season = this.$route.params.season;
+        await this.$store.dispatch('loadSchedule', {groupId, season});
 
-        const [schedule, error1] = await getSchedule(group_id, season);
-        const [calls, error2] = await getCalls();
+        this.$title = this.group;
+    },
+    computed: {
+        calls: function () {
+            return this.state === states.READY ? this.$store.state.calls.data : [];
+        },
+        schedule: function () {
+            return this.$store.state.schedule.data;
+        },
+        group: function () {
+            return this.state === states.READY ? this.schedule['group'] : '';
+        },
+        weeks: function () {
+            return this.state === states.READY ? this.schedule['weeks'] : [];
+        },
+        today: function () {
+            if (this.state === states.READY) {
+                const {week, dayOfWeek: day} = this.schedule['today'];
+                return [week, day];
+            } else {
+                return [];
+            }
+        },
+        error: function () {
+            if (this.state === states.ERROR) {
+                return {
+                    title: 'Что-то пошло не так :(',
+                    message: 'Возможно вы ошиблись группой или расписания на нужный семестр для вашей группы нет'
+                };
+            } else {
+                return {};
+            }
+        },
+        state: function () {
+            const schedule = this.$store.state.schedule.data;
+            const error = this.$store.state.schedule.error
+                || this.$store.state.calls.error;
 
-        if (error1 == null && error2 == null) {
-            const {week, dayOfWeek: day} = schedule.today;
-
-            this.weeks = schedule.weeks;
-            this.calls = calls;
-            this.group = schedule.group;
-            this.today = [week, day];
-
-            this.$store.commit('changeTitle', this.group);
-            this.$title = this.group;
-
-            this.state = states.READY;
-        } else if (error1 == null) {
-            this.error.title = 'Что-то пошло не так :(';
-            this.error.message = 'Нам не удалось загрузить расписание, попробуйте обновить страницу';
-
-            this.state = states.ERROR;
-        } else {
-            this.error.title = 'Что-то пошло не так :(';
-            this.error.message = 'Возможно вы ошиблись группой или расписания на нужный семестр для вашей группы нет';
-
-            this.state = states.ERROR;
+            if (!error && !schedule) {
+                return states.LOADING;
+            } else if (!error && schedule) {
+                return states.READY;
+            } else {
+                return states.ERROR;
+            }
         }
     }
 };

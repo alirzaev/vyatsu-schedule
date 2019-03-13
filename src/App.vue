@@ -18,6 +18,9 @@ import Vsnavbar from './components/VsNavBar';
 export default {
     components: {
         Vsnavbar
+    },
+    created: async function() {
+        await this.$store.dispatch('init');
     }
 };
 </script>

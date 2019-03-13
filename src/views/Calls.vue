@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import {getCalls} from '../utils/api';
 import {states} from '../utils/states';
 import Vsspinner from '../components/VsSpinner';
 
@@ -32,21 +31,25 @@ export default {
     },
     data: function () {
         return {
-            STATES: states,
-            state: states.LOADING,
-            calls: []
+            STATES: states
         };
     },
     created: async function () {
         this.$store.commit('changeTitle', 'Звонки');
-        this.state = states.LOADING;
+    },
+    computed: {
+        calls: function () {
+            return this.state === states.READY ? this.$store.state.calls.data : [];
+        },
+        state: function () {
+            const calls = this.$store.state.calls.data;
+            const error = this.$store.state.calls.error;
 
-        const [calls, error2] = await getCalls();
-
-        if (error2 == null) {
-            this.calls = calls;
-
-            this.state = states.READY;
+            if (!error && calls) {
+                return states.READY;
+            } else {
+                return states.LOADING;
+            }
         }
     }
 };

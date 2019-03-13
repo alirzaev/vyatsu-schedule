@@ -5,7 +5,7 @@
             <div class="col-12 col-md-6">
                 <b-form-group>
                     <label>Выберите факультет</label>
-                    <b-form-select v-model="selectedFaculty" class="mb-2" v-on:change="resetGroup()">
+                    <b-form-select v-model="selectedFaculty" class="mb-2">
                         <option
                                 v-for="faculty_item in groups"
                                 v-bind:key="faculty_item['faculty']"
@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import {getCalls, getGroups, getSeason} from '../utils/api';
 import {states} from '../utils/states';
 import Vsspinner from './VsSpinner';
 
@@ -64,77 +63,65 @@ export default {
     data: function () {
         return {
             STATES: states,
-            state: states.LOADING,
-            selectedGroup: null,
-            selectedFaculty: null,
-            selectedSeason: null,
             seasons: [
                 {text: 'Осень', value: 'autumn'},
                 {text: 'Весна', value: 'spring'}
-            ],
-            calls: [],
-            groups: []
+            ]
         };
     },
     created: async function () {
         this.$store.commit('changeTitle', 'Расписание');
-        this.state = states.LOADING;
-
-        const [calls, error1] = await getCalls();
-        const [groups, error2] = await getGroups();
-        const season = await getSeason();
-
-        if (error1 == null && error2 == null) {
-            this.state = states.READY;
-            this.calls = calls;
-            this.groups = groups.sort((a, b) => a['faculty'].localeCompare(b['faculty']));
-
-            const [savedFaculty, savedGroup] = this.loadFromLocalStorage();
-            this.selectedFaculty = savedFaculty;
-            this.selectedGroup = savedGroup;
-        }
-
-        this.selectedSeason = season === 'autumn' ? this.seasons[0].value : this.seasons[1].value;
     },
     methods: {
-        openGroupSchedule: function () {
+        openGroupSchedule: async function () {
             const groupID = this.selectedGroup['id'];
             const url = `/schedule/${groupID}/${this.selectedSeason}`;
-            this.saveToLocalStorage(this.selectedFaculty['faculty'], this.selectedGroup['name']);
+            await this.$store.dispatch('saveToLocalStorage');
             this.$router.push(url);
-        },
-        resetGroup: function () {
-            this.selectedGroup = null;
-        },
-        saveToLocalStorage: function (faculty, group) {
-            localStorage.setItem('faculty', faculty);
-            localStorage.setItem('group', group);
-        },
-        loadFromLocalStorage: function () {
-            const faculty = localStorage.getItem('faculty');
-            const group = localStorage.getItem('group');
-
-            if (faculty) {
-                const facultyItem = this.groups.find(item => item['faculty'] === faculty);
-
-                if (facultyItem && group) {
-                    const groupItem = facultyItem['groups'].find(item => item['name'] === group);
-
-                    return [facultyItem, groupItem];
-                } else {
-                    return [facultyItem, null];
-                }
-            } else {
-                return [null, null];
-            }
         }
     },
     computed: {
+        selectedFaculty: {
+            get: function () {
+                return this.$store.state.selectedFaculty;
+            },
+            set: function (value) {
+                this.$store.commit('selectFaculty', value);
+            }
+        },
+        selectedGroup: {
+            get: function () {
+                return this.$store.state.selectedGroup;
+            },
+            set: function (value) {
+                this.$store.commit('selectGroup', value);
+            }
+        },
+        selectedSeason: {
+            get: function () {
+                return this.$store.state.selectedSeason;
+            },
+            set: function (value) {
+                this.$store.commit('selectSeason', value);
+            }
+        },
+        isGroupSelected: function () {
+            return this.selectedGroup !== null;
+        },
         facultyGroups: function () {
             return this.selectedFaculty ? this.selectedFaculty['groups'] : [];
         },
-        isGroupSelected: function () {
-            return this.selectedGroup !== null && this.selectedGroup !== undefined;
+        state: function () {
+            const error = this.$store.state.groups.error;
+
+            if (error === null) {
+                return states.READY;
+            } else {
+                return states.LOADING;
+            }
+        },
+        groups: function () {
+            return this.$store.state.groups.data || [];
         }
     }
 };
