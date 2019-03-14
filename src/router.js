@@ -4,7 +4,7 @@ import Schedule from './components/Schedule';
 import GroupChooser from './components/GroupChooser';
 import Groups from './views/Groups.vue';
 import Calls from './views/Calls';
-import Bots from './views/Bots';
+import Bot from './views/Bot';
 
 Vue.use(Router);
 
@@ -34,8 +34,8 @@ export default new Router({
             component: Calls
         },
         {
-            path: '/bots',
-            component: Bots
+            path: '/bot',
+            component: Bot
         }
     ]
 });

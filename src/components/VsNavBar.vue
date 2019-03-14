@@ -5,7 +5,7 @@
             <b-navbar-nav>
                 <b-nav-item to="/schedule">Расписание</b-nav-item>
                 <b-nav-item to="/calls">Звонки</b-nav-item>
-                <b-nav-item to="/bots">Чат-боты</b-nav-item>
+                <b-nav-item to="/bot">Telegram-бот</b-nav-item>
             </b-navbar-nav>
         </b-collapse>
         <b-navbar-brand class="ml-auto">{{ title }}</b-navbar-brand>
