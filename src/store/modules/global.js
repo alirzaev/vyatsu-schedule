@@ -30,6 +30,7 @@ export default {
             context.commit('setSeason', season);
 
             context.commit('groups/selectSeason', season);
+            context.commit('departments/selectSeason', season);
         }
     }
 };

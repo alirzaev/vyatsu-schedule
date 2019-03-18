@@ -73,7 +73,7 @@ export default {
         const groupId = this.$route.params['groupId'];
         const season = this.$route.params['season'];
 
-        await this.$store.dispatch('schedule/loadSchedule', {groupId, season});
+        await this.$store.dispatch('schedule/loadGroupSchedule', {groupId, season});
 
         this.$title = this.group;
     },
@@ -82,7 +82,7 @@ export default {
             return this.state === states.READY ? this.$store.state.global.calls.data : [];
         },
         schedule: function () {
-            return this.$store.state.schedule.data;
+            return this.$store.state.schedule.group.data;
         },
         group: function () {
             return this.state === states.READY ? this.schedule['group'] : '';
@@ -109,8 +109,8 @@ export default {
             }
         },
         state: function () {
-            const schedule = this.$store.state.schedule.data;
-            const error = this.$store.state.schedule.error
+            const schedule = this.$store.state.schedule.group.data;
+            const error = this.$store.state.schedule.group.error
                 || this.$store.state.global.calls.error;
 
             if (!error && !schedule) {

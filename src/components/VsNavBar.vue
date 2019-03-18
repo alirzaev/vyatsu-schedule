@@ -4,6 +4,7 @@
         <b-collapse is-nav id="nav_collapse">
             <b-navbar-nav>
                 <b-nav-item to="/schedule">Расписание</b-nav-item>
+                <b-nav-item to="/department">Преподаватели</b-nav-item>
                 <b-nav-item to="/calls">Звонки</b-nav-item>
                 <b-nav-item to="/bot">Telegram-бот</b-nav-item>
             </b-navbar-nav>
