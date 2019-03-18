@@ -17,7 +17,7 @@ export default {
     name: 'vyatsunavbar',
     computed: {
         title: function () {
-            return this.$store.state.navbarTitle;
+            return this.$store.state.global.navbarTitle;
         }
     }
 };

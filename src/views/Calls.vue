@@ -39,11 +39,11 @@ export default {
     },
     computed: {
         calls: function () {
-            return this.state === states.READY ? this.$store.state.calls.data : [];
+            return this.state === states.READY ? this.$store.state.global.calls.data : [];
         },
         state: function () {
-            const calls = this.$store.state.calls.data;
-            const error = this.$store.state.calls.error;
+            const calls = this.$store.state.global.calls.data;
+            const error = this.$store.state.global.calls.error;
 
             if (!error && calls) {
                 return states.READY;

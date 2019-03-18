@@ -71,38 +71,39 @@ export default {
     },
     created: async function () {
         this.$store.commit('changeTitle', 'Расписание');
+        await this.$store.dispatch('groups/init');
     },
     methods: {
         openGroupSchedule: async function () {
             const groupID = this.selectedGroup['id'];
             const url = `/schedule/${groupID}/${this.selectedSeason}`;
-            await this.$store.dispatch('saveToLocalStorage');
+            await this.$store.dispatch('groups/saveToLocalStorage');
             this.$router.push(url);
         }
     },
     computed: {
         selectedFaculty: {
             get: function () {
-                return this.$store.state.selectedFaculty;
+                return this.$store.state.groups.selectedFaculty;
             },
             set: function (value) {
-                this.$store.commit('selectFaculty', value);
+                this.$store.commit('groups/selectFaculty', value);
             }
         },
         selectedGroup: {
             get: function () {
-                return this.$store.state.selectedGroup;
+                return this.$store.state.groups.selectedGroup;
             },
             set: function (value) {
-                this.$store.commit('selectGroup', value);
+                this.$store.commit('groups/selectGroup', value);
             }
         },
         selectedSeason: {
             get: function () {
-                return this.$store.state.selectedSeason;
+                return this.$store.state.groups.selectedSeason;
             },
             set: function (value) {
-                this.$store.commit('selectSeason', value);
+                this.$store.commit('groups/selectSeason', value);
             }
         },
         isGroupSelected: function () {
