@@ -15,7 +15,7 @@
 
 <script>
 export default {
-    name: 'vyatsunavbar',
+    name: 'navbar',
     computed: {
         title: function () {
             return this.$store.state.global.navbarTitle;

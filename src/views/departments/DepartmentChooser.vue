@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vsspinner v-bind:visible="state === STATES.LOADING"></vsspinner>
+        <loader v-if="state === STATES.LOADING"></loader>
         <div v-if="state === STATES.READY" class="row justify-content-center">
             <div class="col-12 col-md-6">
                 <b-form-group>
@@ -10,8 +10,7 @@
                                 v-for="faculty_item in departments"
                                 v-bind:key="faculty_item['faculty']"
                                 v-bind:value="faculty_item"
-                        >{{ faculty_item['faculty'] }}
-                        </option>
+                        >{{ faculty_item['faculty'] }}</option>
                     </b-form-select>
 
                     <label>Выберите кафедру</label>
@@ -20,8 +19,7 @@
                                 v-for="dep_item in facultyDepartments"
                                 v-bind:key="dep_item['name']"
                                 v-bind:value="dep_item"
-                        >{{ dep_item['name'] }}
-                        </option>
+                        >{{ dep_item['name'] }}</option>
                     </b-form-select>
 
                     <b-form-radio-group
@@ -34,8 +32,7 @@
                                 v-bind:key="season['text']"
                                 v-bind:value="season['value']"
                                 class="w-100"
-                        >{{ season.text }}
-                        </b-form-radio>
+                        >{{ season.text }}</b-form-radio>
                     </b-form-radio-group>
                 </b-form-group>
                 <b-button
@@ -43,22 +40,21 @@
                         v-on:click="openDepartmentSchedule"
                         :disabled="!isDepartmentSelected"
                         class="w-100 mt-0"
-                >Открыть расписание кафедры
-                </b-button>
+                >Открыть расписание кафедры</b-button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import {states} from '../utils/states';
-import Vsspinner from './VsSpinner';
+import {states} from '../../utils/states';
+import loader from '../../components/Loader';
 
 export default {
     title: 'Преподаватели',
-    name: 'DepartmentChooser',
+    name: 'departmentchooser',
     components: {
-        Vsspinner
+        loader
     },
     data: function () {
         return {
@@ -128,5 +124,5 @@ export default {
 </script>
 
 <style scoped lang="sass">
-    @import "../sass/common"
+    @import "../../sass/common"
 </style>

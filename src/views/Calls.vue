@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vsspinner v-bind:visible="state === STATES.LOADING"></vsspinner>
+        <loader v-if="state === STATES.LOADING"></loader>
         <div v-if="state === STATES.READY" class="row justify-content-center">
             <b-list-group class="col-12 col-md-6">
                 <b-list-group-item
@@ -21,13 +21,13 @@
 
 <script>
 import {states} from '../utils/states';
-import Vsspinner from '../components/VsSpinner';
+import loader from '../components/Loader';
 
 export default {
     title: 'Звонки',
     name: 'calls',
     components: {
-        Vsspinner
+        loader
     },
     data: function () {
         return {

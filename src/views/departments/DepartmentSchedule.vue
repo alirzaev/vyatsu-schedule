@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vsspinner v-bind:visible="state === STATES.LOADING"></vsspinner>
+        <loader v-if="state === STATES.LOADING"></loader>
         <div v-if="state === STATES.ERROR" class="error-container">
             <error
                     class="error-column"
@@ -11,7 +11,7 @@
         <div v-if="state === STATES.READY" class="schedule-container">
             <div class="schedule-column">
                 <a id="top" class="anchor"></a>
-                <h3 class="department-title">{{department}}</h3>
+                <h1 class="department-title">{{department}}</h1>
                 <b-form-group>
                     <label>Выберите преподавателя</label>
                     <b-form-select v-model="selectedTeacher" class="mb-2">
@@ -19,8 +19,7 @@
                                 v-for="teacher_item in teachers"
                                 v-bind:key="teacher_item['teacher']"
                                 v-bind:value="teacher_item"
-                        >{{ teacher_item['teacher'] }}
-                        </option>
+                        >{{ teacher_item['teacher'] }}</option>
                     </b-form-select>
                 </b-form-group>
                 <div v-if="schedule">
@@ -66,16 +65,16 @@
 </template>
 
 <script>
-import {states} from '../utils/states';
-import Error from './Error';
-import Vsspinner from './VsSpinner';
+import {states} from '../../utils/states';
+import error from '../../components/Error';
+import loader from '../../components/Loader';
 
 export default {
     title: 'Преподаватели',
     name: 'departmentschedule',
     components: {
-        error: Error,
-        Vsspinner
+        error,
+        loader
     },
     data: function () {
         return {
@@ -190,7 +189,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-    @import "../sass/common"
+    @import "../../sass/common"
 
     .schedule-container
         display: grid

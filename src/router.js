@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Schedule from './components/Schedule';
-import GroupChooser from './components/GroupChooser';
-import Groups from './views/Groups.vue';
+import GroupSchedule from './views/groups/GroupSchedule';
+import GroupChooser from './views/groups/GroupChooser';
+import Groups from './views/groups/Groups';
 import Calls from './views/Calls';
 import Bot from './views/Bot';
-import Departments from './views/Departments';
-import DepartmentChooser from './components/DepartmentChooser';
-import DepartmentSchedule from './components/DepartmentSchedule';
+import Departments from './views/departments/Departments';
+import DepartmentChooser from './views/departments/DepartmentChooser';
+import DepartmentSchedule from './views/departments/DepartmentSchedule';
 
 Vue.use(Router);
 
@@ -27,7 +27,7 @@ export default new Router({
                 },
                 {
                     path: '/schedule/:groupId/:season',
-                    component: Schedule
+                    component: GroupSchedule
                 }
             ]
 

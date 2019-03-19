@@ -4,7 +4,7 @@
             <h1>Telegram-бот</h1>
             <p>Расписание групп, звонков, адреса корпусов</p>
             <b-button href="tg://resolve?domain=vyatsu_schedule_bot" variant="primary">
-                <TelegramLogo
+                <telegramlogo
                         class="telegram-logo"
                         v-bind:width="'24px'"
                         v-bind:height="'24px'"
@@ -16,13 +16,13 @@
 </template>
 
 <script>
-import TelegramLogo from '../components/TelegramLogo';
+import telegramlogo from '../components/TelegramLogo';
 
 export default {
     title: 'Telegram-бот',
     name: 'bot',
     components: {
-        TelegramLogo
+        telegramlogo
     },
     created: function () {
         this.$store.commit('changeTitle', 'Telegram-бот');

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vsspinner v-bind:visible="state === STATES.LOADING"></vsspinner>
+        <loader v-if="state === STATES.LOADING"></loader>
         <div v-if="state === STATES.ERROR" class="error-container">
             <error
                     class="error-column"
@@ -52,16 +52,16 @@
 </template>
 
 <script>
-import {states} from '../utils/states';
-import Error from './Error';
-import Vsspinner from './VsSpinner';
+import {states} from '../../utils/states';
+import error from '../../components/Error';
+import loader from '../../components/Loader';
 
 export default {
     title: 'Расписание',
-    name: 'schedule',
+    name: 'groupschedule',
     components: {
-        error: Error,
-        Vsspinner
+        error,
+        loader
     },
     data: function () {
         return {
@@ -126,7 +126,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-    @import "../sass/common"
+    @import "../../sass/common"
 
     .schedule-container
         display: grid
@@ -179,10 +179,10 @@ export default {
         .error-column
             grid-column: 1 / 3
 
-    div.vs-schedule-week:nth-child(even) .list-group-item
+    div.vs-schedule-week:nth-of-type(odd) .list-group-item
         background-color: #fff1f1
 
-    div.vs-schedule-week:nth-child(odd) .list-group-item
+    div.vs-schedule-week:nth-of-type(even) .list-group-item
         background-color: #fdfff1
 
     .lesson-description

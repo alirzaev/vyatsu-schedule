@@ -1,10 +1,10 @@
 <template>
     <div id="app">
-        <vsnavbar></vsnavbar>
+        <navbar></navbar>
         <div class="container">
             <router-view/>
         </div>
-        <footer class="page-footer font-small pt-3 vs-footer pb-1">
+        <footer class="page-footer font-small pt-3 footer pb-1">
             <div class="footer-copyright text-center py-3">© 2018-2019
                 <a href="https://vk.me/rzaevali">Али Рзаев</a>
             </div>
@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import Vsnavbar from './components/VsNavBar';
+import navbar from './components/NavBar';
 
 export default {
     components: {
-        Vsnavbar
+        navbar
     },
     created: async function() {
         await this.$store.dispatch('init');
@@ -31,6 +31,6 @@ export default {
     .container
         padding-top: $vs-navbar-height + 0.6em
     
-    .vs-footer
+    .footer
         min-height: $vs-footer-height
 </style>

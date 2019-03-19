@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    name: 'TelegramLogo',
+    name: 'telegramlogo',
     props: ['width', 'height', 'color']
 };
 </script>
