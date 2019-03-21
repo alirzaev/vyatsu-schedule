@@ -1,16 +1,16 @@
 <template>
     <div>
         <loader v-if="state === STATES.LOADING"></loader>
-        <div v-if="state === STATES.READY" class="row justify-content-center">
-            <b-list-group class="col-12 col-md-6">
+        <div v-if="state === STATES.READY" class="standard-container">
+            <b-list-group class="content-column">
                 <b-list-group-item
                         v-for="(item, index) in calls"
-                        class="pt-2 pb-2"
+                        class="call-item"
                         v-bind:key="index">
                     <h5 class="call-title">
                         {{ index + 1 + " пара" }}
                     </h5>
-                    <p class="mb-0 call-time">
+                    <p class="call-description">
                         {{ item[0] + " - " + item[1] }}
                     </p>
                 </b-list-group-item>
@@ -57,11 +57,17 @@ export default {
 
 <style scoped lang="sass">
     @import "../sass/common"
+    @import "../sass/grids/standard"
+
+    .call-item
+        padding-top: 0.5em
+        padding-bottom: 0.5em
 
     .call-title
         font-size: 1.1em
 
-    .call-time
+    .call-description
         font-size: 0.9em
         line-height: 1.3em
+        margin-bottom: 0
 </style>

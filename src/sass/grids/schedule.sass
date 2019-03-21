@@ -1,0 +1,28 @@
+@import "../common"
+
+.schedule-container
+  display: grid
+  grid-template-columns: 1fr 2fr 1fr
+  grid-template-rows: auto
+  align-items: start
+
+@include media-breakpoint-up(md)
+  .schedule-column
+    grid-column: 2 / 3
+
+  .toolbar-column
+    grid-column: 3 / 4
+    align-self: end
+    position: sticky
+    bottom: 1em
+    margin-left: 1em
+
+@include media-breakpoint-down(sm)
+  .schedule-column
+    grid-column: 1 / 4
+
+  .toolbar-column
+    position: fixed
+    z-index: $zindex-fixed
+    bottom: 1em
+    right: 1em

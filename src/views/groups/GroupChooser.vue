@@ -1,26 +1,24 @@
 <template>
     <div>
         <loader v-if="state === STATES.LOADING"></loader>
-        <div v-if="state === STATES.READY" class="row justify-content-center">
-            <div class="col-12 col-md-6">
+        <div v-if="state === STATES.READY" class="standard-container">
+            <div class="content-column">
                 <b-form-group>
                     <label>Выберите факультет</label>
-                    <b-form-select v-model="selectedFaculty" class="mb-2">
-                        <option
-                                v-for="faculty_item in groups"
-                                v-bind:key="faculty_item['faculty']"
-                                v-bind:value="faculty_item"
-                        >{{ faculty_item['faculty'] }}</option>
-                    </b-form-select>
+                    <formselect
+                            :items="groups"
+                            :field="'faculty'"
+                            v-model="selectedFaculty"
+                            class="mb-2"
+                    ></formselect>
 
                     <label>Выберите группу</label>
-                    <b-form-select v-model="selectedGroup" class="mb-3">
-                        <option
-                                v-for="group_item in facultyGroups"
-                                v-bind:key="group_item['name']"
-                                v-bind:value="group_item"
-                        >{{ group_item['name'] }}</option>
-                    </b-form-select>
+                    <formselect
+                        :items="facultyGroups"
+                        :field="'name'"
+                        v-model="selectedGroup"
+                        class="mb-3"
+                    ></formselect>
 
                     <b-form-radio-group
                             v-model="selectedSeason"
@@ -49,12 +47,14 @@
 <script>
 import {states} from '../../utils/states';
 import loader from '../../components/Loader';
+import formselect from '../../components/FormSelect';
 
 export default {
     title: 'Расписание',
     name: 'groupchooser',
     components: {
-        loader
+        loader,
+        formselect
     },
     data: function () {
         return {
@@ -126,4 +126,5 @@ export default {
 
 <style scoped lang="sass">
     @import "../../sass/common"
+    @import "../../sass/grids/standard"
 </style>

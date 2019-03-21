@@ -1,26 +1,24 @@
 <template>
     <div>
         <loader v-if="state === STATES.LOADING"></loader>
-        <div v-if="state === STATES.READY" class="row justify-content-center">
-            <div class="col-12 col-md-6">
+        <div v-if="state === STATES.READY" class="standard-container">
+            <div class="content-column">
                 <b-form-group>
                     <label>Выберите факультет</label>
-                    <b-form-select v-model="selectedFaculty" class="mb-2">
-                        <option
-                                v-for="faculty_item in departments"
-                                v-bind:key="faculty_item['faculty']"
-                                v-bind:value="faculty_item"
-                        >{{ faculty_item['faculty'] }}</option>
-                    </b-form-select>
+                    <formselect
+                            :items="departments"
+                            :field="'faculty'"
+                            v-model="selectedFaculty"
+                            class="mb-2"
+                    ></formselect>
 
                     <label>Выберите кафедру</label>
-                    <b-form-select v-model="selectedDepartment" class="mb-3">
-                        <option
-                                v-for="dep_item in facultyDepartments"
-                                v-bind:key="dep_item['name']"
-                                v-bind:value="dep_item"
-                        >{{ dep_item['name'] }}</option>
-                    </b-form-select>
+                    <formselect
+                            :items="facultyDepartments"
+                            :field="'name'"
+                            v-model="selectedDepartment"
+                            class="mb-3"
+                    ></formselect>
 
                     <b-form-radio-group
                             v-model="selectedSeason"
@@ -49,12 +47,14 @@
 <script>
 import {states} from '../../utils/states';
 import loader from '../../components/Loader';
+import formselect from '../../components/FormSelect';
 
 export default {
     title: 'Преподаватели',
     name: 'departmentchooser',
     components: {
-        loader
+        loader,
+        formselect
     },
     data: function () {
         return {
@@ -125,4 +125,5 @@ export default {
 
 <style scoped lang="sass">
     @import "../../sass/common"
+    @import "../../sass/grids/standard"
 </style>

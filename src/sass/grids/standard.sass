@@ -1,0 +1,18 @@
+@import "../common"
+
+.standard-container
+  display: grid
+  grid-template-columns: 1fr 2fr 1fr
+  grid-template-rows: auto
+  align-items: start
+
+.content-column
+  justify-self: stretch
+
+@include media-breakpoint-up(md)
+  .content-column
+    grid-column: 2 / 3
+
+@include media-breakpoint-down(sm)
+  .content-column
+    grid-column: 1 / 4
