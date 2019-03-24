@@ -25,7 +25,7 @@ export default {
         telegramlogo
     },
     created: function () {
-        this.$store.commit('changeTitle', 'Telegram-бот');
+        this.$store.commit('setTitle', 'Telegram-бот');
     }
 };
 </script>

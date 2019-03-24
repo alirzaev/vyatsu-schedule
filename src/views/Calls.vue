@@ -35,7 +35,7 @@ export default {
         };
     },
     created: async function () {
-        this.$store.commit('changeTitle', 'Звонки');
+        this.$store.commit('setTitle', 'Звонки');
     },
     computed: {
         calls: function () {

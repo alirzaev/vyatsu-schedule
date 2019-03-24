@@ -66,7 +66,7 @@ export default {
         };
     },
     created: async function () {
-        this.$store.commit('changeTitle', 'Расписание');
+        this.$store.commit('setTitle', 'Расписание');
         await this.$store.dispatch('groups/init');
     },
     methods: {

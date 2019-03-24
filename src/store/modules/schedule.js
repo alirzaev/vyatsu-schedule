@@ -34,7 +34,7 @@ export default {
             context.commit('setGroupSchedule', {data, error});
 
             if (!error) {
-                context.commit('changeTitle', data['group'], { root: true });
+                context.commit('setTitle', data['group'], { root: true });
             }
         },
         loadDepartmentSchedule: async (context, {departmentId, season}) => {

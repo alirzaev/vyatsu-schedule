@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <navbar :title="$store.state.global.navbarTitle"></navbar>
+        <navbar :title="$store.state.global.navBarTitle"></navbar>
         <div class="container">
             <router-view/>
         </div>

@@ -2,7 +2,7 @@ import {getCalls, getSeason} from '../../utils/api';
 
 export default {
     state: {
-        navbarTitle: '',
+        navBarTitle: '',
         calls: {
             data: null,
             error: null
@@ -10,8 +10,8 @@ export default {
         season: null
     },
     mutations: {
-        changeTitle: (state, title) => {
-            state.navbarTitle = title;
+        setTitle: (state, title) => {
+            state.navBarTitle = title;
         },
         setCalls: (state, {data, error}) => {
             state.calls.data = data;

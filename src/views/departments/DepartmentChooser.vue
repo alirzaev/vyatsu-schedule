@@ -66,7 +66,7 @@ export default {
         };
     },
     created: async function () {
-        this.$store.commit('changeTitle', 'Преподаватели');
+        this.$store.commit('setTitle', 'Преподаватели');
         await this.$store.dispatch('departments/init');
     },
     methods: {
