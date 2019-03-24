@@ -16,11 +16,7 @@
 <script>
 export default {
     name: 'navbar',
-    computed: {
-        title: function () {
-            return this.$store.state.global.navbarTitle;
-        }
-    }
+    props: ['title']
 };
 </script>
 

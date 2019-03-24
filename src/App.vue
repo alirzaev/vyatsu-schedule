@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <navbar></navbar>
+        <navbar :title="$store.state.global.navbarTitle"></navbar>
         <div class="container">
             <router-view/>
         </div>
@@ -30,7 +30,7 @@ export default {
 
     .container
         padding-top: $vs-navbar-height + 0.6em
-    
+
     .footer
         min-height: $vs-footer-height
 </style>
