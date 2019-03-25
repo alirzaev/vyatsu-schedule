@@ -1,16 +1,16 @@
 <template>
     <div>
-        <vsspinner v-bind:visible="state === STATES.LOADING"></vsspinner>
-        <div v-if="state === STATES.READY" class="row justify-content-center">
-            <b-list-group class="col-12 col-md-6">
+        <loader v-if="state === STATES.LOADING"></loader>
+        <div v-if="state === STATES.READY" class="standard-container">
+            <b-list-group class="content-column">
                 <b-list-group-item
                         v-for="(item, index) in calls"
-                        class="pt-2 pb-2"
+                        class="call-item"
                         v-bind:key="index">
                     <h5 class="call-title">
                         {{ index + 1 + " пара" }}
                     </h5>
-                    <p class="mb-0 call-time">
+                    <p class="call-description">
                         {{ item[0] + " - " + item[1] }}
                     </p>
                 </b-list-group-item>
@@ -20,33 +20,36 @@
 </template>
 
 <script>
-import {getCalls} from '../utils/api';
 import {states} from '../utils/states';
-import Vsspinner from '../components/VsSpinner';
+import loader from '../components/Loader';
 
 export default {
     title: 'Звонки',
     name: 'calls',
     components: {
-        Vsspinner
+        loader
     },
     data: function () {
         return {
-            STATES: states,
-            state: states.LOADING,
-            calls: []
+            STATES: states
         };
     },
     created: async function () {
-        this.$store.commit('changeTitle', 'Звонки');
-        this.state = states.LOADING;
+        this.$store.commit('setTitle', 'Звонки');
+    },
+    computed: {
+        calls: function () {
+            return this.state === states.READY ? this.$store.state.global.calls.data : [];
+        },
+        state: function () {
+            const calls = this.$store.state.global.calls.data;
+            const error = this.$store.state.global.calls.error;
 
-        const [calls, error2] = await getCalls();
-
-        if (error2 == null) {
-            this.calls = calls;
-
-            this.state = states.READY;
+            if (!error && calls) {
+                return states.READY;
+            } else {
+                return states.LOADING;
+            }
         }
     }
 };
@@ -54,11 +57,17 @@ export default {
 
 <style scoped lang="sass">
     @import "../sass/common"
+    @import "../sass/grids/standard"
+
+    .call-item
+        padding-top: 0.5em
+        padding-bottom: 0.5em
 
     .call-title
         font-size: 1.1em
 
-    .call-time
+    .call-description
         font-size: 0.9em
         line-height: 1.3em
+        margin-bottom: 0
 </style>

@@ -1,12 +1,8 @@
 module.exports = {
-    baseUrl: './',
+    publicPath: './',
     css: {
         loaderOptions: {
-            postcss: {
-                plugins: {
-                    autoprefixer: {}
-                }
-            }
+            sass: {}
         }
     }
 };

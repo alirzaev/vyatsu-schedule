@@ -7,6 +7,7 @@ install:
 script:
   - npm run configure
   - npm run lint
+  - npm run test:unit
   - npm run build
 deploy:
   - provider: pages
@@ -15,6 +16,3 @@ deploy:
     local-dir: dist
     on:
       branch: master
-branches:
-  only:
-  - master

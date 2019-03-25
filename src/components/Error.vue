@@ -1,7 +1,7 @@
 <template>
     <b-alert :show="true" variant="danger">
-        <h4 class="alert-heading">{{title}}</h4>
-        <p>{{message}}</p>
+        <h4 class="alert-heading">{{ title }}</h4>
+        <p>{{ message }}</p>
         <hr>
         <p class="mb-0">
             Попробуйте перезагрузить страницу или перейти на
@@ -17,6 +17,6 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="sass">
+    @import "../sass/common"
 </style>

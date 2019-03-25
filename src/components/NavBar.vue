@@ -4,8 +4,9 @@
         <b-collapse is-nav id="nav_collapse">
             <b-navbar-nav>
                 <b-nav-item to="/schedule">Расписание</b-nav-item>
+                <b-nav-item to="/department">Преподаватели</b-nav-item>
                 <b-nav-item to="/calls">Звонки</b-nav-item>
-                <b-nav-item to="/bots">Чат-боты</b-nav-item>
+                <b-nav-item to="/bot">Telegram-бот</b-nav-item>
             </b-navbar-nav>
         </b-collapse>
         <b-navbar-brand class="ml-auto">{{ title }}</b-navbar-brand>
@@ -14,12 +15,8 @@
 
 <script>
 export default {
-    name: 'vyatsunavbar',
-    computed: {
-        title: function () {
-            return this.$store.state.navbarTitle;
-        }
-    }
+    name: 'navbar',
+    props: ['title']
 };
 </script>
 

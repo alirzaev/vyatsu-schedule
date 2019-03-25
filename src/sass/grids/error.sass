@@ -1,0 +1,25 @@
+@import "../common"
+
+.error-container
+  display: grid
+  grid-template-rows: auto
+  align-items: start
+
+.error-column
+  padding: 1.2em
+
+@include media-breakpoint-up(md)
+  .error-container
+    grid-template-columns: 1fr 2fr 1fr
+
+@include media-breakpoint-between(xs, sm)
+  .error-container
+    grid-template-columns: 1fr 11fr 1fr
+
+@include media-breakpoint-up(sm)
+  .error-column
+    grid-column: 2 / 3
+
+@include media-breakpoint-down(xs)
+  .error-column
+    grid-column: 1 / 4
