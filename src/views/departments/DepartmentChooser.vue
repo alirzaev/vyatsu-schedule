@@ -109,11 +109,14 @@ export default {
         },
         state: function () {
             const error = this.$store.state.departments.error;
+            const departments = this.$store.state.departments.data;
 
-            if (error === null) {
+            if (!error && !departments) {
+                return states.LOADING;
+            } else if (!error && departments) {
                 return states.READY;
             } else {
-                return states.LOADING;
+                return states.ERROR;
             }
         },
         departments: function () {

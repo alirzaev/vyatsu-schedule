@@ -110,11 +110,14 @@ export default {
         },
         state: function () {
             const error = this.$store.state.groups.error;
+            const groups = this.$store.state.groups.data;
 
-            if (error === null) {
+            if (!error && !groups) {
+                return states.LOADING;
+            } else if (!error && groups) {
                 return states.READY;
             } else {
-                return states.LOADING;
+                return states.ERROR;
             }
         },
         groups: function () {
