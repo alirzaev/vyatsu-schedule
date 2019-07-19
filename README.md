@@ -8,19 +8,19 @@
 
 ## Для разработчиков
 
-Этот сайт - не что иное, как одностраничное [Vue.js](https://vuejs.org)-приложение. Для сборки на production, запуска сервера и линтера используется [Vue CLI 3](https://cli.vuejs.org).
+Сайт выполнен в виде одностраничного [Vue.js](https://vuejs.org)-приложения. Для сборки на production, запуска сервера и линтера используется [Vue CLI 3](https://cli.vuejs.org).
 
 ### Сборка приложения
 
-1. Установка параметров
+1. Установка переменных окружения
 
-   Для работы сайта нужен [backend-сервер](https://github.com/AliRzaev/vyatsu-schedule-backend). Указываем его URL через переменную окружения `API_URL` и запускаем скрпит `configure`:
+   Для работы сайта нужен [backend-сервер](https://github.com/AliRzaev/vyatsu-schedule-backend). Указываем его URL через переменную окружения `VUE_APP_API_URL`:
    
    ```
-   API_URL=<apiUrl> npm run configure
+   export VUE_APP_API_URL=<apiUrl>
    ```
    
-   По умолчанию для `API_URL` используется значение `http://localhost:8080`.
+   По умолчанию для `VUE_APP_API_URL` используется значение `''`.
 
 2. Собираем на production
    
@@ -32,7 +32,7 @@
 
 ### Запуск сервера для разработки
 
-1. Устанавливаем параметры
+1. Устанавливаем переменные окружения
 
 2. Запускаем сервер
    
@@ -40,19 +40,15 @@
    npm run serve
    ```
 
-### Сборка Docker-образа
+### Сборка и запуск Docker-образа
 
-1. Устанавливаем параметры
-
-2. Собираем на production
-
-3. Собираем образ
+1. Собираем образ
 
    ```
-   docker build -t imagename .
+   docker build --build-arg VUE_APP_API_URL=<apiUrl> -t imagename .
    ```
 
-4. Запускаем
+2. Запускаем
    
    ```
    docker run --name somename -d -p 8080:80 imagename
