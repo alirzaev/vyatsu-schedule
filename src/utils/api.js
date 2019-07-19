@@ -1,7 +1,6 @@
 import axios from 'axios';
-import config from './config';
 
-const API_URL = config.apiUrl;
+const API_URL = process.env.VUE_APP_API_URL || '';
 
 export async function getCalls() {
     try {
