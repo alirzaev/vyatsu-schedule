@@ -5,13 +5,7 @@
             <router-view/>
             <footer class="page-footer font-small pt-3 footer pb-1 standard-container">
                 <div class="content-column">
-                    <a href="https://oborona.digital/" target="_blank">
-                        <img
-                            class="oborona"
-                            src="assets/Against-Runet-Isolation-hor.png"
-                            alt="Я против изоляции Рунета!"/>
-                    </a>
-                    <div class="footer-copyright text-center py-3">© 2018-2019
+                    <div class="footer-copyright text-center py-3">&copy; 2018-2020
                         <a href="https://vk.me/rzaevali">Али Рзаев</a>
                     </div>
                 </div>
